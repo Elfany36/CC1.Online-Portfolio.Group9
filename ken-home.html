@@ -113,7 +113,24 @@
     /* Hero */
     .hero{ display:grid; grid-template-columns: 220px 1fr; gap:20px; align-items:center; margin-bottom:28px; }
     .profile{ background:var(--card-bg); padding:18px; border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,0.06); display:flex; flex-direction:column; align-items:center; text-align:center; }
-    .avatar{ width:140px; height:140px; border-radius:50%; background:linear-gradient(135deg,var(--accent-1),var(--accent-2)); overflow:hidden; margin-bottom:12px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:28px; font-weight:800; }
+    .avatar{
+      width:140px;
+      height:140px;
+      border-radius:50%;
+      overflow:hidden;
+      margin-bottom:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
+    }
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      border-radius:50%;
+    }
     .name{ font-size:20px; font-weight:800; margin:6px 0; }
     .role{ color:var(--muted); font-weight:700; font-size:13px; margin-bottom:8px; }
     .socials{ display:flex; gap:8px; margin-top:8px; }
@@ -201,12 +218,23 @@
 
     <section class="hero" aria-label="Profile">
       <aside class="profile" aria-label="Profile card">
-        <div class="avatar" role="img" aria-label="Profile photo">KDF</div>
+        <!-- Updated avatar: replace src with your actual image URL -->
+        <div class="avatar" role="img" aria-label="Profile photo">
+          <img
+            src="https://dl.dropboxusercontent.com/scl/fi/pilhzirwy9849gzrrhods/resume-pic_enhanced.webp?rlkey=qyoym6db4egf2t7x7s6lkpgaw&st=exxl1wl5&dl=0"
+            alt="Ken Delos Santos Fabros profile photo"
+            width="140"
+            height="140"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
         <div class="name">Ken Delos Santos Fabros</div>
         <div class="role"></div>
         <div class="socials" aria-hidden="false">
           <a href="#" aria-label="Instagram" title="Instagram" style="text-decoration:none; color:var(--muted)">Instagram</a>
-          <a href="#" aria-label="Twitter" title="LinkedIn" style="text-decoration:none; color:var(--muted)">Twitter</a>
+          <a href="#" aria-label="Twitter" title="LinkedIn" style="text-decoration:none; color:var(--muted)"></a>
           <a href="#" aria-label="GitHub" title="GitHub" style="text-decoration:none; color:var(--muted)">GitHub</a>
         </div>
       </aside>
@@ -232,7 +260,7 @@
         </article>
 
         <!-- Project 2 -->
-        <article class="project large" data-title="Projects" data-desc="Artistic and Inspiring Works — This page showcases my projects from junior and senior high school through to the present, highlighting creative growth, key achievements, and the ideas that shaped my journey." data-images='["https://dl.dropboxusercontent.com/scl/fi/5gpq1ocmeb1zabsiigu1z/Screenshot-2025-12-03-233450.webp?rlkey=v5riw1ehsouhigcm5q8yb7v53&st=0p5vtfq4&dl=0","https://dl.dropboxusercontent.com/scl/fi/yzng9ahaffc4u86azj78q/abstract-art-no.2-varation-final-done.webp?rlkey=mnny0uyvyp3y2v058cp8pm23u&st=5ddfqr19&dl=0","https://dl.dropboxusercontent.com/scl/fi/i382gqw2nzmft8kvusew7/abstarct-background-ps-export-final.webp?rlkey=toxf95xvccptcr9lcf5lyalon&st=ath0li21&dl=0scl/fi/i382gqw2nzmft8kvusew7/abstarct-background-ps-export-final.webp?rlkey=toxf95xvccptcr9lcf5lyalon&st=ath0li21&dl=0","https://dl.dropboxusercontent.com/scl/fi/w4gqj47m5xtb62v7tfg2l/Screenshot-2024-11-28-170142.webp?rlkey=0g9vcba82jvr17vej1h7pxupd&st=4thsofh5&dl=0"]'>
+        <article class="project large" data-title="Projects" data-desc="Artistic and Inspiring Works — This page showcases my projects from junior and senior high school through to the present, highlighting creative growth, key achievements, and the ideas that shaped my journey." data-images='["https://dl.dropboxusercontent.com/scl/fi/5gpq1ocmeb1zabsiigu1z/Screenshot-2025-12-03-233450.webp?rlkey=v5riw1ehsouhigcm5q8yb7v53&st=0p5vtfq4&dl=0","https://dl.dropboxusercontent.com/scl/fi/yzng9ahaffc4u86azj78q/abstract-art-no.2-varation-final-done.webp?rlkey=mnny0uyvyp3y2v058cp8pm23u&st=5ddfqr19&dl=0","https://dl.dropboxusercontent.com/scl/fi/i382gqw2nzmft8kvusew7/abstarct-background-ps-export-final.webp?rlkey=toxf95xvccptcr9lcf5lyalon&st=ath0li21&dl=0scl/fi/i382gqw2nzmft8kvusew7/abstarct-background-ps-export-final.webp?rlkey=toxf95xvccptcr9lcf5lyalon&st=ath0li21&dl=0", "https://dl.dropboxusercontent.com/scl/fi/w4gqj47m5xtb62v7tfg2l/Screenshot-2024-11-28-170142.webp?rlkey=0g9vcba82jvr17vej1h7pxupd&st=vsa9tkke&dl=0","https://dl.dropboxusercontent.com/scl/fi/uko3rpfi0svp9h8f0fdn2/Screenshot-2025-12-03-235753.webp?rlkey=t41x5hwkqbqtgwakgwfekahun&st=p96f4i5u&dl=0"]'>
           <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/5gpq1ocmeb1zabsiigu1z/Screenshot-2025-12-03-233450.webp?rlkey=v5riw1ehsouhigcm5q8yb7v53&st=0p5vtfq4&dl=0" role="img" aria-label="Projects image"></div>
           <div class="meta">
             <h3 class="title">Projects</h3>
@@ -498,247 +526,178 @@
           img.style.maxWidth = '100%';
           img.style.maxHeight = '100%';
           // set a tiny placeholder to reserve layout (keeps aspect ratio)
-          img.src = 'data:image/svg+xml;charset=utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9"%3E%3Crect width="16" height="9" fill="%23f3f4f6"/%3E%3C/svg%3E';
-          // store the real src on dataset for controlled loading
-          img.dataset.realSrc = src || '';
+          img.src = 'data:image/svg+xml;charset=utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="16" height="9"%3E%3Crect width="16" height="9" fill="%23111"%2F%3E%3C%2Fsvg%3E';
           wrapper.appendChild(img);
+          // set real src after a short idle to avoid blocking
+          setTimeout(() => { img.src = src; }, 60);
         }
         return wrapper;
       }
 
-      // Render thumbnails
-      function renderThumbs(){
-        thumbs.innerHTML = '';
-        currentImages.forEach((src, i) => {
-          const div = document.createElement('div');
-          div.className = 'thumb' + (i === currentIndex ? ' active' : '');
-          div.style.backgroundImage = `url('${src}')`;
-          div.setAttribute('role','button');
-          div.setAttribute('aria-label','Thumbnail ' + (i+1));
-          div.addEventListener('click', () => {
-            if(i === currentIndex || isAnimating) return;
-            animateToIndex(i, i > currentIndex ? 1 : -1);
-          });
-          thumbs.appendChild(div);
-        });
+      function clearStage(){
+        while(galleryStage.firstChild) galleryStage.removeChild(galleryStage.firstChild);
       }
 
-      // Show initial media immediately (no animation) but load image only when appended
-      function showIndexImmediate(index){
-        galleryStage.innerHTML = '';
-        const el = createMediaElement(currentImages[index] || '');
-        el.classList.add('media-item','current');
-        el.style.transform = 'translateX(0%)';
-        galleryStage.appendChild(el);
-        // load the image now (if image)
-        const img = el.querySelector('img[data-real-src]');
-        if(img && img.dataset.realSrc){
-          img.src = img.dataset.realSrc;
-          delete img.dataset.realSrc;
-        }
+      function renderStage(index, direction = 0){
+        if(!currentImages.length) return;
+        // clamp index
+        index = (index + currentImages.length) % currentImages.length;
         currentIndex = index;
-        renderThumbs();
-        pauseAllExcept(el);
-        // prefetch neighbors
+
+        // create new element for current index
+        const newEl = createMediaElement(currentImages[index]);
+        newEl.style.transform = `translateX(${direction === 1 ? '100%' : direction === -1 ? '-100%' : '0%'})`;
+        newEl.style.opacity = '0';
+        galleryStage.appendChild(newEl);
+
+        // force reflow then animate into place
+        requestAnimationFrame(() => {
+          newEl.style.transition = 'transform 320ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease';
+          newEl.style.transform = 'translateX(0%)';
+          newEl.style.opacity = '1';
+        });
+
+        // remove previous siblings after animation
+        Array.from(galleryStage.children).forEach((child) => {
+          if(child !== newEl){
+            child.style.transition = 'transform 320ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease';
+            child.style.transform = `translateX(${direction === 1 ? '-100%' : direction === -1 ? '100%' : '-100%'})`;
+            child.style.opacity = '0';
+            setTimeout(() => {
+              if(child.parentNode) child.parentNode.removeChild(child);
+            }, 360);
+          }
+        });
+
+        updateThumbs();
         prefetchNeighbors(index);
       }
 
-      function pauseAllExcept(keepEl){
-        const videos = galleryStage.querySelectorAll('video');
-        videos.forEach(v => {
-          if(!keepEl || !keepEl.contains(v)) {
-            try { v.pause(); v.currentTime = 0; } catch(e){}
-          }
+      function updateThumbs(){
+        thumbs.innerHTML = '';
+        currentImages.forEach((src, i) => {
+          const t = document.createElement('button');
+          t.className = 'thumb';
+          t.type = 'button';
+          t.setAttribute('aria-label', `Thumbnail ${i + 1}`);
+          t.style.backgroundImage = `url('${src}')`;
+          if(i === currentIndex) t.classList.add('active');
+          t.addEventListener('click', () => {
+            if(i === currentIndex) return;
+            renderStage(i, i > currentIndex ? 1 : -1);
+          });
+          thumbs.appendChild(t);
         });
       }
 
-      function animateToIndex(newIndex, dir){
-        if(isAnimating) return;
-        if(newIndex === currentIndex) return;
-        if(!currentImages.length) return;
-        isAnimating = true;
-
-        const oldEl = galleryStage.querySelector('.media-item.current') || galleryStage.firstElementChild;
-        const newEl = createMediaElement(currentImages[newIndex] || '');
-        newEl.classList.add('media-item');
-        newEl.style.transform = `translateX(${dir > 0 ? 100 : -100}%)`;
-        galleryStage.appendChild(newEl);
-
-        // load the new image only when appended
-        const img = newEl.querySelector('img[data-real-src]');
-        if(img && img.dataset.realSrc){
-          // small delay to allow browser to schedule decode after layout
-          requestAnimationFrame(() => {
-            img.src = img.dataset.realSrc;
-            delete img.dataset.realSrc;
-          });
-        }
-
-        requestAnimationFrame(() => {
-          if(oldEl){
-            oldEl.style.transition = 'transform 320ms cubic-bezier(.2,.9,.2,1)';
-            oldEl.style.transform = `translateX(${dir > 0 ? -100 : 100}%)`;
-          }
-          newEl.style.transition = 'transform 320ms cubic-bezier(.2,.9,.2,1)';
-          newEl.style.transform = 'translateX(0%)';
-        });
-
-        const onEnd = () => {
-          if(oldEl && oldEl.parentElement === galleryStage) {
-            const v = oldEl.querySelector('video');
-            if(v){ try { v.pause(); v.currentTime = 0; } catch(e){} }
-            oldEl.remove();
-          }
-          newEl.classList.add('current');
-          Array.from(galleryStage.querySelectorAll('.media-item')).forEach((el) => {
-            if(el !== newEl) el.classList.remove('current');
-          });
-          currentIndex = newIndex;
-          renderThumbs();
-          pauseAllExcept(newEl);
-          isAnimating = false;
-          // prefetch neighbors after animation completes
-          prefetchNeighbors(currentIndex);
-        };
-
-        let finished = false;
-        newEl.addEventListener('transitionend', function te(){
-          if(finished) return;
-          finished = true;
-          newEl.removeEventListener('transitionend', te);
-          onEnd();
-        });
-        setTimeout(() => {
-          if(!finished) {
-            finished = true;
-            onEnd();
-          }
-        }, 500);
+      function prefetchImage(src){
+        if(!src) return;
+        // only prefetch images (not videos)
+        if(/\.(mp4|webm|ogg)(\?.*)?$/i.test(src)) return;
+        const img = new Image();
+        img.src = src;
       }
 
-      // Prefetch adjacent images (previous and next) using requestIdleCallback
       function prefetchNeighbors(index){
-        if(!currentImages || !currentImages.length) return;
+        if(!currentImages.length) return;
         const prev = (index - 1 + currentImages.length) % currentImages.length;
         const next = (index + 1) % currentImages.length;
-        const toPrefetch = [prev, next].filter((i, pos, arr) => arr.indexOf(i) === pos);
-        const doPrefetch = () => {
-          toPrefetch.forEach(i => {
-            const url = currentImages[i];
-            if(!url) return;
-            const img = new Image();
-            img.src = url;
-            img.decoding = 'async';
-          });
-        };
-        if('requestIdleCallback' in window){
-          requestIdleCallback(doPrefetch, {timeout:2000});
-        } else {
-          setTimeout(doPrefetch, 1000);
-        }
+        prefetchImage(currentImages[prev]);
+        prefetchImage(currentImages[next]);
       }
 
-      // Open modal
-      function openModal(data){
+      function openGallery(images, startIndex = 0, title = '', desc = ''){
+        if(!images || !images.length) return;
+        currentImages = images.slice();
+        modalTitle.textContent = title || '';
+        modalDesc.textContent = desc || '';
         lastFocused = document.activeElement;
-        modalTitle.textContent = data.title || '';
-        modalDesc.textContent = data.desc || '';
-        try {
-          currentImages = Array.isArray(data.images) ? data.images.slice() : [];
-        } catch(e){
-          currentImages = [];
-        }
-        currentIndex = 0;
-        galleryStage.innerHTML = '';
-        if(currentImages.length){
-          showIndexImmediate(0);
-        } else {
-          const placeholder = document.createElement('div');
-          placeholder.className = 'media-item current';
-          placeholder.style.display = 'flex';
-          placeholder.style.alignItems = 'center';
-          placeholder.style.justifyContent = 'center';
-          placeholder.style.color = '#fff';
-          placeholder.textContent = 'No media';
-          galleryStage.appendChild(placeholder);
-        }
-        renderThumbs();
         overlay.classList.add('open');
-        overlay.setAttribute('aria-hidden','false');
+        overlay.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+        renderStage(startIndex, 0);
+        // focus close button for accessibility
         closeBtn.focus();
       }
 
-      function closeModal(){
+      function closeGallery(){
         overlay.classList.remove('open');
-        overlay.setAttribute('aria-hidden','true');
+        overlay.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
-        const videos = galleryStage.querySelectorAll('video');
-        videos.forEach(v => { try { v.pause(); v.currentTime = 0; } catch(e){} });
-        galleryStage.innerHTML = '';
+        clearStage();
+        thumbs.innerHTML = '';
         currentImages = [];
         currentIndex = 0;
         if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
       }
 
-      // Attach click handlers to project cards to open modal
-      document.querySelectorAll('.project').forEach(card => {
-        card.addEventListener('click', () => {
-          const title = card.getAttribute('data-title') || '';
-          const desc = card.getAttribute('data-desc') || '';
+      // Navigation handlers
+      prevBtn.addEventListener('click', () => {
+        if(!currentImages.length) return;
+        renderStage((currentIndex - 1 + currentImages.length) % currentImages.length, -1);
+      });
+      nextBtn.addEventListener('click', () => {
+        if(!currentImages.length) return;
+        renderStage((currentIndex + 1) % currentImages.length, 1);
+      });
+
+      // Close handlers
+      closeBtn.addEventListener('click', closeGallery);
+      modalClose2.addEventListener('click', closeGallery);
+      overlay.addEventListener('click', (e) => {
+        if(e.target === overlay) closeGallery();
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if(overlay.classList.contains('open')){
+          if(e.key === 'Escape') { e.preventDefault(); closeGallery(); }
+          if(e.key === 'ArrowLeft') { e.preventDefault(); prevBtn.click(); }
+          if(e.key === 'ArrowRight') { e.preventDefault(); nextBtn.click(); }
+          // trap focus inside modal
+          if(e.key === 'Tab'){
+            const focusable = overlay.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            if(!focusable.length) return;
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+            else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+          }
+        }
+      });
+
+      // Attach click handlers to project cards
+      const projectEls = [].slice.call(document.querySelectorAll('.project'));
+      projectEls.forEach(el => {
+        el.addEventListener('click', (e) => {
+          // allow clicks on interactive children to behave normally
+          if(e.target && (e.target.tagName === 'A' || e.target.closest('a'))) return;
+          const imagesAttr = el.getAttribute('data-images');
           let images = [];
           try {
-            images = JSON.parse(card.getAttribute('data-images') || '[]');
-          } catch(e){
-            images = [];
+            images = imagesAttr ? JSON.parse(imagesAttr) : [];
+          } catch (err) {
+            // fallback: try to read data-bg as single image
+            const bg = el.querySelector('.media') && el.querySelector('.media').getAttribute('data-bg');
+            if(bg) images = [bg];
           }
-          openModal({title, desc, images});
+          const title = el.getAttribute('data-title') || (el.querySelector('.title') && el.querySelector('.title').textContent) || '';
+          const desc = el.getAttribute('data-desc') || (el.querySelector('.desc') && el.querySelector('.desc').textContent) || '';
+          openGallery(images, 0, title, desc);
+        });
+
+        // make keyboard accessible
+        el.setAttribute('tabindex', '0');
+        el.addEventListener('keydown', (e) => {
+          if(e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            el.click();
+          }
         });
       });
 
-      // Modal controls
-      closeBtn.addEventListener('click', closeModal);
-      modalClose2.addEventListener('click', closeModal);
-      overlay.addEventListener('click', (e) => { if(e.target === overlay) closeModal(); });
-      prevBtn.addEventListener('click', () => { if(isAnimating || !currentImages.length) return; const next = (currentIndex - 1 + currentImages.length) % currentImages.length; animateToIndex(next, -1); });
-      nextBtn.addEventListener('click', () => { if(isAnimating || !currentImages.length) return; const next = (currentIndex + 1) % currentImages.length; animateToIndex(next, 1); });
-
-      // Keyboard navigation for modal
-      document.addEventListener('keydown', (e) => {
-        if(overlay.classList.contains('open')){
-          if(e.key === 'Escape') closeModal();
-          if(e.key === 'ArrowLeft') prevBtn.click();
-          if(e.key === 'ArrowRight') nextBtn.click();
-        }
-      });
-
-      // Pause videos when tab/window hidden
-      document.addEventListener('visibilitychange', () => {
-        if(document.hidden){
-          const vids = document.querySelectorAll('video');
-          vids.forEach(v => { try { v.pause(); } catch(e){} });
-        }
-      });
-
-      // Warm-up: prefetch first project's first image during idle time
-      if('requestIdleCallback' in window){
-        requestIdleCallback(() => {
-          const firstProject = document.querySelector('.project[data-images]');
-          if(firstProject){
-            try {
-              const imgs = JSON.parse(firstProject.getAttribute('data-images') || '[]');
-              if(imgs && imgs[0]){
-                const i = new Image();
-                i.src = imgs[0];
-                i.decoding = 'async';
-              }
-            } catch(e){}
-          }
-        }, {timeout:2000});
-      }
-
+      // End IIFE
     })();
   </script>
 </body>
 </html>
-
