@@ -1,0 +1,1052 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio — Meg</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-light: #ffffff;
+      --bg-pink: #CB1C7C;
+      --accent-1: #FF76C4;
+      --accent-2: #FF3499;
+      --text: #0b0b0b;
+      --muted: #6b7280;
+      --card-bg: #ffffff;
+      --max-width: 1100px;
+
+      /* Navigation Barbie-pink gradient variables (darkened) */
+      --nav-start: #FF76C4;
+      --nav-mid:  #FF3499;
+      --nav-end:  #CB1C7C;
+      --nav-accent-shadow: rgba(203,28,124,0.22);
+      --nav-inactive-bg: rgba(255,255,255,0.06);
+      --nav-inactive-color: var(--muted);
+      --nav-text-active: #ffffff;
+      --nav-focus: rgba(203,28,124,0.18);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html { scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      color:var(--text);
+      background: none;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;
+      justify-content:center;
+      padding:32px 16px;
+      position:relative;
+    }
+
+    /* fixed background layer that never scrolls */
+    body::before{
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(135deg, var(--bg-light) 50%, var(--bg-pink) 50%);
+      background-size: cover;
+      background-repeat: no-repeat;
+      pointer-events: none;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+      background:transparent;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:18px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    /* Navigation Barbie-pink gradient */
+    header nav{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    /* Button base */
+    .nav-btn{
+      position:relative;
+      display:inline-block;
+      padding:9px 16px;
+      border-radius:999px;
+      text-decoration:none;
+      color:var(--nav-inactive-color);
+      background:var(--nav-inactive-bg);
+      font-weight:700;
+      letter-spacing:0.2px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      transition: transform .14s ease, box-shadow .14s ease, background .18s ease, color .14s ease;
+      -webkit-tap-highlight-color: transparent;
+      overflow:hidden;
+    }
+
+    /* Hover and focus for all buttons */
+    .nav-btn:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.12);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    }
+    .nav-btn:focus{
+      outline: 3px solid var(--nav-focus);
+      outline-offset:4px;
+      border-radius:999px;
+    }
+
+    /* Active (Projects) with multi-stop Barbie gradient and sheen */
+    .nav-btn.active,
+    .nav-btn[aria-current="page"]{
+      background: linear-gradient(180deg, var(--nav-start) 0%, var(--nav-mid) 48%, var(--nav-end) 100%);
+      color: var(--nav-text-active);
+      box-shadow: 0 18px 48px var(--nav-accent-shadow);
+      transform: translateY(-2px);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* Glossy highlight (subtle sheen) */
+    .nav-btn.active::after{
+      content: "";
+      position: absolute;
+      left: -10%;
+      top: -40%;
+      width: 120%;
+      height: 70%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0.06) 40%, rgba(255,255,255,0) 60%);
+      transform: rotate(-6deg);
+      pointer-events: none;
+      opacity: 0.95;
+      mix-blend-mode: overlay;
+    }
+
+    /* Slight inner glow for depth */
+    .nav-btn.active::before{
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+      pointer-events: none;
+    }
+
+    /* Small screens: stack nav */
+    @media (max-width:600px){
+      header nav{
+        flex-direction:column;
+        gap:8px;
+      }
+      .nav-btn{
+        width:220px;
+        text-align:center;
+      }
+    }
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 220px 1fr;
+      gap:20px;
+      align-items:center;
+      margin-bottom:28px;
+    }
+    .profile{
+      background:var(--card-bg);
+      padding:18px;
+      border-radius:14px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.06);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+    }
+    .avatar{
+      width:140px;
+      height:140px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
+      overflow:hidden;
+      margin-bottom:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-size:28px;
+      font-weight:800;
+    }
+    .name{ font-size:20px; font-weight:800; margin:6px 0; }
+    .role{ color:var(--muted); font-weight:700; font-size:13px; margin-bottom:8px; }
+    .socials{ display:flex; gap:8px; margin-top:8px; }
+
+    .intro{
+      background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.98));
+      padding:20px;
+      border-radius:14px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.04);
+    }
+    .intro h1{ margin:0 0 8px 0; font-size:28px; }
+    .intro p{ margin:0; color:var(--muted); line-height:1.5; }
+
+    /* Projects */
+    .projects{
+      margin-top:8px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap:18px;
+    }
+    .project{
+      background:var(--card-bg);
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,0.06);
+      display:flex;
+      flex-direction:column;
+      min-height:220px;
+      cursor:pointer;
+    }
+    .project .media{
+      height:140px;
+      background-size:cover;
+      background-position:center;
+    }
+
+    .project.large .media{
+      height:320px;
+    }
+    .project.large .big-desc{
+      font-size:14px;
+      color:var(--muted);
+      margin-top:10px;
+      line-height:1.45;
+    }
+
+    .project .meta{
+      padding:12px 14px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      flex:1;
+    }
+    .project .title{ font-weight:800; font-size:16px; margin:0; }
+    .project .desc{ color:var(--muted); font-size:13px; margin:0; flex:1; }
+
+    /* Programs */
+    .programs{
+      margin-top:8px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap:18px;
+    }
+
+    /* Media-only grid */
+    .media-showcase{
+      margin-top:28px;
+      display:grid;
+      gap:18px;
+    }
+
+    .media-row{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:18px;
+      align-items:start;
+    }
+    .media-card{
+      background:var(--card-bg);
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,0.06);
+      height:225px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .media-card img,
+    .media-card video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .media-large{
+      background:var(--card-bg);
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 12px 40px rgba(0,0,0,0.08);
+      height:525px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .media-large img,
+    .media-large video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* Modal and gallery styles */
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.6);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:60;
+      padding:20px;
+    }
+    .overlay.open{ display:flex; }
+    .modal{
+      width:100%;
+      max-width:1000px;
+      background:#fff;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 30px 80px rgba(0,0,0,0.3);
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:0;
+      max-height:90vh;
+    }
+    .modal .gallery{
+      background:#000;
+      min-height:320px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      color:#fff;
+    }
+    .modal .gallery .main-wrap{
+      width:100%;
+      height:60vh;
+      max-height:60vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      background:#111;
+      overflow:hidden;
+    }
+
+    /* Stage that holds sliding media items */
+    .modal .gallery .stage{
+      position:relative;
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      z-index:1;
+    }
+    .modal .gallery .media-item{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transform: translateX(0%);
+      transition: transform 320ms cubic-bezier(.2,.9,.2,1);
+      will-change: transform, opacity;
+      background:#111;
+      z-index:2;
+    }
+    .modal .gallery .media-item img,
+    .modal .gallery .media-item video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .modal .gallery .nav{
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 12px;
+      pointer-events: auto;
+      z-index: 70;
+    }
+
+    .modal .gallery button.arrow{
+      pointer-events: auto;
+      background: rgba(255,255,255,0.95);
+      border: none;
+      padding: 10px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 800;
+      color: #111;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+    .modal .gallery button.arrow:focus{
+      outline: 3px solid rgba(43,95,224,0.18);
+      outline-offset: 2px;
+    }
+
+    .modal .gallery .thumbs{
+      width:100%;
+      display:flex;
+      gap:8px;
+      padding:12px;
+      overflow:auto;
+      background:rgba(0,0,0,0.05);
+      box-sizing:border-box;
+    }
+    .modal .gallery .thumb{
+      width:92px;
+      height:64px;
+      background-size:cover;
+      background-position:center;
+      border-radius:6px;
+      cursor:pointer;
+      opacity:0.6;
+      border:2px solid transparent;
+      flex:0 0 auto;
+    }
+    .modal .gallery .thumb.active{
+      opacity:1;
+      border-color:rgba(255,255,255,0.9);
+    }
+
+    .modal .details{
+      padding:18px;
+      overflow:auto;
+      background:#fff;
+    }
+    .modal .details h3{ margin:0 0 8px 0; }
+    .modal .close{
+      position:absolute;
+      right:12px;
+      top:12px;
+      background:rgba(255,255,255,0.9);
+      border:none;
+      padding:8px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    footer{
+      margin-top:28px;
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
+    }
+    
+    .modal-details {
+      max-height: 70vh;       /* Prevents overflowing outside the screen */
+      overflow-y: auto;       /* Enables vertical scrollbar */
+      padding-right: 10px;    /* So text doesn't hide behind scrollbar */
+    }
+
+    /* Optional: prettier scrollbar */
+    .modal-details::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .modal-details::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .modal-details::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+
+    .modal-details::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+
+    @media (max-width:1100px){
+      .media-row{ grid-template-columns: repeat(2, 1fr); }
+      .programs{ grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width:720px){
+      .hero{ grid-template-columns: 1fr; }
+      .modal{ grid-template-columns: 1fr; max-width:720px; }
+      .media-row{ grid-template-columns: 1fr; }
+      .media-large{ height:325px; }
+      .project.large .media{ height:220px; }
+      .modal .gallery .main-wrap{ height:40vh; max-height:40vh; }
+    }
+    @media (max-width:560px){
+      .profile{ padding:14px; }
+      .avatar{ width:120px; height:120px; }
+      .intro h1{ font-size:22px; }
+      .modal .gallery button.arrow{
+        width:48px;
+        height:48px;
+        padding:12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+ <div class="container" role="main" id="home">
+    <header>
+      <div class="brand" aria-hidden="false">
+      </div>
+
+      <!-- Navigation -->
+      <nav aria-label="Main">
+        <a href="index.html" class="nav-btn">Home</a>
+        <a href="project-home.html" class="nav-btn active" aria-current="page">Projects</a>
+        <a href="#about" class="nav-btn">AboutUs</a>
+      </nav>
+    </header>
+
+    <section class="hero" aria-label="Profile">
+      <!-- REPLACED PROFILE BLOCK: supports an image with initials fallback -->
+      <aside class="profile" aria-label="Profile card">
+        <div class="avatar" role="img" aria-label="Profile photo">
+          <!-- Replace the src value with your image URL or local path.
+               Example: src="images/ken-profile.jpg" or an absolute URL. -->
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=60" alt="Ken Delos Santos Fabros profile photo">
+          <span class="initials" aria-hidden="true">KDF</span>
+        </div>
+        <div class="name">Meg Cyzarine Gines</div>
+        <div class="role"></div>
+        <div class="socials" aria-hidden="false">
+          <a href="#" aria-label="Instagram" title="Instagram" style="text-decoration:none; color:var(--muted)">Instagram</a>
+          <a href="#" aria-label="Twitter" title="LinkedIn" style="text-decoration:none; color:var(--muted)">Twitter</a>
+          <a href="#" aria-label="GitHub" title="GitHub" style="text-decoration:none; color:var(--muted)">GitHub</a>
+        </div>
+      </aside>
+
+      <div class="intro" aria-label="Introduction" id="about">
+        <h1>About Me</h1>
+        <p>Hi, I am <strong>Meg Cyzarine Gines</strong>, a CITCS student in the <strong>University of the Cordilleras</strong>. Here I will showcases my <strong>achievements,aspirations, hobbies, skills, book reviews, and game reviews.</strong> Also, I would love to share my beloved pets for people to see how adorable they are!</p>
+        <br>
+        <p><strong>Disclaimer</strong>:<em>Both the book and the game review are my <strong>OWN</strong> opinion.</em> </p>
+      </div>
+    </section>
+
+<section aria-label="Projects">
+  <h2 style="margin:0 0 12px 0; font-size:18px; font-weight:800">
+    Here are the Highlights of My Journey
+  </h2>
+  <div class="projects" id="projects">
+        <!-- Project 1 -->
+        <article class="project large" data-slides='[
+          {
+            "img":"https://dl.dropboxusercontent.com/scl/fi/8dx6ts58e7ioiuwyig6bn/shs.png?rlkey=rrmzf9vk3sqf3mp9an7a1g89t&st=nb36siqz",
+            "title":"Senior High Awards",
+            "desc":"Here is the list of awards I accomplished in <strong>Senior High School</strong>.",
+            "bullets":[
+              "Received a Diploma for <strong>completing the requirements of Senior High School</strong>, Grade 12 (2024-2025)",
+              "Received the <strong>Certificate of Academic Excellence Award and graduated with Honors</strong>, Grade 12 (2024-2025)",
+              "Earned a <strong>Work Immersion Certificate from DICT C.A.R</strong>, Grade 12 (2024-2025)",
+              "Awarded a <strong>Training Certificate from Informatics Baguio City Center, Inc. for completing 320 hours of animation training</strong>, Grade 12 (2024-2025)",
+              "Received a <strong>Recognition Award from Baguio City National Science High School’s English Club</strong> for serving as the <strong>Secretary</strong>, Grade 12 (2024-2025)",
+              "Won <strong>1st Place in the Children’s Storybook Writing Contest at the Baguio Library</strong> together with my <strong>sister</strong>, Grade 12 (2024-2025)",
+              "Received the <strong>Certificate of Academic Excellence Award and graduated with Honors</strong>, Grade 11 (2023-2024)",
+              "Received the <strong>Certificate of Good Conduct</strong>, Grade 11 (2023-2024)"
+            ]
+          },
+          {
+            "img":"https://dl.dropboxusercontent.com/scl/fi/mmwh60pjtpz7x53vxmphs/4.png?rlkey=cxleo21pzl74ixz9oscyba9km&st=xnq1i8n9",
+            "title":"Junior High Awards",
+            "desc":"Here is the list of awards I accomplished in <strong>Junior High School</strong>.",
+            "bullets":[
+              "Received a Diploma for <strong>completing the requirements of Junior High School</strong>, Grade 10 (2022-2023)",
+              "Received the <strong>Certificate of Academic Excellence Award and graduated with Honors</strong>, Grade 10 (2022-2023)",
+              "Received the <strong>Certificate of Good Conduct</strong>, Grade 10 (2022-2023)",
+              "Received the <strong>Certificate of Good Conduct</strong>, Grade 9 (2021-2022)",
+              "Won <strong>2nd Place</strong> in the <strong>Digital Poster Making Division Competition of Baguio City during the “Filipino Values Month”</strong>, Grade 9 (2021-2022)",
+              "Won <strong>3rd Place</strong> in the <strong>Science Club Month Celebration Poster Making Contest of BCNSHS</strong>, Grade 9 (2021-2022)",
+              "Won <strong>1st Place</strong> in the <strong>Logo-Making Contest during the Anti-Bullying Month Celebration</strong>, Grade 9 (2021-2022)",
+              "Received a <strong>Certificate of Good Conduct for all quarters</strong>, Grade 7 (2019-2020)",
+              "Received a <strong>Certificate of Participation in the 2019 School-Based Science Festival</strong>, Grade 7 (2019-2020)"
+            ]
+          },
+          {
+            "img":"https://dl.dropboxusercontent.com/scl/fi/dn4y7257brh4kajljobhl/Black-and-White-Scrapbook-Creative-Portfolio-Presentation.png?rlkey=iu8i0b2dgapvfnxvvxa0ed59y&st=4r6dzgfo",
+            "title":"Nursery to Elementary Awards",
+            "desc":"Here is the list of awards I accomplished from Nursery to Elementary.",
+            "bullets":[
+              "Received a Diploma for completing the requirements of Elementary School, Grade 6 (2018-2019)",
+              "Received the Certificate of Academic Excellence Award and graduated with Honors, Grade 6 (2018-2019)",
+              "Received the Certificate of Good Conduct, Grade 6 (2018-2019)",
+              "Earned a Training Certificate for completing 12 hours of CSDA Hand-Drawn Animation Training, Grade 6 (2018-2019)",
+              "Received a Certificate of Recognition for achieving 1st Place in the YMCA Quiz Bee Competition, Grade 6 (2018-2019)",
+              "Received an Honor Card for achieving the highest marks in Hekasi 6, Computer 6, MAPE 6, EPP 6, and Bible 6, Grade 6 (2018-2019)",
+              "Received a Certificate of Participation for joining YMCA Club, Board Game Club, and BPFLC’s Philippine Society of Youth Science and Math Club, Grade 6 (2018-2019)",
+              "Received an Honor Card for achieving the highest marks in Filipino 5, Hekasi 5, Science 5, Computer 5, Mathematics 5, MAPE 5, EPP 5, and Bible 5, Grade 5 (2017-2018)",
+              "Received a Certificate of Recognition for achieving 4th Place in the YMCA Quiz Bee Competition, Grade 5 (2017-2018)",
+              "Received a Certificate of Participation for joining YMCA Club, Arts Club, Bible Study Club, Board Game Club, and BPFLC’s Philippine Society of Youth Science and Math Club, Grade 5 (2017-2018)",
+              "Received an Honor Card for achieving the highest marks in HELE 4, Language 4, Filipino 4, Hekasi 4, Computer 4, Mathematics 4, MAPE 4, EPP 4, and Bible 4, Grade 4 (2016-2017)",
+              "Received a Certificate of Participation for joining YMCA Club, Board Game Club, and BPFLC’s Philippine Society of Youth Science and Math Club, Grade 4 (2016-2017)",
+              "Received an Honor Card for achieving the highest marks in Filipino 3, Sibika at Kultura 3, Mathematics 3, MAPE 3, and Bible 3, Grade 3 (2015-2016)",
+              "Received a Certificate of Participation for joining YMCA Club, Board Game Club, and BPFLC’s Philippine Society of Youth Science and Math Club, Grade 3 (2015-2016)",
+              "Received an Honor Card for achieving the highest marks in Science 2, Language 2, Filipino 2, Sibika at Kultura 2, Mathematics 2, MAPE 2, and Bible 2, Grade 2 (2014-2015)",
+              "Received a Certificate of Participation for joining YMCA Club, Board Game Club, and BPFLC’s Philippine Society of Youth Science and Math Club, Grade 2 (2014-2015)",
+              "Received a Diploma for completing the requirements of Kindergarten, Kinder 2 (2012-2013)",
+              "Received a Best Conduct Certificate, Kinder 2 (2012-2013)",
+              "Received a Certificate of Recognition for participating in the Early Childhood Care and Development (ECCD) program, Kinder 1 (2011-2012)",
+              "Received a Certificate of Recognition for completing the requirements of the Pre-Kindergarten Level, Kinder 1 (2011-2012)",
+              "Received a Certificate of Recognition for participating in the Early Childhood Care and Development (ECCD) program, Nursery (2010-2011)"
+            ]
+          }
+        ]'>
+          <div class="media" style="background-image:url('https://dl.dropboxusercontent.com/scl/fi/6zwlt644cwmnr16lg2toe/Black-and-White-Scrapbook-Creative-Portfolio-Presentation-1.png?rlkey=dw3qlvu21ae1jab2ud33gfemj&st=fwt37ssq')" role="img" aria-label="Project Aurora image"></div>
+          <div class="meta">
+            <h3 class="title">Achievements</h3>
+            <p class="desc">“Optimism is the faith that leads to achievement. Nothing can be done without hope and confidence.” — <strong>Helen Keller</strong></p>
+          </div>
+        </article>
+
+        <!-- Project 2: Aspirations -->
+        <article class="project large" data-slides='[
+          {
+            "img":"https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60",
+            "title":"Aspiration — Learning",
+            "desc":"The future belongs to those who believe in the beauty of their dreams. — Eleanor Roosevelt",
+            "bullets":[
+              "Master advanced web development",
+              "Earn industry certifications",
+              "Pursue graduate studies in IT"
+            ]
+          },
+          {
+            "img":"https://images.unsplash.com/photo-1532619187604-8a4d5a0f0f6b?auto=format&fit=crop&w=1200&q=60",
+            "title":"Aspiration — Projects",
+            "desc":"Turning ideas into impactful work.",
+            "bullets":[
+              "Develop a cultural advocacy website",
+              "Contribute to open-source projects",
+              "Lead a community tech initiative"
+            ]
+          }
+        ]'>
+          <div class="media" style="background-image:url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Pulse Dashboard image"></div>
+          <div class="meta">
+            <h3 class="title">Aspirations</h3>
+            <p class="desc">“The future belongs to those who believe in the beauty of their dreams.” — <strong>Eleanor Roosevelt</strong></p>
+          </div>
+        </article>
+
+          <!-- Project 3: Hobbies -->
+          <article class="project large" data-slides='[
+            {"img":"https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60",
+            "title":"Hobbies — Photography",
+            "desc":"To be really happy, have a few real hobbies.",
+            "bullets":
+            [
+            "Landscape photos","Pet photography"
+            ]
+          },
+            {"img":"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60",
+            "title":"Hobbies — Reading",
+            "desc":"Book collection and reviews.",
+            "bullets":["Fiction","Non-fiction","Reviews"]}
+          ]'>
+            <div class="media" style="background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Atlas Site image"></div>
+            <div class="meta">
+              <h3 class="title">Hobbies</h3>
+              <p class="desc">“To be really happy and really safe, one ought to have at least two or three hobbies, and they must all be real.” — <strong>Winston Churchill</strong></p>
+            </div>
+          </article>
+      </div>
+    </section>
+
+    <!-- Programs -->
+    <section aria-label="Programs">
+      <div class="programs" id="programs">
+
+        <article class="project program large" data-slides='[
+              {"img":"https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60",
+              "title":"Awards",
+              "desc":"Here you will see the awards that I&#39;ve achived throughout my life",
+              "bullets":["Research and user interviews","Interactive prototypes","Final UI and handoff"]},
+
+              {"img":"https://images.unsplash.com/photo-1482192505345-5655af888cc4?auto=format&fit=crop&w=1200&q=60",
+              "title":"Award — Regional",
+              "desc":"Regional recognition for community service and academic work.",
+              "bullets":["Community service","Academic excellence"]}
+            ]'>
+              <div class="media" style="background-image:url('https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Project Aurora image"></div>
+              <div class="meta">
+                <h3 class="title">Skills</h3>
+                <p class="desc">The future belongs to those who learn more skills and combine them in creative ways.” — <strong>Robert Greene</strong></p>
+              </div>
+            </article>
+
+        <article class="project program large" data-title="A Tale of Magic Triology" data-desc="A toolkit for data visualization and reporting." data-images='["https://dl.dropboxusercontent.com/scl/fi/swgd6c6z9ibgouxvhcocw/Beige-Brown-and-White-Playful-Cat-Photo-Collage-A4-Landscape-1.png?rlkey=v2ub8autkwpv14oh52uc72wvn&st=59z6io01"]'>
+          <div class="media" style="background-image:url('https://dl.dropboxusercontent.com/scl/fi/swgd6c6z9ibgouxvhcocw/Beige-Brown-and-White-Playful-Cat-Photo-Collage-A4-Landscape-1.png?rlkey=v2ub8autkwpv14oh52uc72wvn&st=59z6io01')" role="img" aria-label="Program Two image"></div>
+          <div class="meta">
+            <h3 class="title">Book Reviews</h3>
+            <p class="desc"><strong>Disclaimer</strong>:These reviews are based on my <em>OWN OPINIONS</em>. I do not intend to offend or harm anyone; I simply wish to share my thoughts on the books I read.</p>
+            <p class="desc">Also, please support the authors of these books!</p>
+          </div>
+        </article>
+
+        <article class="project program large" data-title="Program Three" data-desc="Accessibility-first UI components and patterns." data-images='["https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60"]'>
+          <div class="media" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Program Three image"></div>
+          <div class="meta">
+            <h3 class="title">Game Reviews</h3>
+            <p class="desc"><strong>Disclaimer</strong>:These reviews are based on my <em>OWN OPINIONS</em>. I do not intend to offend or harm anyone; I simply wish to share my thoughts on the games I play.</p>
+            <p class="desc">Also, please support the developers of these games!</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Media showcase -->
+    <section class="media-showcase" aria-label="MY HAMSTERS">
+      <h2 style="margin:0 0 12px 0; font-size:18px; font-weight:800">MY HAMSTERS</h2>
+
+      <div class="media-row" aria-hidden="false">
+        <div class="media-card" aria-label="Media card 1">
+          <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=1200&q=60" alt="Media 1">
+        </div>
+        <div class="media-card" aria-label="Media card 2">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60" alt="Media 2">
+        </div>
+        <div class="media-card" aria-label="Media card 3">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60" alt="Media 2">
+        </div>
+      </div>
+
+      <div class="media-large" aria-label="Large media display">
+          <video controls poster="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60">
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+    </section>
+
+    <!-- Modal for project details and image gallery (UPDATED for per-slide text) -->
+    <div class="overlay" id="overlay" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="gallery" id="gallery">
+          <div class="main-wrap" id="mainWrap">
+            <button class="close" id="closeBtn" aria-label="Close">Close</button>
+
+            <div class="nav" aria-hidden="false">
+              <button class="arrow" id="prevBtn" aria-label="Previous">‹</button>
+              <button class="arrow" id="nextBtn" aria-label="Next">›</button>
+            </div>
+
+            <!-- Stage: sliding media items are appended here -->
+            <div id="galleryStage" class="stage" aria-live="polite"></div>
+          </div>
+
+          <div class="thumbs" id="thumbs" aria-hidden="false"></div>
+        </div>
+
+        <div class="details modal-details">
+          <h3 id="modal-title">Project Title</h3>
+          <p id="modal-desc" style="color:var(--muted)"></p>
+
+          <div style="margin-top:12px;">
+            <strong style="display:block; margin-bottom:8px">Highlights</strong>
+            <ul id="modalHighlights" style="color:var(--muted); margin-top:0">
+              <!-- bullets will be injected here -->
+            </ul>
+          </div>
+          <div style="margin-top:14px;">
+            <button class="btn ghost" id="modal-close-2" style="margin-left:8px">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <footer>
+      © <span id="year"></span> Your Name. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    // Populate year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+      // DOM elements
+      const overlay = document.getElementById('overlay');
+      const galleryStage = document.getElementById('galleryStage');
+      const modalTitle = document.getElementById('modal-title');
+      const modalDesc = document.getElementById('modal-desc');
+      const modalHighlights = document.getElementById('modalHighlights');
+      const closeBtn = document.getElementById('closeBtn');
+      const modalClose2 = document.getElementById('modal-close-2');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const thumbs = document.getElementById('thumbs');
+
+      let currentSlides = [];   // array of {img,title,desc,bullets}
+      let currentIndex = 0;
+      let isAnimating = false;
+      let lastFocused = null;
+
+      function createMediaElement(src){
+        const isVideo = typeof src === 'string' && (src.match(/\.(mp4|webm|ogg)(\?.*)?$/i) || src.includes('video') || src.includes('mp4'));
+        const wrapper = document.createElement('div');
+        wrapper.className = 'media-item';
+        if(isVideo){
+          const v = document.createElement('video');
+          v.src = src;
+          v.controls = true;
+          v.playsInline = true;
+          v.preload = 'metadata';
+          v.style.maxHeight = '100%';
+          v.style.maxWidth = '100%';
+          wrapper.appendChild(v);
+        } else {
+          const img = document.createElement('img');
+          img.src = src || '';
+          img.alt = modalTitle ? modalTitle.textContent : '';
+          wrapper.appendChild(img);
+        }
+        return wrapper;
+      }
+
+      // Render thumbnails (uses slide.img)
+      function renderThumbs(){
+        if(!thumbs) return;
+        thumbs.innerHTML = '';
+        currentSlides.forEach((slide, i) => {
+          const div = document.createElement('div');
+          div.className = 'thumb' + (i === currentIndex ? ' active' : '');
+          div.style.backgroundImage = `url('${slide.img || ''}')`;
+          div.setAttribute('role','button');
+          div.setAttribute('aria-label','Thumbnail ' + (i+1));
+          div.addEventListener('click', () => {
+            if(i === currentIndex || isAnimating) return;
+            animateToIndex(i, i > currentIndex ? 1 : -1);
+          });
+          thumbs.appendChild(div);
+        });
+      }
+
+      // Update text (title, desc, bullets)
+      function updateTextForIndex(index){
+        const slide = currentSlides[index] || {title:'',desc:'',bullets:[]};
+        if(modalTitle) modalTitle.textContent = slide.title || '';
+        if(modalDesc) modalDesc.textContent = slide.desc || '';
+        if(modalHighlights) {
+          modalHighlights.innerHTML = (slide.bullets || []).map(b => `<li>${b}</li>`).join('');
+        }
+      }
+
+      function showIndexImmediate(index){
+        if(!galleryStage) return;
+        galleryStage.innerHTML = '';
+        const slide = currentSlides[index] || {img:''};
+        const el = createMediaElement(slide.img || '');
+        el.classList.add('media-item','current');
+        el.style.transform = 'translateX(0%)';
+        galleryStage.appendChild(el);
+        currentIndex = index;
+        renderThumbs();
+        pauseAllExcept(el);
+        updateTextForIndex(index);
+      }
+
+      function pauseAllExcept(keepEl){
+        if(!galleryStage) return;
+        const videos = galleryStage.querySelectorAll('video');
+        videos.forEach(v => {
+          if(!keepEl || !keepEl.contains(v)) {
+            try { v.pause(); v.currentTime = 0; } catch(e){}
+          }
+        });
+      }
+
+      function animateToIndex(newIndex, dir){
+        if(isAnimating) return;
+        if(newIndex === currentIndex) return;
+        if(!currentSlides.length) return;
+        isAnimating = true;
+
+        const oldEl = galleryStage.querySelector('.media-item.current') || galleryStage.firstElementChild;
+        const slide = currentSlides[newIndex] || {img:''};
+        const newEl = createMediaElement(slide.img || '');
+        newEl.classList.add('media-item');
+        newEl.style.transform = `translateX(${dir > 0 ? 100 : -100}%)`;
+        galleryStage.appendChild(newEl);
+
+        requestAnimationFrame(() => {
+          if(oldEl){
+            oldEl.style.transition = 'transform 320ms cubic-bezier(.2,.9,.2,1)';
+            oldEl.style.transform = `translateX(${dir > 0 ? -100 : 100}%)`;
+          }
+          newEl.style.transition = 'transform 320ms cubic-bezier(.2,.9,.2,1)';
+          newEl.style.transform = 'translateX(0%)';
+        });
+
+        const onEnd = () => {
+          if(oldEl && oldEl.parentElement === galleryStage) {
+            const v = oldEl.querySelector('video');
+            if(v){ try { v.pause(); v.currentTime = 0; } catch(e){} }
+            oldEl.remove();
+          }
+          newEl.classList.add('current');
+          Array.from(galleryStage.querySelectorAll('.media-item')).forEach((el) => {
+            if(el !== newEl) el.classList.remove('current');
+          });
+          currentIndex = newIndex;
+          renderThumbs();
+          pauseAllExcept(newEl);
+          updateTextForIndex(currentIndex); // <-- update title/desc/bullets here
+          isAnimating = false;
+        };
+
+        let finished = false;
+        newEl.addEventListener('transitionend', function te(){
+          if(finished) return;
+          finished = true;
+          newEl.removeEventListener('transitionend', te);
+          onEnd();
+        });
+        setTimeout(() => {
+          if(!finished) {
+            finished = true;
+            onEnd();
+          }
+        }, 500);
+      }
+
+      // Wire project cards to open modal
+      if(document.querySelectorAll('.project').length){
+        document.querySelectorAll('.project').forEach(card=>{
+          card.addEventListener('click', function(){
+            const slidesJson = card.dataset.slides;
+            const imagesJson = card.dataset.images;
+            let slides = [];
+
+            if(slidesJson){
+              try{ slides = JSON.parse(slidesJson); } catch(e){ slides = []; }
+            } else if(imagesJson){
+              // fallback: convert simple images array into slides with card title/desc
+              try{
+                const imgs = JSON.parse(imagesJson || '[]');
+                const title = card.dataset.title || (card.querySelector('.title') && card.querySelector('.title').textContent) || '';
+                const desc = card.dataset.desc || (card.querySelector('.desc') && card.querySelector('.desc').textContent) || '';
+                slides = imgs.map((src, i) => ({ img: src, title: (i===0?title:''), desc: (i===0?desc:''), bullets: [] }));
+              } catch(e){ slides = []; }
+            }
+
+            // If no slides, create a placeholder slide
+            if(!slides.length){
+              slides = [{ img:'', title:(card.dataset.title||''), desc:(card.dataset.desc||''), bullets:[] }];
+            }
+
+            openModal({ slides: slides });
+          });
+        });
+      }
+
+      function openModal(data){
+        lastFocused = document.activeElement;
+        currentSlides = Array.isArray(data.slides) ? data.slides.slice() : [];
+        currentIndex = 0;
+        if(galleryStage) galleryStage.innerHTML = '';
+        if(currentSlides.length){
+          showIndexImmediate(0);
+        } else if(galleryStage){
+          const placeholder = document.createElement('div');
+          placeholder.className = 'media-item current';
+          placeholder.style.display = 'flex';
+          placeholder.style.alignItems = 'center';
+          placeholder.style.justifyContent = 'center';
+          placeholder.style.color = '#fff';
+          placeholder.textContent = 'No media';
+          galleryStage.appendChild(placeholder);
+          updateTextForIndex(0);
+        }
+        if(thumbs) renderThumbs();
+        if(overlay) overlay.classList.add('open');
+        if(overlay) overlay.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+        if(closeBtn) closeBtn.focus();
+      }
+
+      function closeModal(){
+        if(overlay) overlay.classList.remove('open');
+        if(overlay) overlay.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+        if(galleryStage){
+          const videos = galleryStage.querySelectorAll('video');
+          videos.forEach(v => { try { v.pause(); v.currentTime = 0; } catch(e){} });
+          galleryStage.innerHTML = '';
+        }
+        currentSlides = [];
+        currentIndex = 0;
+        if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+      }
+
+      // Controls
+      if(prevBtn) prevBtn.addEventListener('click', () => {
+        if(isAnimating || !currentSlides.length) return;
+        const next = (currentIndex - 1 + currentSlides.length) % currentSlides.length;
+        animateToIndex(next, -1);
+      });
+      if(nextBtn) nextBtn.addEventListener('click', () => {
+        if(isAnimating || !currentSlides.length) return;
+        const next = (currentIndex + 1) % currentSlides.length;
+        animateToIndex(next, 1);
+      });
+      if(closeBtn) closeBtn.addEventListener('click', closeModal);
+      if(modalClose2) modalClose2.addEventListener('click', closeModal);
+
+      // Close when clicking outside modal content
+      if(overlay){
+        overlay.addEventListener('click', (e) => {
+          if(e.target === overlay) closeModal();
+        });
+      }
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if(!overlay || overlay.getAttribute('aria-hidden') === 'true') return;
+        if(e.key === 'Escape') {
+          closeModal();
+        } else if(e.key === 'ArrowLeft') {
+          if(!isAnimating && currentSlides.length) {
+            const prev = (currentIndex - 1 + currentSlides.length) % currentSlides.length;
+            animateToIndex(prev, -1);
+          }
+        } else if(e.key === 'ArrowRight') {
+          if(!isAnimating && currentSlides.length) {
+            const next = (currentIndex + 1) % currentSlides.length;
+            animateToIndex(next, 1);
+          }
+        }
+      });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio — Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-light: #f3f3f3;
+      --bg-orange: #0E281F;
+      --accent-a: #096905;
+      --accent-b: #44b326;
+      --text: #111111;
+      --muted: #6b6b6b;
+      --nav-btn-bg: #e6e6e6;
+      --nav-btn-hover: #d0d0d0;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      color:var(--text);
+      /* background moved to fixed pseudo element for cross-browser stability */
+      background: none;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      min-height:100vh;
+      position:relative; /* required so ::before sits behind content */
+      overflow-x:hidden;
+    }
+
+    /* fixed background that stays put while content scrolls */
+    body::before{
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(135deg, var(--bg-light) 50%, var(--bg-orange) 50%);
+      background-repeat: no-repeat;
+      background-size: cover;
+      pointer-events: none;
+    }
+
+    .profile-circle {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,0.6);
+      border: 4px solid white;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      overflow: hidden;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Header and nav */
+    .header{
+      width:100%;
+      max-width:1200px;
+      padding:56px 40px 8px;
+      position:relative;
+      display:block;
+    }
+
+    .nav-bar{
+      position:absolute;
+      top:18px;
+      left:0;
+      right:0;
+      max-width:1200px;
+      margin:0 auto;
+      padding:0 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      z-index:10;
+    }
+
+    .nav-left,
+    .nav-right{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+
+    /* Primary nav links: make them light pills so they remain visible on dark background */
+    .nav-link{
+      color: #0E281F;
+      background: rgba(255,255,255,0.94);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      letter-spacing: 0.4px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      border: 1px solid rgba(0,0,0,0.06);
+      transition: transform .12s ease, box-shadow .18s ease, background .12s ease;
+    }
+
+    /* Hover / focus state keeps high contrast and a subtle lift */
+    .nav-link:hover,
+    .nav-link:focus{
+      background: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+      outline: none;
+    }
+
+    .nav-login{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      color:#fff;
+      font-weight:700;
+      text-decoration:none;
+      background: linear-gradient(90deg, var(--accent-a), var(--accent-b));
+      box-shadow:0 10px 26px rgba(123,47,247,0.14);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .nav-login:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(123,47,247,0.18); }
+    .nav-home{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      color:#fff;
+      font-weight:700;
+      text-decoration:none;
+      background: linear-gradient(90deg, var(--accent-a), var(--accent-b));
+      box-shadow:0 10px 26px rgba(123,47,247,0.14);
+      border: 1px solid rgba(0,0,0,0.06);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .nav-home:hover{
+      transform:translateY(-3px);
+      box-shadow:0 18px 40px rgba(123,47,247,0.18);
+    }
+    .nav-home:focus{
+      outline:3px solid rgba(68,179,38,0.18);
+      outline-offset:2px;
+    }
+
+    /* Title and subtitle centered */
+    .title{
+      margin:0;
+      font-size:36px;
+      font-weight:700;
+      letter-spacing:0.4px;
+      text-align:center;
+    }
+    .subtitle{
+      margin:10px 0 0;
+      font-size:12px;
+      letter-spacing:2px;
+      color:var(--muted);
+      text-transform:uppercase;
+      font-weight:600;
+      text-align:center;
+    }
+
+    /* Intro message box made longer */
+    .intro {
+      width: 100%;
+      max-width: 1200px;
+      margin: 28px auto 8px;
+      background: rgba(255, 255, 255, 0.45);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      padding: 28px 32px;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.35);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      text-align: center;
+      color: #111111;
+    }
+    .intro h3, .intro h2 {
+      margin-top: 0;
+    }
+    .intro p {
+      margin: 8px 0 0;
+    }
+    .intro-large {
+      font-size: 40px;
+      font-weight: 800;
+      color: #111111;
+      text-align: center;
+      margin: 0 0 8px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Gallery of vertical panels */
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:18px;
+      width:100%;
+      max-width:1200px;
+      padding:28px 80px 48px;
+      align-items:stretch;
+    }
+    .panel{
+      height:460px;
+      border-radius:10px;
+      overflow:hidden;
+      background-size:cover;
+      background-position:center;
+      box-shadow:0 8px 24px rgba(0,0,0,0.08);
+      transition:transform .35s cubic-bezier(.2,.9,.3,1), box-shadow .35s;
+      display:flex;
+      align-items:flex-end;
+      justify-content:flex-start;
+      padding:18px;
+    }
+    .panel:hover{
+      transform:translateY(-10px);
+      box-shadow:0 26px 60px rgba(0,0,0,0.18);
+    }
+    .panel .label{
+      background:rgba(255,255,255,0.85);
+      color:var(--text);
+      padding:8px 12px;
+      border-radius:6px;
+      font-weight:600;
+      font-size:13px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.06);
+    }
+
+    /* Placeholder images (replace with your own) */
+    .panel:nth-child(1){ background-image: url('https://cdn1.epicgames.com/salesEvent/salesEvent/amoguslandscape_2560x1440-3fac17e8bb45d81ec9b2c24655758075'); }
+    .panel:nth-child(2){ background-image: url('https://cdn.static.pikoya.com/robloxgo/games/6263431107/thumbnail_1'); }
+    .panel:nth-child(3){ background-image: url('https://wallpaperaccess.com/full/4247650.jpg'); }
+    .panel:nth-child(4){ background-image: url('https://wallpaperaccess.com/full/6083155.jpg'); }
+
+    /* Media showcase (video + carousel) */
+    .media-showcase{
+      width:100%;
+      max-width:1200px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      padding:18px 80px 28px;
+      align-items:stretch;
+      box-sizing:border-box;
+    }
+
+    .media-card{
+      background: rgba(255,255,255,0.6);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.4);
+      box-shadow:0 12px 30px rgba(0,0,0,0.08);
+      overflow:hidden;
+      position:relative;
+      min-height:220px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .media-video,
+    .carousel{
+      width:100%;
+      height:100%;
+      transition:opacity .6s ease, transform .6s ease;
+      opacity:1;
+      transform:translateY(0);
+    }
+    .hidden {
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(6px) scale(.995);
+    }
+
+    .media-video video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* Carousel styles */
+    .carousel{
+      position:relative;
+      overflow:hidden;
+      display:block;
+    }
+    .slides{
+      position:relative;
+      width:100%;
+      height:100%;
+    }
+    .slide{
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center;
+      transition:opacity .9s ease;
+      opacity:0;
+    }
+    .slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .slide.active{
+      opacity:1;
+    }
+
+    .media-caption{
+      position:absolute;
+      left:12px;
+      bottom:12px;
+      background:rgba(0,0,0,0.45);
+      color:#fff;
+      padding:8px 10px;
+      border-radius:8px;
+      font-weight:600;
+      font-size:13px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* CTA */
+    .cta{
+      display:flex;
+      justify-content:center;
+      width:100%;
+      padding:18px 20px 64px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      padding:12px 22px;
+      border-radius:999px;
+      color:#fff;
+      font-weight:700;
+      text-decoration:none;
+      background: linear-gradient(90deg, var(--accent-a), var(--accent-b));
+      box-shadow:0 12px 30px rgba(123,47,247,0.18);
+      border:none;
+      cursor:pointer;
+      transition:transform .22s ease, box-shadow .22s ease;
+    }
+    .btn:hover{ transform:translateY(-4px); box-shadow:0 22px 48px rgba(123,47,247,0.22); }
+
+    /* Footer styling added */
+    footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 18px 0;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .title{ font-size:40px; }
+      .gallery{ grid-template-columns:repeat(2,1fr); gap:14px; padding:24px 36px 40px; }
+      .panel{ height:380px; }
+      .nav-bar{ padding:0 16px; top:14px; }
+      .intro{ margin:20px 18px; padding:28px 20px; min-height:180px; }
+      .media-showcase{ grid-template-columns:1fr; padding:18px 36px 28px; }
+    }
+
+    @media (max-width:560px){
+      .title{ font-size:28px; }
+      .subtitle{ font-size:11px; letter-spacing:1.6px; }
+      .gallery{ grid-template-columns:1fr; gap:12px; padding:18px; }
+      .panel{ height:320px; border-radius:8px; }
+      .header{ padding-top:36px; padding-left:18px; padding-right:18px; }
+      .nav-bar{
+        position:static;
+        margin:12px auto 0;
+        flex-direction:column;
+        gap:8px;
+        align-items:center;
+      }
+      .nav-left, .nav-right{ width:100%; justify-content:center; gap:8px; }
+      .nav-link{ padding:10px 16px; }
+      .nav-login{ padding:10px 16px; }
+      .intro{ margin:14px 12px; padding:18px 14px; min-height:160px; }
+      .media-showcase{ padding:12px 18px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header" role="banner">
+    <div class="nav-bar" role="navigation" aria-label="Main navigation">
+      <div class="nav-left">
+        <a class="nav-login" href="#login">Login</a>
+      </div>
+
+      <div class="nav-right" aria-hidden="false">
+        <a class="nav-link nav-home" href="HomeBoard.html">Home</a>
+        <a class="nav-link" href="ProjectHome.html">Projects</a>
+        <a class="nav-link" href="#about">AboutUs</a>
+      </div>
+    </div>
+
+    <h1 class="title">Portfolio</h1>
+    <div class="subtitle">CITCS &amp; STUDENT</div>
+
+    <!-- Intro message box added above the gallery -->
+    <div class="intro" role="region" aria-label="Welcome message">
+      <h3 class="intro-large">Welcome to Our Portfolio</h3>
+      <p>We would like to thank ma'am Maynigo for enticing us to create this bombastic project and to expose our very handsome and beautiful faces with our unbelievable projects to the world where no one can ever come close to our greatness. Without her guidance and joyful energy, we would've just been drifting in space depressed, lonely, and negative while being suspicious of each other on whose the impostor.</p>
+      
+      <div class="profile-circle">
+        <img src="https://media1.tenor.com/m/jUMex_rdqPwAAAAd/among-us-twerk.gif" alt="Profile">
+      </div>
+    </div>
+  
+  </header>
+
+  <main class="gallery" role="main" id="home">
+    <div class="panel"><div class="label">Ken Fabros</div></div>
+    <div class="panel"><div class="label">Meg Cyzarine Gines</div></div>
+    <div class="panel"><div class="label">Mhar Raymon Megote</div></div>
+    <div class="panel"><div class="label">Isaiah Ghian Fernandez</div></div>
+  </main>
+
+  <!-- Media showcase inserted below the 4 containers -->
+  <section class="media-showcase" aria-label="Media showcase">
+    <!-- Video card -->
+    <div class="media-card">
+      <div class="media-video" id="mediaVideoWrap">
+        <video class="media-element" muted autoplay loop playsinline preload="metadata" poster="">
+          <!-- sample public domain video; replace with your own source if desired -->
+          <source src="https://www.pexels.com/download/video/1851190/" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="media-caption" aria-hidden="true">Project Reel</div>
+      </div>
+    </div>
+
+    <!-- Carousel card -->
+    <div class="media-card">
+      <div class="carousel" id="imageCarousel" aria-live="polite">
+        <div class="slides">
+          <div class="slide active"><img src="https://wallpaperaccess.com/full/4247650.jpg" alt="Sample image 1"></div>
+          <div class="slide"><img src="https://wallpaperaccess.com/full/6083155.jpg" alt="Sample image 2"></div>
+          <div class="slide"><img src="https://cdn.static.pikoya.com/robloxgo/games/6263431107/thumbnail_1" alt="Sample image 3"></div>
+          <div class="slide"><img src="https://cdn1.epicgames.com/salesEvent/salesEvent/amoguslandscape_2560x1440-3fac17e8bb45d81ec9b2c24655758075" alt="Sample image 4"></div>
+        </div>
+        <div class="media-caption" aria-hidden="true">Image Gallery</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer with copyright mark -->
+  <footer aria-label="Site copyright">
+    &copy; <span id="year"></span> Meggy. All rights reserved.
+  </footer>
+
+  <script>
+    // Image carousel: crossfade slides every 4 seconds
+    (function(){
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      let current = 0;
+      const slideInterval = 4000;
+
+      function showSlide(index){
+        slides.forEach((s, i) => {
+          s.classList.toggle('active', i === index);
+        });
+      }
+
+      setInterval(() => {
+        current = (current + 1) % slides.length;
+        showSlide(current);
+      }, slideInterval);
+    })();
+
+    // Toggle between video and carousel every 10 seconds with fade
+    (function(){
+      const videoWrap = document.getElementById('mediaVideoWrap');
+      const carousel = document.getElementById('imageCarousel');
+      const videoEl = videoWrap.querySelector('video');
+      let showVideo = true;
+      const toggleInterval = 10000;
+
+      // Start with video playing
+      videoEl.play().catch(()=>{ /* autoplay may be blocked; user can interact */ });
+
+      setInterval(() => {
+        if (showVideo) {
+          // hide video, show carousel
+          videoWrap.classList.add('hidden');
+          carousel.classList.remove('hidden');
+          try { videoEl.pause(); } catch(e){}
+        } else {
+          // show video, hide carousel
+          videoWrap.classList.remove('hidden');
+          carousel.classList.add('hidden');
+          try { videoEl.play(); } catch(e){}
+        }
+        showVideo = !showVideo;
+      }, toggleInterval);
+    })();
+
+    // Populate footer year dynamically
+    (function(){
+      const yearEl = document.getElementById('year');
+      if(yearEl) yearEl.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>

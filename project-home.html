@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio — Projects</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-light: #f3f3f3;
+      --bg-orange: #0E281F;
+      --text: #0b0b0b;
+      --muted: #4a4a4a;
+      --max-width: 1200px;
+      --page-pad: 40px;
+      --rot-interval: 5s;
+      --fade-ease: cubic-bezier(.2,.9,.3,1);
+      --fade-time: 1s;
+      --media-gap: 0.5rem;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html { scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      color:var(--text);
+      background: none;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      min-height:100vh;
+      line-height:1.45;
+      position:relative;
+      overflow-y:auto;
+    }
+
+    /* fixed background layer that never scrolls */
+    body::before{
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(135deg, var(--bg-light) 50%, var(--bg-orange) 50%);
+      background-size: cover;
+      background-repeat: no-repeat;
+      pointer-events: none;
+    }
+
+    /* Parallax helper: elements with .parallax will move vertically on scroll */
+    .parallax{
+      will-change: transform;
+      transform: translateZ(0);
+      transition: transform 0.06s linear;
+    }
+
+    /* Disable parallax on small screens for usability and performance */
+    @media (max-width:720px){
+      .parallax{ transform: none !important; transition: none !important; }
+    }
+
+    .wrap{
+      width:100%;
+      max-width:var(--max-width);
+      padding:0 var(--page-pad);
+      margin:0 auto;
+    }
+
+    /* Header: brand left, nav right */
+    header {
+      width: 100%;
+      max-width: var(--max-width);
+      padding: 18px var(--page-pad);
+      box-sizing: border-box;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* brand left, nav right */
+      gap: 12px;
+    }
+
+    .site-brand {
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--text);
+      line-height: 1;
+    }
+    .site-sub {
+      display: block;
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* Navigation */
+    .nav-bar {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end; /* push links to the right */
+      align-items: center;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--text);
+      background: #ffffff;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+      transition: background 0.18s ease, transform 0.12s ease;
+    }
+
+    .nav-link:hover {
+      background: #f0f0f0;
+      transform: translateY(-2px);
+    }
+
+    .nav-link.active {
+      background: linear-gradient(90deg, #096905, #44b326);
+      color: #fff;
+      box-shadow: 0 12px 30px rgba(123, 47, 247, 0.14);
+    }
+
+    /* Intro */
+    .intro{
+      width:100%;
+      max-width:var(--max-width);
+      padding:18px var(--page-pad);
+      margin-bottom:8px;
+    }
+    .intro-large{ margin:0 0 6px 0; font-size:22px; font-weight:800; color:var(--text); }
+    .intro p{ margin:0; color:var(--muted); }
+
+    /* Projects grid */
+    .projects {
+      width:100%;
+      max-width:var(--max-width);
+      padding:18px var(--page-pad) 8px;
+      display:grid;
+      gap:20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      justify-content:center;
+      align-items:stretch;
+    }
+
+    .card {
+      position:relative;
+      height:320px;
+      border-radius:12px;
+      overflow:hidden;
+      color:#fff;
+      display:flex;
+      align-items:flex-start;
+      box-shadow:0 10px 30px rgba(0,0,0,0.10);
+      transition:box-shadow .28s, transform .28s cubic-bezier(.2,.9,.3,1);
+      min-width:260px;
+      background:transparent; /* gradient fallback sits behind image if image fails */
+    }
+
+    /* Anchor now acts as the stacking context and fills the card */
+    .card .card-link{
+      position:relative;
+      display:block;
+      width:100%;
+      height:100%;
+      color:inherit;
+      text-decoration:none;
+      border-radius:inherit;
+      overflow:hidden;
+    }
+
+    /* Photo fills the card and sits behind overlay/text */
+    .card-photo {
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:0.75; /* 75% transparency */
+      z-index:0;
+      pointer-events:none; /* allow clicks to pass to the anchor */
+      display:block;
+    }
+
+    /* Gradient overlay between photo and text (keeps text readable) */
+    .card-overlay {
+      position:absolute;
+      inset:0;
+      z-index:1;
+      background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.45) 100%);
+      border-radius:inherit;
+      pointer-events:none;
+    }
+
+    /* disable the old pseudo-element overlay to avoid duplicate overlays */
+    .card::after { display:none !important; }
+
+    /* Position text at the top of the card and keep it above photo/overlay */
+    .card-inner{
+      position:absolute;
+      top:12px;
+      left:12px;
+      right:12px;
+      z-index:2;
+      padding:10px 12px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+      gap:8px;
+      color:#fff;
+      pointer-events:auto;
+      background: linear-gradient(180deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.00) 100%); /* transparent background to preserve readability */
+      border-radius:8px;
+    }
+
+    /* subtle hover effect on the whole card (text stays in place) */
+    .card:hover{
+      box-shadow:0 18px 40px rgba(0,0,0,0.14);
+      transform: translateY(-4px);
+    }
+
+    .card-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .category {
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:0.6px;
+      text-transform:uppercase;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      padding:6px 10px;
+      border-radius:999px;
+      backdrop-filter: blur(4px);
+    }
+
+    .card-info{ text-align:left; color:#fff; }
+    .project-title{ margin:0; font-size:20px; font-weight:800; letter-spacing:0.2px; color:#fff; }
+
+    /* Make names 40% larger and add glow */
+    .project-author {
+      margin-top:6px;
+      font-size: 18.2px; /* 13px × 1.4 = 18.2px (40% larger) */
+      font-weight: 700;
+      color: #fff;
+      opacity: 0.98;
+      text-shadow:
+        0 0 6px rgba(123,47,247,0.95),
+        0 0 12px rgba(123,47,247,0.60),
+        0 0 20px rgba(255,65,108,0.25);
+      transition: text-shadow .22s ease, transform .18s ease;
+      will-change: transform, text-shadow;
+    }
+
+    /* Intensify glow and scale slightly on card hover */
+    .card:hover .project-author {
+      transform: scale(1.06);
+      text-shadow:
+        0 0 10px rgba(123,47,247,1),
+        0 0 18px rgba(123,47,247,0.85),
+        0 0 28px rgba(255,65,108,0.40);
+    }
+
+    .tags{ margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
+    .tag{ font-size:12px; background: rgba(255,255,255,0.12); padding:6px 8px; border-radius:8px; color:#fff; font-weight:700; }
+
+    /* gradients for each card (fallback behind the photo) */
+    .g-aurora{ background: linear-gradient(135deg,#7b2ff7 0%, #ff416c 100%); }
+    .g-pulse { background: linear-gradient(135deg,#ff7a00 0%, #ff416c 100%); }
+    .g-atlas { background: linear-gradient(135deg,#00c6ff 0%, #0072ff 100%); }
+    .g-nova  { background: linear-gradient(135deg,#ff9a9e 0%, #fecfef 100%); }
+
+    /* visible focus for keyboard users */
+    .card .card-link:focus{
+      outline:3px solid rgba(255,255,255,0.25);
+      outline-offset:4px;
+      border-radius:10px;
+    }
+
+    /* ---------------------------
+       Media showcase (video + image carousel)
+       --------------------------- */
+    .media-showcase{
+      width:100%;
+      max-width:var(--max-width);
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      padding:18px var(--page-pad) 28px;
+      align-items:stretch;
+      box-sizing:border-box;
+      margin:28px auto;
+    }
+
+    .media-card{
+      background: rgba(255,255,255,0.6);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.4);
+      box-shadow:0 12px 30px rgba(0,0,0,0.08);
+      overflow:hidden;
+      position:relative;
+      min-height:220px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .media-video,
+    .carousel{
+      width:100%;
+      height:100%;
+      transition:opacity .6s ease, transform .6s ease;
+      opacity:1;
+      transform:translateY(0);
+    }
+    .hidden {
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(6px) scale(.995);
+    }
+
+    .media-video video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* Carousel styles */
+    .carousel{
+      position:relative;
+      overflow:hidden;
+      display:block;
+    }
+    .slides{
+      position:relative;
+      width:100%;
+      height:100%;
+    }
+    .slide{
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center;
+      transition:opacity .9s ease;
+      opacity:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .slide.active{
+      opacity:1;
+    }
+
+    .media-caption{
+      position:absolute;
+      left:12px;
+      bottom:12px;
+      background:rgba(0,0,0,0.45);
+      color:#fff;
+      padding:8px 10px;
+      border-radius:8px;
+      font-weight:600;
+      font-size:13px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ---------------------------
+       Transparent contact box (updated)
+       --------------------------- */
+    .contact{
+      width:100%;
+      max-width:var(--max-width);
+      padding:20px;
+      display:flex;
+      gap:24px;
+      align-items:flex-start;
+      justify-content:space-between;
+      margin:28px auto 48px;
+      border-radius:14px;
+      overflow:visible;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.12);
+      box-sizing:border-box;
+    }
+
+    .contact .contact-info{
+      flex:1;
+      min-width:260px;
+      padding:18px;
+      border-radius:10px;
+      color:var(--text);
+      background: transparent;
+    }
+
+    .contact form{
+      flex:1.2;
+      min-width:320px;
+      background: rgba(255,255,255,0.92);
+      padding:18px;
+      border-radius:12px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.06);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      color:var(--text);
+    }
+
+    .contact input,
+    .contact textarea{
+      width:100%;
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid rgba(0,0,0,0.08);
+      font-size:14px;
+      background: #fff;
+      color:var(--text);
+    }
+
+    .contact button[type="submit"]{
+      align-self:flex-start;
+      background: linear-gradient(90deg,#7b2ff7,#ff416c);
+      color:#fff;
+      border:none;
+      padding:10px 16px;
+      border-radius:8px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    /* Darker text for the Get in touch section */
+    /* Placed after the .contact rules so it overrides earlier color settings */
+    .contact,
+    .contact .contact-info,
+    .contact .contact-info h4,
+    .contact .contact-info p,
+    .contact .contact-info strong,
+    .contact form,
+    .contact form label {
+      color: #0b0b0b;
+    }
+
+    /* Ensure form inputs and textarea use dark text too */
+    .contact input,
+    .contact textarea {
+      color: #0b0b0b;
+      border-color: rgba(0,0,0,0.12);
+      background: #ffffff;
+    }
+
+    /* Darker placeholder for better contrast */
+    .contact input::placeholder,
+    .contact textarea::placeholder {
+      color: #6b6b6b;
+    }
+
+    /* Responsive */
+    @media (max-width:900px){
+      .card{ height:240px; }
+      .nav-bar{ justify-content:flex-end; } /* keep nav right-aligned on smaller screens */
+      .contact{ flex-direction:column; padding:16px; }
+      .contact form{ min-width:0; width:100%; }
+      .contact .contact-info{ width:100%; }
+      .media-showcase{ grid-template-columns:1fr; padding:18px 28px 18px; }
+      .card-inner{ top:10px; left:10px; right:10px; padding:8px 10px; }
+    }
+    @media (max-width:560px){
+      .projects{ padding:12px; gap:14px; }
+      .card{ height:200px; min-width:0; }
+      .media-showcase{ padding:12px 18px 20px; }
+      .contact form{ min-width:0; }
+      .card-inner{ top:8px; left:8px; right:8px; padding:6px 8px; }
+      /* slightly reduce author size on very small screens for layout */
+      .project-author { font-size: 16px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header with brand left and nav right -->
+  <header>
+    <div class="site-brand" aria-hidden="false">
+      <span style="display:block">Portfolio</span>
+      <span class="site-sub">CITCS & STUDENT</span>
+    </div>
+
+    <nav class="nav-bar" role="navigation" aria-label="Main navigation">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link active" href="project-home.html">Projects</a>
+      <a class="nav-link" href="#about">AboutUs</a>
+    </nav>
+  </header>
+
+  <!-- Intro -->
+  <div class="intro parallax" role="region" aria-label="Welcome message" data-speed="0.08">
+    <h3 class="intro-large">Welcome to Our Portfolio</h3>
+    <p>Welcome to our project page.
+       We’re Ken Fabros, Meg Cyzarine Gines, Isaiah Ghian Fernandez, and Mhar Raymon Megote
+    </p>
+  </div>
+
+  <!-- Retained 4 colored project boxes -->
+  <main class="projects parallax" role="main" aria-label="Projects list" data-speed="0.06">
+    <!-- Ken -->
+    <article class="card g-aurora" aria-labelledby="p-aurora">
+      <a class="card-link" href="KenHome.html" aria-label="Open Ken's page">
+        <!-- Photo (replace src with your actual image path) -->
+        <img class="card-photo" src="https://images.pexels.com/photos/2866073/pexels-photo-2866073.jpeg" alt="Ken Fabros photo">
+        <!-- Overlay (keeps text readable) -->
+        <div class="card-overlay" aria-hidden="true"></div>
+
+        <div class="card-inner">
+          <div class="card-top">
+            <span class="category"></span>
+          </div>
+          <div class="card-info">
+            <h3 id="p-aurora" class="project-title">1</h3>
+            <div class="project-author">Ken Fabros</div>
+            <div class="tags">
+              <span class="tag">Male</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- Meg -->
+    <article class="card g-pulse" aria-labelledby="p-pulse">
+      <a class="card-link" href="MegHome.html" aria-label="Open Meg's page">
+        <img class="card-photo" src="https://images.pexels.com/photos/17768139/pexels-photo-17768139.jpeg" alt="Meg Cyzarine Gines photo">
+        <div class="card-overlay" aria-hidden="true"></div>
+
+        <div class="card-inner">
+          <div class="card-top">
+            <span class="category"></span>
+          </div>
+          <div class="card-info">
+            <h3 id="p-pulse" class="project-title">2</h3>
+            <div class="project-author">Meg Cyzarine Gines</div>
+            <div class="tags">
+              <span class="tag">Female</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- Mhar -->
+    <article class="card g-atlas" aria-labelledby="p-atlas">
+      <a class="card-link" href="MharHome.html" aria-label="Open Mhar's page">
+        <img class="card-photo" src="https://images.pexels.com/photos/15647646/pexels-photo-15647646.jpeg" alt="Mhar Raymon Megote photo">
+        <div class="card-overlay" aria-hidden="true"></div>
+
+        <div class="card-inner">
+          <div class="card-top">
+            <span class="category"></span>
+          </div>
+          <div class="card-info">
+            <h3 id="p-atlas" class="project-title">3</h3>
+            <div class="project-author">Mhar Raymon Megote</div>
+            <div class="tags">
+              <span class="tag">Male</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- Isaiah -->
+    <article class="card g-nova" aria-labelledby="p-nova">
+      <a class="card-link" href="IsaiahHome.html" aria-label="Open Isaiah's page">
+        <img class="card-photo" src="https://images.pexels.com/photos/20037733/pexels-photo-20037733.jpeg" alt="Isaiah Ghian Fernandez photo">
+        <div class="card-overlay" aria-hidden="true"></div>
+
+        <div class="card-inner">
+          <div class="card-top">
+            <span class="category"></span>
+          </div>
+          <div class="card-info">
+            <h3 id="p-nova" class="project-title">4</h3>
+            <div class="project-author">Isaiah Ghian Fernandez</div>
+            <div class="tags">
+              <span class="tag">Male</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </article>
+  </main>
+
+  <!-- Media showcase inserted below the 4 containers -->
+  <section class="media-showcase parallax" aria-label="Media showcase" data-speed="0.05">
+    <!-- Video card -->
+    <div class="media-card">
+      <div class="media-video" id="mediaVideoWrap">
+        <video class="media-element" muted autoplay loop playsinline preload="metadata" poster="">
+          <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="media-caption" aria-hidden="true">Project Reel</div>
+      </div>
+    </div>
+
+    <!-- Carousel card -->
+    <div class="media-card">
+      <div class="carousel" id="imageCarousel" aria-live="polite">
+        <div class="slides">
+          <div class="slide active"><img src="https://wallpaperaccess.com/full/4247650.jpg" alt="Sample image 1"></div>
+          <div class="slide"><img src="https://wallpaperaccess.com/full/6083155.jpg" alt="Sample image 2"></div>
+          <div class="slide"><img src="https://cdn.static.pikoya.com/robloxgo/games/6263431107/thumbnail_1" alt="Sample image 3"></div>
+          <div class="slide"><img src="https://cdn1.epicgames.com/salesEvent/salesEvent/amoguslandscape_2560x1440-3fac17e8bb45d81ec9b2c24655758075" alt="Sample image 4"></div>
+        </div>
+        <div class="media-caption" aria-hidden="true">Image Gallery</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Get in touch (transparent box) -->
+  <section class="contact parallax" aria-label="Contact section" data-speed="0.04">
+    <div class="contact-info" aria-hidden="false">
+      <h4 style="margin-top:0;">Get in touch</h4>
+      <p>Tell us about your project and timeline. We'll respond within 2 business days.</p>
+      <p style="margin-top:12px;"><strong>Email</strong><br>hello@example.com</p>
+      <p><strong>Location</strong><br>Arayat, Central Luzon, Philippines</p>
+    </div>
+
+    <form aria-label="Contact form" onsubmit="event.preventDefault(); alert('Message sent (demo)');">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" placeholder="Your name" required>
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" placeholder="you@example.com" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="6" placeholder="Tell us about your project" required></textarea>
+
+      <button type="submit">Send message</button>
+    </form>
+  </section>
+
+  <footer class="parallax" data-speed="0.03" style="width:100%; max-width:var(--max-width); padding:18px var(--page-pad); box-sizing:border-box; text-align:center; color:var(--muted);">
+     <span id="year"></span> @Meggy. All rights reserved.
+  </footer>
+
+  <script>
+    // Populate year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Image carousel: crossfade slides every 4 seconds
+    (function(){
+      const slides = Array.from(document.querySelectorAll('#imageCarousel .slide'));
+      let current = 0;
+      const slideInterval = 4000;
+
+      function showSlide(index){
+        slides.forEach((s, i) => {
+          s.classList.toggle('active', i === index);
+        });
+      }
+
+      setInterval(() => {
+        current = (current + 1) % slides.length;
+        showSlide(current);
+      }, slideInterval);
+    })();
+
+    // Toggle between video and carousel every 10 seconds with fade
+    (function(){
+      const videoWrap = document.getElementById('mediaVideoWrap');
+      const carousel = document.getElementById('imageCarousel');
+      const videoEl = videoWrap.querySelector('video');
+      let showVideo = true;
+      const toggleInterval = 10000;
+
+      // Start with video playing
+      videoEl.play().catch(()=>{ /* autoplay may be blocked; user can interact */ });
+
+      setInterval(() => {
+        if (showVideo) {
+          // hide video, show carousel
+          videoWrap.classList.add('hidden');
+          carousel.classList.remove('hidden');
+          try { videoEl.pause(); } catch(e){}
+        } else {
+          // show video, hide carousel
+          videoWrap.classList.remove('hidden');
+          carousel.classList.add('hidden');
+          try { videoEl.play(); } catch(e){}
+        }
+        showVideo = !showVideo;
+      }, toggleInterval);
+    })();
+
+    /* Parallax scroll script
+       Elements with class="parallax" will translate vertically based on scroll.
+       Add or adjust data-speed on elements to tune movement. Smaller values = subtler movement.
+       Implementation uses requestAnimationFrame for smooth updates and a passive scroll listener.
+    */
+    (function(){
+      const parallaxEls = Array.from(document.querySelectorAll('.parallax'));
+      if(!parallaxEls.length) return;
+
+      // Filter out elements that shouldn't move on very small screens
+      const isSmallScreen = () => window.matchMedia('(max-width:720px)').matches;
+
+      let latestY = window.scrollY;
+      let ticking = false;
+
+      function onScroll(){
+        latestY = window.scrollY;
+        if(!ticking){
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }
+
+      function update(){
+        // If small screen, reset transforms and skip
+        if(isSmallScreen()){
+          parallaxEls.forEach(el => el.style.transform = '');
+          ticking = false;
+          return;
+        }
+
+        parallaxEls.forEach(el => {
+          const speed = parseFloat(el.dataset.speed) || 0.12;
+          // offset in px; positive moves element down as you scroll down
+          const offset = Math.round(latestY * speed);
+          // apply translateY only (do not override other transforms like scale)
+          el.style.transform = `translateY(${offset}px)`;
+        });
+        ticking = false;
+      }
+
+      // initialize positions
+      update();
+
+      // passive listener for better scrolling performance
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // re-run on resize to keep things consistent
+      window.addEventListener('resize', () => {
+        latestY = window.scrollY;
+        update();
+      });
+    })();
+  </script>
+
+</body>
+</html>
