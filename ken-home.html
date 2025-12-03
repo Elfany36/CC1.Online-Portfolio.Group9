@@ -175,8 +175,29 @@
     .media-row{ display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; align-items:start; }
     .media-card{ background:var(--card-bg); border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.06); height:225px; display:flex; align-items:center; justify-content:center; content-visibility: auto; contain-intrinsic-size: 225px; }
     .media-card img, .media-card video{ width:100%; height:100%; object-fit:cover; display:block; }
-    .media-large{ background:var(--card-bg); border-radius:12px; overflow:hidden; box-shadow:0 12px 40px rgba(0,0,0,0.08); height:525px; display:flex; align-items:center; justify-content:center; content-visibility: auto; contain-intrinsic-size: 525px; }
-    .media-large img, .media-large video{ width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* Updated .media-large to remove white card background */
+    .media-large{
+      background: transparent;
+      border-radius: 0;
+      overflow: visible;
+      box-shadow: none;
+      height:525px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      content-visibility: auto;
+      contain-intrinsic-size: 525px;
+    }
+    .media-large img,
+    .media-large video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      background: transparent;
+      border-radius: 0;
+    }
 
     /* Modal and gallery styles */
     .overlay{ position:fixed; inset:0; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; z-index:60; padding:20px; }
@@ -260,7 +281,7 @@
         </article>
 
         <!-- Project 2 -->
-        <article class="project large" data-title="Projects" data-desc="Artistic and Inspiring Works — This page showcases my projects from junior and senior high school through to the present, highlighting creative growth, key achievements, and the ideas that shaped my journey." data-images='["https://dl.dropboxusercontent.com/scl/fi/5gpq1ocmeb1zabsiigu1z/Screenshot-2025-12-03-233450.webp?rlkey=v5riw1ehsouhigcm5q8yb7v53&st=0p5vtfq4&dl=0","https://dl.dropboxusercontent.com/scl/fi/yzng9ahaffc4u86azj78q/abstract-art-no.2-varation-final-done.webp?rlkey=mnny0uyvyp3y2v058cp8pm23u&st=5ddfqr19&dl=0","https://dl.dropboxusercontent.com/scl/fi/i382gqw2nzmft8kvusew7/abstarct-background-ps-export-final.webp?rlkey=toxf95xvccptcr9lcf5lyalon&st=ath0li21&dl=0scl/fi/i382gqw2nzmft8kvusew7/abstarct-background-ps-export-final.webp?rlkey=toxf95xvccptcr9lcf5lyalon&st=ath0li21&dl=0", "https://dl.dropboxusercontent.com/scl/fi/w4gqj47m5xtb62v7tfg2l/Screenshot-2024-11-28-170142.webp?rlkey=0g9vcba82jvr17vej1h7pxupd&st=vsa9tkke&dl=0","https://dl.dropboxusercontent.com/scl/fi/uko3rpfi0svp9h8f0fdn2/Screenshot-2025-12-03-235753.webp?rlkey=t41x5hwkqbqtgwakgwfekahun&st=p96f4i5u&dl=0"]'>
+        <article class="project large" data-title="Projects" data-desc="Artistic and Inspiring Works — This page showcases my projects from junior and senior high school through to the present, highlighting creative growth, key achievements, and the ideas that shaped my journey." data-images='["https://dl.dropboxusercontent.com/scl/fi/5gpq1ocmeb1zabsiigu1z/Screenshot-2025-12-03-233450.webp?rlkey=v5riw1ehsouhigcm5q8yb7v53&st=0p5vtfq4&dl=0","https://dl.dropboxusercontent.com/scl/fi/yzng9ahaffc4u86azj78q/abstract-art-no.2-varation-final-done.webp?rlkey=mnny0uyvyp3y2v058cp8pm23u&st=5ddfqr19&dl=0","https://dl.dropboxusercontent.com/scl/fi/i382gqw2nzmft8kvusew7/abstarct-background-ps-export-final.webp?rlkey=toxf95xvccptcr9lcf5lyalon&st=ath0li21&dl=0","https://dl.dropboxusercontent.com/scl/fi/w4gqj47m5xtb62v7tfg2l/Screenshot-2024-11-28-170142.webp?rlkey=0g9vcba82jvr17vej1h7pxupd&st=vsa9tkke&dl=0","https://dl.dropboxusercontent.com/scl/fi/uko3rpfi0svp9h8f0fdn2/Screenshot-2025-12-03-235753.webp?rlkey=t41x5hwkqbqtgwakgwfekahun&st=p96f4i5u&dl=0"]'>
           <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/5gpq1ocmeb1zabsiigu1z/Screenshot-2025-12-03-233450.webp?rlkey=v5riw1ehsouhigcm5q8yb7v53&st=0p5vtfq4&dl=0" role="img" aria-label="Projects image"></div>
           <div class="meta">
             <h3 class="title">Projects</h3>
@@ -269,7 +290,7 @@
         </article>
 
         <!-- Project 3 -->
-        <article class="project large" data-title="My Hobbies" data-desc="I chase light and quiet moments, turning ordinary scenes into lingering visual stories. That quote depicts my art itself" data-images='["https://dl.dropboxusercontent.com/scl/fi/lyn3uxx4nw5i6et93y8np/329499139_1622334898278996_4171053628367841960_n.webp?rlkey=d2f8eltuqii1n5hq6f867s566&st=djofau4i&dl=0", "https://dl.dropboxusercontent.com/scl/fi/2lstn5budn0q2t5sfj7z5/329785655_964051695037498_1346925642961946229_n.webp?rlkey=8zcpcskvlum2v7a39npipkj6h&st=986r19ha&dl=0", "https://dl.dropboxusercontent.com/scl/fi/d51shgcl2zoesva5c8avx/340641356_738845294571244_1138016351730339913_n.webp?rlkey=aez1ducpsddy0hgz3b9uqayfd&st=rjz6uz5l&dl=0", "https://dl.dropboxusercontent.com/scl/fi/z77p7amj2wwknsivnizvh/341933494_962319381792372_3535160102446161496_n.webp?rlkey=54hnyq19aq8un7uq2r4e4hbus&st=bd31u6m4&dl=0", "https://dl.dropboxusercontent.com/scl/fi/iizjhqsxsunss09x1rj8r/342335417_743817660624178_944112588714985992_n.webp?rlkey=dm4px8e0gcu3d19i89s70euw7&st=jkzohd2c&dl=0"]'>
+        <article class="project large" data-title="My Hobbies" data-desc="I chase light and quiet moments, turning ordinary scenes into lingering visual stories. That quote depicts my art itself" data-images='["https://dl.dropboxusercontent.com/scl/fi/lyn3uxx4nw5i6et93y8np/329499139_1622334898278996_4171053628367841960_n.webp?rlkey=d2f8eltuqii1n5hq6f867s566&st=djofau4i&dl=0","https://dl.dropboxusercontent.com/scl/fi/2lstn5budn0q2t5sfj7z5/329785655_964051695037498_1346925642961946229_n.webp?rlkey=8zcpcskvlum2v7a39npipkj6h&st=986r19ha&dl=0","https://dl.dropboxusercontent.com/scl/fi/d51shgcl2zoesva5c8avx/340641356_738845294571244_1138016351730339913_n.webp?rlkey=aez1ducpsddy0hgz3b9uqayfd&st=rjz6uz5l&dl=0","https://dl.dropboxusercontent.com/scl/fi/z77p7amj2wwknsivnizvh/341933494_962319381792372_3535160102446161496_n.webp?rlkey=54hnyq19aq8un7uq2r4e4hbus&st=bd31u6m4&dl=0","https://dl.dropboxusercontent.com/scl/fi/iizjhqsxsunss09x1rj8r/342335417_743817660624178_944112588714985992_n.webp?rlkey=dm4px8e0gcu3d19i89s70euw7&st=jkzohd2c&dl=0"]'>
           <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/lyn3uxx4nw5i6et93y8np/329499139_1622334898278996_4171053628367841960_n.webp?rlkey=d2f8eltuqii1n5hq6f867s566&st=djofau4i&dl=0" role="img" aria-label="Atlas Site image"></div>
           <div class="meta">
             <h3 class="title">Hobbies</h3>
@@ -370,7 +391,7 @@
             alt="Large media"
             loading="lazy"
             decoding="async"
-            style="max-width:100%;height:auto;display:block;background:#f3f4f6;"
+            style="max-width:100%;height:auto;display:block;background:transparent;"
             src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23f3f4f6'/%3E%3C/svg%3E">
         </picture>
       </div>
@@ -468,6 +489,16 @@
       const lazyImgs = [].slice.call(document.querySelectorAll('img.lazy-img'));
       function loadImage(img){
         if(!img) return;
+        // if inside a <picture>, set source srcsets first
+        const picture = img.closest('picture');
+        if(picture){
+          const sources = [].slice.call(picture.querySelectorAll('source'));
+          sources.forEach(s => {
+            const ds = s.getAttribute('data-srcset');
+            if(ds) s.srcset = ds;
+            s.removeAttribute('data-srcset');
+          });
+        }
         // set srcset/sizes from data attributes
         const src = img.getAttribute('data-src');
         const srcset = img.getAttribute('data-srcset');
@@ -491,213 +522,197 @@
               obs.unobserve(img);
             }
           });
-        }, {rootMargin: '300px 0px', threshold: 0.01});
+        }, {rootMargin: '300px 0px'});
         lazyImgs.forEach(img => imgObserver.observe(img));
       } else {
-        // fallback: load all images after a short idle time
-        if('requestIdleCallback' in window){
-          requestIdleCallback(() => lazyImgs.forEach(loadImage), {timeout:2000});
-        } else {
-          setTimeout(() => lazyImgs.forEach(loadImage), 1000);
-        }
+        lazyImgs.forEach(img => loadImage(img));
       }
 
-      // ---------- Gallery: create media elements lazily and prefetch neighbors ----------
-      function createMediaElement(src){
-        const isVideo = typeof src === 'string' && (src.match(/\.(mp4|webm|ogg)(\?.*)?$/i) || src.includes('video') || src.includes('mp4'));
-        const wrapper = document.createElement('div');
-        wrapper.className = 'media-item';
-        if(isVideo){
-          const v = document.createElement('video');
-          v.src = src;
-          v.controls = true;
-          v.playsInline = true;
-          v.preload = 'metadata';
-          v.style.maxHeight = '100%';
-          v.style.maxWidth = '100%';
-          wrapper.appendChild(v);
-        } else {
-          const img = document.createElement('img');
-          // do not set src immediately to avoid mass decoding
-          img.alt = modalTitle.textContent || '';
-          img.loading = 'lazy';
-          img.decoding = 'async';
-          img.style.maxWidth = '100%';
-          img.style.maxHeight = '100%';
-          // set a tiny placeholder to reserve layout (keeps aspect ratio)
-          img.src = 'data:image/svg+xml;charset=utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="16" height="9"%3E%3Crect width="16" height="9" fill="%23111"%2F%3E%3C%2Fsvg%3E';
-          wrapper.appendChild(img);
-          // set real src after a short idle to avoid blocking
-          setTimeout(() => { img.src = src; }, 60);
-        }
-        return wrapper;
-      }
-
-      function clearStage(){
-        while(galleryStage.firstChild) galleryStage.removeChild(galleryStage.firstChild);
-      }
-
-      function renderStage(index, direction = 0){
-        if(!currentImages.length) return;
-        // clamp index
-        index = (index + currentImages.length) % currentImages.length;
-        currentIndex = index;
-
-        // create new element for current index
-        const newEl = createMediaElement(currentImages[index]);
-        newEl.style.transform = `translateX(${direction === 1 ? '100%' : direction === -1 ? '-100%' : '0%'})`;
-        newEl.style.opacity = '0';
-        galleryStage.appendChild(newEl);
-
-        // force reflow then animate into place
-        requestAnimationFrame(() => {
-          newEl.style.transition = 'transform 320ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease';
-          newEl.style.transform = 'translateX(0%)';
-          newEl.style.opacity = '1';
-        });
-
-        // remove previous siblings after animation
-        Array.from(galleryStage.children).forEach((child) => {
-          if(child !== newEl){
-            child.style.transition = 'transform 320ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease';
-            child.style.transform = `translateX(${direction === 1 ? '-100%' : direction === -1 ? '100%' : '-100%'})`;
-            child.style.opacity = '0';
-            setTimeout(() => {
-              if(child.parentNode) child.parentNode.removeChild(child);
-            }, 360);
-          }
-        });
-
-        updateThumbs();
-        prefetchNeighbors(index);
-      }
-
-      function updateThumbs(){
-        thumbs.innerHTML = '';
-        currentImages.forEach((src, i) => {
-          const t = document.createElement('button');
-          t.className = 'thumb';
-          t.type = 'button';
-          t.setAttribute('aria-label', `Thumbnail ${i + 1}`);
-          t.style.backgroundImage = `url('${src}')`;
-          if(i === currentIndex) t.classList.add('active');
-          t.addEventListener('click', () => {
-            if(i === currentIndex) return;
-            renderStage(i, i > currentIndex ? 1 : -1);
-          });
-          thumbs.appendChild(t);
-        });
-      }
-
-      function prefetchImage(src){
-        if(!src) return;
-        // only prefetch images (not videos)
-        if(/\.(mp4|webm|ogg)(\?.*)?$/i.test(src)) return;
-        const img = new Image();
-        img.src = src;
-      }
-
-      function prefetchNeighbors(index){
-        if(!currentImages.length) return;
-        const prev = (index - 1 + currentImages.length) % currentImages.length;
-        const next = (index + 1) % currentImages.length;
-        prefetchImage(currentImages[prev]);
-        prefetchImage(currentImages[next]);
-      }
-
-      function openGallery(images, startIndex = 0, title = '', desc = ''){
+      // ---------- Gallery modal logic ----------
+      const projectEls = [].slice.call(document.querySelectorAll('.project'));
+      function openGallery(images, title, desc, startIndex = 0){
         if(!images || !images.length) return;
         currentImages = images.slice();
+        currentIndex = Math.max(0, Math.min(startIndex, currentImages.length - 1));
         modalTitle.textContent = title || '';
         modalDesc.textContent = desc || '';
-        lastFocused = document.activeElement;
+        buildGallery();
         overlay.classList.add('open');
         overlay.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-        renderStage(startIndex, 0);
+        lastFocused = document.activeElement;
         // focus close button for accessibility
         closeBtn.focus();
+        updateStage();
       }
 
       function closeGallery(){
         overlay.classList.remove('open');
         overlay.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-        clearStage();
+        // cleanup
+        galleryStage.innerHTML = '';
         thumbs.innerHTML = '';
         currentImages = [];
         currentIndex = 0;
         if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
       }
 
-      // Navigation handlers
+      function buildGallery(){
+        galleryStage.innerHTML = '';
+        thumbs.innerHTML = '';
+        currentImages.forEach((src, i) => {
+          // create media item
+          const item = document.createElement('div');
+          item.className = 'media-item';
+          item.style.transform = `translateX(${(i - currentIndex) * 100}%)`;
+          item.setAttribute('data-index', i);
+
+          // determine if video or image (basic check)
+          const isVideo = /\.(mp4|webm|ogg)(\?|$)/i.test(src);
+          if(isVideo){
+            const video = document.createElement('video');
+            video.controls = true;
+            video.preload = 'metadata';
+            video.style.width = '100%';
+            video.style.height = '100%';
+            video.style.objectFit = 'cover';
+            const source = document.createElement('source');
+            source.src = src;
+            source.type = 'video/mp4';
+            video.appendChild(source);
+            item.appendChild(video);
+          } else {
+            // use picture wrapper for responsiveness if desired
+            const img = document.createElement('img');
+            img.alt = `Gallery image ${i + 1}`;
+            img.setAttribute('data-src', src);
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'cover';
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            item.appendChild(img);
+            // load immediately for visible items
+            // we'll call loadImage on all images after appending
+          }
+
+          galleryStage.appendChild(item);
+
+          // create thumb
+          const t = document.createElement('button');
+          t.className = 'thumb';
+          t.type = 'button';
+          t.setAttribute('data-index', i);
+          t.style.backgroundImage = `url('${src}')`;
+          t.addEventListener('click', () => {
+            if(currentIndex === i) return;
+            goToIndex(i);
+          });
+          thumbs.appendChild(t);
+        });
+
+        // lazy-load images inside gallery
+        const galleryImgs = [].slice.call(galleryStage.querySelectorAll('img'));
+        galleryImgs.forEach(img => {
+          // set src immediately so gallery shows images
+          const ds = img.getAttribute('data-src');
+          if(ds) {
+            img.src = ds;
+            img.removeAttribute('data-src');
+          }
+        });
+      }
+
+      function updateStage(){
+        const items = [].slice.call(galleryStage.querySelectorAll('.media-item'));
+        items.forEach((el, i) => {
+          const offset = (i - currentIndex) * 100;
+          el.style.transform = `translateX(${offset}%)`;
+          el.style.opacity = (i === currentIndex) ? '1' : '0.6';
+          el.style.zIndex = (i === currentIndex) ? '3' : '2';
+        });
+
+        const thumbEls = [].slice.call(thumbs.querySelectorAll('.thumb'));
+        thumbEls.forEach((t, i) => {
+          if(i === currentIndex) t.classList.add('active'); else t.classList.remove('active');
+        });
+
+        // ensure active thumb is visible
+        const activeThumb = thumbs.querySelector('.thumb.active');
+        if(activeThumb) activeThumb.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+      }
+
+      function goToIndex(idx){
+        if(isAnimating) return;
+        if(idx < 0) idx = currentImages.length - 1;
+        if(idx >= currentImages.length) idx = 0;
+        currentIndex = idx;
+        updateStage();
+      }
+
       prevBtn.addEventListener('click', () => {
-        if(!currentImages.length) return;
-        renderStage((currentIndex - 1 + currentImages.length) % currentImages.length, -1);
+        goToIndex(currentIndex - 1);
       });
       nextBtn.addEventListener('click', () => {
-        if(!currentImages.length) return;
-        renderStage((currentIndex + 1) % currentImages.length, 1);
+        goToIndex(currentIndex + 1);
       });
 
-      // Close handlers
       closeBtn.addEventListener('click', closeGallery);
       modalClose2.addEventListener('click', closeGallery);
+
+      // close when clicking outside modal content
       overlay.addEventListener('click', (e) => {
         if(e.target === overlay) closeGallery();
       });
 
-      // Keyboard navigation
+      // keyboard navigation
       document.addEventListener('keydown', (e) => {
         if(overlay.classList.contains('open')){
+          if(e.key === 'ArrowLeft') { e.preventDefault(); goToIndex(currentIndex - 1); }
+          if(e.key === 'ArrowRight') { e.preventDefault(); goToIndex(currentIndex + 1); }
           if(e.key === 'Escape') { e.preventDefault(); closeGallery(); }
-          if(e.key === 'ArrowLeft') { e.preventDefault(); prevBtn.click(); }
-          if(e.key === 'ArrowRight') { e.preventDefault(); nextBtn.click(); }
-          // trap focus inside modal
-          if(e.key === 'Tab'){
-            const focusable = overlay.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-            if(!focusable.length) return;
-            const first = focusable[0];
-            const last = focusable[focusable.length - 1];
-            if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
-            else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
-          }
         }
       });
 
-      // Attach click handlers to project cards
-      const projectEls = [].slice.call(document.querySelectorAll('.project'));
-      projectEls.forEach(el => {
-        el.addEventListener('click', (e) => {
-          // allow clicks on interactive children to behave normally
-          if(e.target && (e.target.tagName === 'A' || e.target.closest('a'))) return;
-          const imagesAttr = el.getAttribute('data-images');
-          let images = [];
-          try {
-            images = imagesAttr ? JSON.parse(imagesAttr) : [];
-          } catch (err) {
-            // fallback: try to read data-bg as single image
-            const bg = el.querySelector('.media') && el.querySelector('.media').getAttribute('data-bg');
-            if(bg) images = [bg];
-          }
-          const title = el.getAttribute('data-title') || (el.querySelector('.title') && el.querySelector('.title').textContent) || '';
-          const desc = el.getAttribute('data-desc') || (el.querySelector('.desc') && el.querySelector('.desc').textContent) || '';
-          openGallery(images, 0, title, desc);
+      // open gallery when clicking a project
+      projectEls.forEach(p => {
+        p.addEventListener('click', () => {
+          const raw = p.getAttribute('data-images') || '[]';
+          let imgs = [];
+          try { imgs = JSON.parse(raw); } catch (err) { imgs = []; }
+          const title = p.getAttribute('data-title') || '';
+          const desc = p.getAttribute('data-desc') || '';
+          openGallery(imgs, title, desc, 0);
         });
 
         // make keyboard accessible
-        el.setAttribute('tabindex', '0');
-        el.addEventListener('keydown', (e) => {
+        p.setAttribute('tabindex', '0');
+        p.addEventListener('keydown', (e) => {
           if(e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            el.click();
+            p.click();
           }
         });
       });
 
-      // End IIFE
+      // ensure any remaining lazy images (outside IntersectionObserver) are loaded on DOMContentLoaded
+      window.addEventListener('load', () => {
+        const remaining = [].slice.call(document.querySelectorAll('img.lazy-img'));
+        remaining.forEach(img => loadImage(img));
+      });
+
+      // small accessibility improvement: trap focus inside modal while open (basic)
+      document.addEventListener('focus', (e) => {
+        if(!overlay.classList.contains('open')) return;
+        const modal = overlay.querySelector('.modal');
+        if(!modal) return;
+        if(!modal.contains(e.target)){
+          // move focus back to close button
+          e.stopPropagation();
+          closeBtn.focus();
+        }
+      }, true);
+
     })();
   </script>
 </body>
 </html>
-
