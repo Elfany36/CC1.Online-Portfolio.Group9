@@ -4,22 +4,26 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Portfolio — Ken</title>
+
+  <!-- Preconnect and preload -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1600&q=60">
+
   <style>
     :root{
       --bg-light: #ffffff;
-      --bg-blue: #0504A4; /* exact color requested */
+      --bg-blue: #0504A4;
       --accent-1: #5b8cff;
       --accent-2: #2b5fe0;
       --text: #0b0b0b;
       --muted: #6b7280;
       --card-bg: #ffffff;
       --max-width: 1100px;
-
-      /* Navigation gradient tuned to include #0504A4 as the deep stop */
       --nav-start: #4b63ff;
       --nav-mid:  #2439d1;
-      --nav-end:  #0504A4; /* deep royal blue (exact) */
+      --nav-end:  #0504A4;
       --nav-accent-shadow: rgba(5,4,164,0.28);
       --nav-inactive-bg: rgba(255,255,255,0.06);
       --nav-inactive-color: var(--muted);
@@ -41,6 +45,7 @@
       justify-content:center;
       padding:32px 16px;
       position:relative;
+      background-color:var(--bg-light);
     }
 
     /* fixed background layer that never scrolls (left white → right deep blue) */
@@ -68,25 +73,11 @@
       gap:16px;
       margin-bottom:18px;
     }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-    .brand-name{
-      font-weight:800;
-      font-size:18px;
-      color:var(--muted);
-    }
+    .brand{ display:flex; align-items:center; gap:12px; }
+    .brand-name{ font-weight:800; font-size:18px; color:var(--muted); }
 
-    /* Navigation dark-blue gradient (integrated) */
-    header nav{
-      display:flex;
-      gap:10px;
-      align-items:center;
-    }
+    header nav{ display:flex; gap:10px; align-items:center; }
 
-    /* Button base */
     .nav-btn{
       position:relative;
       display:inline-block;
@@ -102,20 +93,9 @@
       -webkit-tap-highlight-color: transparent;
       overflow:hidden;
     }
+    .nav-btn:hover{ transform: translateY(-3px); box-shadow: 0 14px 36px rgba(0,0,0,0.12); }
+    .nav-btn:focus{ outline: 3px solid var(--nav-focus); outline-offset:4px; border-radius:999px; }
 
-    /* Hover and focus for all buttons */
-    .nav-btn:hover{
-      transform: translateY(-3px);
-      box-shadow: 0 14px 36px rgba(0,0,0,0.12);
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-    }
-    .nav-btn:focus{
-      outline: 3px solid var(--nav-focus);
-      outline-offset:4px;
-      border-radius:999px;
-    }
-
-    /* Active (Projects) with multi-stop deep-blue gradient and sheen */
     .nav-btn.active,
     .nav-btn[aria-current="page"]{
       background: linear-gradient(180deg, var(--nav-start) 0%, var(--nav-mid) 48%, var(--nav-end) 100%);
@@ -125,95 +105,25 @@
       border: 1px solid rgba(255,255,255,0.06);
     }
 
-    /* Glossy highlight (subtle sheen) */
-    .nav-btn.active::after{
-      content: "";
-      position: absolute;
-      left: -10%;
-      top: -40%;
-      width: 120%;
-      height: 70%;
-      background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.04) 40%, rgba(255,255,255,0) 60%);
-      transform: rotate(-6deg);
-      pointer-events: none;
-      opacity: 0.9;
-      mix-blend-mode: overlay;
-    }
-
-    /* Slight inner glow for depth */
-    .nav-btn.active::before{
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 999px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
-      pointer-events: none;
-    }
-
-    /* Small screens: stack nav */
     @media (max-width:600px){
-      header nav{
-        flex-direction:column;
-        gap:8px;
-      }
-      .nav-btn{
-        width:220px;
-        text-align:center;
-      }
+      header nav{ flex-direction:column; gap:8px; }
+      .nav-btn{ width:220px; text-align:center; }
     }
 
     /* Hero */
-    .hero{
-      display:grid;
-      grid-template-columns: 220px 1fr;
-      gap:20px;
-      align-items:center;
-      margin-bottom:28px;
-    }
-    .profile{
-      background:var(--card-bg);
-      padding:18px;
-      border-radius:14px;
-      box-shadow:0 12px 30px rgba(0,0,0,0.06);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      text-align:center;
-    }
-    .avatar{
-      width:140px;
-      height:140px;
-      border-radius:50%;
-      background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
-      overflow:hidden;
-      margin-bottom:12px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#fff;
-      font-size:28px;
-      font-weight:800;
-    }
+    .hero{ display:grid; grid-template-columns: 220px 1fr; gap:20px; align-items:center; margin-bottom:28px; }
+    .profile{ background:var(--card-bg); padding:18px; border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,0.06); display:flex; flex-direction:column; align-items:center; text-align:center; }
+    .avatar{ width:140px; height:140px; border-radius:50%; background:linear-gradient(135deg,var(--accent-1),var(--accent-2)); overflow:hidden; margin-bottom:12px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:28px; font-weight:800; }
     .name{ font-size:20px; font-weight:800; margin:6px 0; }
     .role{ color:var(--muted); font-weight:700; font-size:13px; margin-bottom:8px; }
     .socials{ display:flex; gap:8px; margin-top:8px; }
 
-    .intro{
-      background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.98));
-      padding:20px;
-      border-radius:14px;
-      box-shadow:0 12px 30px rgba(0,0,0,0.04);
-    }
+    .intro{ background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.98)); padding:20px; border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,0.04); }
     .intro h1{ margin:0 0 8px 0; font-size:28px; }
     .intro p{ margin:0; color:var(--muted); line-height:1.5; }
 
     /* Projects */
-    .projects{
-      margin-top:8px;
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap:18px;
-    }
+    .projects{ margin-top:8px; display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:18px; }
     .project{
       background:var(--card-bg);
       border-radius:12px;
@@ -223,286 +133,68 @@
       flex-direction:column;
       min-height:220px;
       cursor:pointer;
+      content-visibility: auto;
+      contain-intrinsic-size: 240px;
     }
     .project .media{
       height:140px;
       background-size:cover;
       background-position:center;
+      background-repeat:no-repeat;
+      background-color:#f3f4f6;
+      /* keep aspect ratio to avoid CLS when using background images */
+      aspect-ratio: 16 / 9;
     }
-
-    .project.large .media{
-      height:320px;
-    }
-    .project.large .big-desc{
-      font-size:14px;
-      color:var(--muted);
-      margin-top:10px;
-      line-height:1.45;
-    }
-
-    .project .meta{
-      padding:12px 14px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      flex:1;
-    }
+    .project.large .media{ height:320px; aspect-ratio: 16 / 9; }
+    .project .meta{ padding:12px 14px; display:flex; flex-direction:column; gap:8px; flex:1; }
     .project .title{ font-weight:800; font-size:16px; margin:0; }
     .project .desc{ color:var(--muted); font-size:13px; margin:0; flex:1; }
 
     /* Programs */
-    .programs{
-      margin-top:8px;
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap:18px;
-    }
+    .programs{ margin-top:8px; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:18px; }
 
     /* Media-only grid */
-    .media-showcase{
-      margin-top:28px;
-      display:grid;
-      gap:18px;
-    }
-
-    .media-row{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:18px;
-      align-items:start;
-    }
-    .media-card{
-      background:var(--card-bg);
-      border-radius:12px;
-      overflow:hidden;
-      box-shadow:0 10px 30px rgba(0,0,0,0.06);
-      height:225px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .media-card img,
-    .media-card video{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .media-large{
-      background:var(--card-bg);
-      border-radius:12px;
-      overflow:hidden;
-      box-shadow:0 12px 40px rgba(0,0,0,0.08);
-      height:525px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .media-large img,
-    .media-large video{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
+    .media-showcase{ margin-top:28px; display:grid; gap:18px; }
+    .media-row{ display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; align-items:start; }
+    .media-card{ background:var(--card-bg); border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.06); height:225px; display:flex; align-items:center; justify-content:center; content-visibility: auto; contain-intrinsic-size: 225px; }
+    .media-card img, .media-card video{ width:100%; height:100%; object-fit:cover; display:block; }
+    .media-large{ background:var(--card-bg); border-radius:12px; overflow:hidden; box-shadow:0 12px 40px rgba(0,0,0,0.08); height:525px; display:flex; align-items:center; justify-content:center; content-visibility: auto; contain-intrinsic-size: 525px; }
+    .media-large img, .media-large video{ width:100%; height:100%; object-fit:cover; display:block; }
 
     /* Modal and gallery styles */
-    .overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.6);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:60;
-      padding:20px;
-    }
+    .overlay{ position:fixed; inset:0; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; z-index:60; padding:20px; }
     .overlay.open{ display:flex; }
-    .modal{
-      width:100%;
-      max-width:1000px;
-      background:#fff;
-      border-radius:12px;
-      overflow:hidden;
-      box-shadow:0 30px 80px rgba(0,0,0,0.3);
-      display:grid;
-      grid-template-columns: 1fr 360px;
-      gap:0;
-      max-height:90vh;
-    }
-    .modal .gallery{
-      background:#000;
-      min-height:320px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      position:relative;
-      color:#fff;
-    }
-    .modal .gallery .main-wrap{
-      width:100%;
-      height:60vh;
-      max-height:60vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      position:relative;
-      background:#111;
-      overflow:hidden;
-    }
-
-    /* Stage that holds sliding media items */
-    .modal .gallery .stage{
-      position:relative;
-      width:100%;
-      height:100%;
-      overflow:hidden;
-      z-index:1;
-    }
-    .modal .gallery .media-item{
-      position:absolute;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      transform: translateX(0%);
-      transition: transform 320ms cubic-bezier(.2,.9,.2,1);
-      will-change: transform, opacity;
-      background:#111;
-      z-index:2;
-    }
-    .modal .gallery .media-item img,
-    .modal .gallery .media-item video{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-
-    .modal .gallery .nav{
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      transform: translateY(-50%);
-      display: flex;
-      justify-content: space-between;
-      padding: 0 12px;
-      pointer-events: auto;
-      z-index: 70;
-    }
-
-    .modal .gallery button.arrow{
-      pointer-events: auto;
-      background: rgba(255,255,255,0.95);
-      border: none;
-      padding: 10px 12px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 800;
-      color: #111;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      user-select: none;
-    }
-    .modal .gallery button.arrow:focus{
-      outline: 3px solid rgba(5,4,164,0.18);
-      outline-offset: 2px;
-    }
-
-    .modal .gallery .thumbs{
-      width:100%;
-      display:flex;
-      gap:8px;
-      padding:12px;
-      overflow:auto;
-      background:rgba(0,0,0,0.05);
-      box-sizing:border-box;
-    }
-    .modal .gallery .thumb{
-      width:92px;
-      height:64px;
-      background-size:cover;
-      background-position:center;
-      border-radius:6px;
-      cursor:pointer;
-      opacity:0.6;
-      border:2px solid transparent;
-      flex:0 0 auto;
-    }
-    .modal .gallery .thumb.active{
-      opacity:1;
-      border-color:rgba(255,255,255,0.9);
-    }
-
-    .modal .details{
-      padding:18px;
-      overflow:auto;
-      background:#fff;
-    }
+    .modal{ width:100%; max-width:1000px; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,0.3); display:grid; grid-template-columns: 1fr 360px; gap:0; max-height:90vh; }
+    .modal .gallery{ background:#000; min-height:320px; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; color:#fff; }
+    .modal .gallery .main-wrap{ width:100%; height:60vh; max-height:60vh; display:flex; align-items:center; justify-content:center; position:relative; background:#111; overflow:hidden; }
+    .modal .gallery .stage{ position:relative; width:100%; height:100%; overflow:hidden; z-index:1; }
+    .modal .gallery .media-item{ position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; transform: translateX(0%); transition: transform 320ms cubic-bezier(.2,.9,.2,1); will-change: transform, opacity; background:#111; z-index:2; }
+    .modal .gallery .media-item img, .modal .gallery .media-item video{ width:100%; height:100%; object-fit:cover; display:block; }
+    .modal .gallery .nav{ position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); display: flex; justify-content: space-between; padding: 0 12px; pointer-events: auto; z-index: 70; }
+    .modal .gallery button.arrow{ pointer-events: auto; background: rgba(255,255,255,0.95); border: none; padding: 10px 12px; border-radius: 10px; cursor: pointer; font-weight: 800; color: #111; box-shadow: 0 6px 18px rgba(0,0,0,0.12); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; user-select: none; }
+    .modal .gallery .thumbs{ width:100%; display:flex; gap:8px; padding:12px; overflow:auto; background:rgba(0,0,0,0.05); box-sizing:border-box; }
+    .modal .gallery .thumb{ width:92px; height:64px; background-size:cover; background-position:center; border-radius:6px; cursor:pointer; opacity:0.6; border:2px solid transparent; flex:0 0 auto; }
+    .modal .gallery .thumb.active{ opacity:1; border-color:rgba(255,255,255,0.9); }
+    .modal .details{ padding:18px; overflow:auto; background:#fff; }
     .modal .details h3{ margin:0 0 8px 0; }
-    .modal .close{
-      position:absolute;
-      right:12px;
-      top:12px;
-      background:rgba(255,255,255,0.9);
-      border:none;
-      padding:8px;
-      border-radius:8px;
-      cursor:pointer;
-      font-weight:700;
-    }
+    .modal .close{ position:absolute; right:12px; top:12px; background:rgba(255,255,255,0.9); border:none; padding:8px; border-radius:8px; cursor:pointer; font-weight:700; }
 
-    footer{
-      margin-top:28px;
-      color:var(--muted);
-      font-size:13px;
-      text-align:center;
-    }
+    footer{ margin-top:28px; color:var(--muted); font-size:13px; text-align:center; }
 
-    @media (max-width:1100px){
-      .media-row{ grid-template-columns: repeat(2, 1fr); }
-      .programs{ grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width:720px){
-      .hero{ grid-template-columns: 1fr; }
-      .modal{ grid-template-columns: 1fr; max-width:720px; }
-      .media-row{ grid-template-columns: 1fr; }
-      .media-large{ height:325px; }
-      .project.large .media{ height:220px; }
-      .modal .gallery .main-wrap{ height:40vh; max-height:40vh; }
-    }
-    @media (max-width:560px){
-      .profile{ padding:14px; }
-      .avatar{ width:120px; height:120px; }
-      .intro h1{ font-size:22px; }
-      .modal .gallery button.arrow{
-        width:48px;
-        height:48px;
-        padding:12px;
-      }
-    }
+    @media (max-width:1100px){ .media-row{ grid-template-columns: repeat(2, 1fr); } .programs{ grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width:720px){ .hero{ grid-template-columns: 1fr; } .modal{ grid-template-columns: 1fr; max-width:720px; } .media-row{ grid-template-columns: 1fr; } .media-large{ height:325px; } .project.large .media{ height:220px; } .modal .gallery .main-wrap{ height:40vh; max-height:40vh; } }
+    @media (max-width:560px){ .profile{ padding:14px; } .avatar{ width:120px; height:120px; } .intro h1{ font-size:22px; } .modal .gallery button.arrow{ width:48px; height:48px; padding:12px; } }
   </style>
 </head>
 <body>
 
   <div class="container" role="main" id="home">
     <header>
-      <div class="brand" aria-hidden="false">
-      </div>
+      <div class="brand" aria-hidden="false"></div>
 
-      <!-- Navigation -->
       <nav aria-label="Main">
-        <a href="HomeBoard.html" class="nav-btn">Home</a>
-        <a href="ProjectHome.html" class="nav-btn active" aria-current="page">Projects</a>
+        <a href="index.html" class="nav-btn">Home</a>
+        <a href="project-home.html" class="nav-btn active" aria-current="page">Projects</a>
         <a href="#about" class="nav-btn">About Me</a>
       </nav>
     </header>
@@ -521,11 +213,8 @@
 
       <div class="intro" aria-label="Introduction" id="about">
         <h1>About Me</h1>
-        <p>Hi, I am <strong>Ken Delos Santos Fabros</strong>. A CITCS Student from the University of the Cordilleras. I'm passionate about sharing my journey and work. This is a space where I express my creativity and showcase my accomplishments. Feel free to explore and get to know me better.
-        </p>
-        <br>
-        <br>
-        <p>My philosophy "Quote":</p>
+        <p>Hi, I am <strong>Ken Delos Santos Fabros</strong>. A CITCS Student from the University of the Cordilleras. I'm passionate about sharing my journey and work. This is a space where I express my creativity and showcase my accomplishments. Feel free to explore and get to know me better.</p>
+        <p style="margin-top:12px">My philosophy "Quote":</p>
         <p>In the cosmic ballet of existence, we find ourselves continuously seeking meaning, purpose, and connection. Our philosophy of harmonious existence is grounded in the principle that every individual, no matter their background, beliefs, or circumstances, contributes uniquely to the grand tapestry of life.</p>
       </div>
     </section>
@@ -533,9 +222,9 @@
     <section aria-label="Projects">
       <h2 style="margin:0 0 12px 0; font-size:18px; font-weight:800">Selected Projects</h2>
       <div class="projects" id="projects">
-        <!-- Project 1 -->
+        <!-- Project 1: background lazy via data-bg -->
         <article class="project large" data-title="Project Aurora" data-desc="Onboarding and retention redesign for a mobile app. Research driven and pixel perfect UI." data-images='["https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60","https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1200&q=60"]'>
-          <div class="media" style="background-image:url('https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Project Aurora image"></div>
+          <div class="media" data-bg="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60" role="img" aria-label="Project Aurora image"></div>
           <div class="meta">
             <h3 class="title">Achievements</h3>
             <p class="desc">Here you'll find the achievements i've acquired</p>
@@ -543,8 +232,8 @@
         </article>
 
         <!-- Project 2 -->
-        <article class="project large" data-title="Projects" data-desc="Artistic and Inspiring Works — This page showcases my projects from junior and senior high school through to the present, highlighting creative growth, key achievements, and the ideas that shaped my journey." data-images='["https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60","https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=60"]'>
-          <div class="media" style="background-image:url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Pulse Dashboard image"></div>
+        <article class="project large" data-title="Projects" data-desc="Artistic and Inspiring Works — This page showcases my projects from junior and senior high school through to the present, highlighting creative growth, key achievements, and the ideas that shaped my journey." data-images='["https://dl.dropboxusercontent.com//scl/fi/rfriha18scrxor1k5qvmy/Jaguar-STEM-11-ISB-FABROS-KEN-111.png?rlkey=5l8p3gelxz25vqhwsc4akyut1&st=zfxod4vk&dl=0","https://dl.dropboxusercontent.com//scl/fi/7r2ry9dnq4gw9je60o6cs/abstract-art-no.2-varation-final-done.png?rlkey=0hk5joqv9a3k4we6wh5s2tap0&st=sz75w6km&dl=0"]'>
+          <div class="media" data-bg="https://dl.dropboxusercontent.com//scl/fi/rfriha18scrxor1k5qvmy/Jaguar-STEM-11-ISB-FABROS-KEN-111.png?rlkey=5l8p3gelxz25vqhwsc4akyut1&st=pvxq629z&dl=0" role="img" aria-label="Projects image"></div>
           <div class="meta">
             <h3 class="title">Projects</h3>
             <p class="desc">Here you’ll find a selection of my work. Explore my projects to learn more about what I do.</p>
@@ -552,8 +241,8 @@
         </article>
 
         <!-- Project 3 -->
-        <article class="project large" data-title="Atlas Site" data-desc="Marketing site rebuild with performance and accessibility improvements." data-images='["https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60","https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60"]'>
-          <div class="media" style="background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Atlas Site image"></div>
+        <article class="project large" data-title="Atlas Site" data-desc="Marketing site rebuild with performance and accessibility improvements." data-images='["https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60"]'>
+          <div class="media" data-bg="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60" role="img" aria-label="Atlas Site image"></div>
           <div class="meta">
             <h3 class="title">Hobbies</h3>
             <p class="desc">Marketing site rebuild with performance and accessibility improvements.</p>
@@ -563,12 +252,11 @@
       </div>
     </section>
 
-    <!-- Programs -->
     <section aria-label="Programs">
       <h2 style="margin:18px 0 12px 0; font-size:18px; font-weight:800">Selected Programs</h2>
       <div class="programs" id="programs">
         <article class="project program" data-title="Program One" data-desc="A compact program focused on onboarding flows." data-images='["https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60"]'>
-          <div class="media" style="background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Program One image"></div>
+          <div class="media" data-bg="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60" role="img" aria-label="Program One image"></div>
           <div class="meta">
             <h3 class="title">Program One</h3>
             <p class="desc">Compact program focused on onboarding flows and micro-interactions.</p>
@@ -576,7 +264,7 @@
         </article>
 
         <article class="project program" data-title="Program Two" data-desc="A toolkit for data visualization and reporting." data-images='["https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60"]'>
-          <div class="media" style="background-image:url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Program Two image"></div>
+          <div class="media" data-bg="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60" role="img" aria-label="Program Two image"></div>
           <div class="meta">
             <h3 class="title">Program Two</h3>
             <p class="desc">Toolkit for building clear, performant data visualizations and reports.</p>
@@ -584,7 +272,7 @@
         </article>
 
         <article class="project program" data-title="Program Three" data-desc="Accessibility-first UI components and patterns." data-images='["https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60"]'>
-          <div class="media" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Program Three image"></div>
+          <div class="media" data-bg="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60" role="img" aria-label="Program Three image"></div>
           <div class="meta">
             <h3 class="title">Program Three</h3>
             <p class="desc">A set of accessibility-first UI components and interaction patterns.</p>
@@ -593,19 +281,49 @@
       </div>
     </section>
 
-    <!-- Media showcase -->
     <section class="media-showcase" aria-label="Media showcase">
       <h2 style="margin:0 0 12px 0; font-size:18px; font-weight:800">Media Showcase</h2>
 
       <div class="media-row" aria-hidden="false">
         <div class="media-card" aria-label="Media card 1">
-          <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=1200&q=60" alt="Media 1">
+          <!-- Responsive image with LQIP placeholder and explicit dimensions -->
+          <picture>
+            <source type="image/avif" data-srcset="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=400&q=60&fm=avif 400w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=800&q=60&fm=avif 800w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=1200&q=60&fm=avif 1200w" />
+            <source type="image/webp" data-srcset="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=400&q=60&fm=webp 400w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=800&q=60&fm=webp 800w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=1200&q=60&fm=webp 1200w" />
+            <img
+              class="lazy-img"
+              data-src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=800&q=60"
+              data-srcset="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=400&q=60 400w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=800&q=60 800w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=1200&q=60 1200w"
+              data-sizes="(max-width:720px) 100vw, 33vw"
+              width="800" height="450"
+              alt="Media 1"
+              loading="lazy"
+              decoding="async"
+              style="max-width:100%;height:auto;display:block;background:#f3f4f6;"
+              src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23f3f4f6'/%3E%3C/svg%3E">
+          </picture>
         </div>
+
         <div class="media-card" aria-label="Media card 2">
-          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60" alt="Media 2">
+          <picture>
+            <source type="image/avif" data-srcset="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=60&fm=avif 400w, https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=60&fm=avif 800w" />
+            <source type="image/webp" data-srcset="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=60&fm=webp 400w, https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=60&fm=webp 800w" />
+            <img
+              class="lazy-img"
+              data-src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=60"
+              data-srcset="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=60 400w, https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=60 800w"
+              data-sizes="(max-width:720px) 100vw, 33vw"
+              width="800" height="450"
+              alt="Media 2"
+              loading="lazy"
+              decoding="async"
+              style="max-width:100%;height:auto;display:block;background:#f3f4f6;"
+              src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23f3f4f6'/%3E%3C/svg%3E">
+          </picture>
         </div>
+
         <div class="media-card" aria-label="Media card 3">
-          <video controls poster="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60">
+          <video controls poster="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60" preload="none" style="width:100%;height:100%;object-fit:cover;">
             <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -613,7 +331,21 @@
       </div>
 
       <div class="media-large" aria-label="Large media display">
-        <img src="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1600&q=60" alt="Large media">
+        <picture>
+          <source type="image/avif" data-srcset="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=800&q=60&fm=avif 800w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60&fm=avif 1200w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1600&q=60&fm=avif 1600w" />
+          <source type="image/webp" data-srcset="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=800&q=60&fm=webp 800w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60&fm=webp 1200w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1600&q=60&fm=webp 1600w" />
+          <img
+            class="lazy-img"
+            data-src="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1600&q=60"
+            data-srcset="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=800&q=60 800w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60 1200w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1600&q=60 1600w"
+            data-sizes="(max-width:720px) 100vw, 1000px"
+            width="1600" height="900"
+            alt="Large media"
+            loading="lazy"
+            decoding="async"
+            style="max-width:100%;height:auto;display:block;background:#f3f4f6;"
+            src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23f3f4f6'/%3E%3C/svg%3E">
+        </picture>
       </div>
     </section>
 
@@ -660,231 +392,352 @@
   </div>
 
   <script>
-    // Populate year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    (function(){
+      // Populate year
+      document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Elements
-    const overlay = document.getElementById('overlay');
-    const galleryStage = document.getElementById('galleryStage');
-    const modalTitle = document.getElementById('modal-title');
-    const modalDesc = document.getElementById('modal-desc');
-    const closeBtn = document.getElementById('closeBtn');
-    const modalClose2 = document.getElementById('modal-close-2');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const thumbs = document.getElementById('thumbs');
+      // Elements for modal/gallery
+      const overlay = document.getElementById('overlay');
+      const galleryStage = document.getElementById('galleryStage');
+      const modalTitle = document.getElementById('modal-title');
+      const modalDesc = document.getElementById('modal-desc');
+      const closeBtn = document.getElementById('closeBtn');
+      const modalClose2 = document.getElementById('modal-close-2');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const thumbs = document.getElementById('thumbs');
 
-    let currentImages = [];
-    let currentIndex = 0;
-    let isAnimating = false;
-    let lastFocused = null;
+      let currentImages = [];
+      let currentIndex = 0;
+      let isAnimating = false;
+      let lastFocused = null;
 
-    // Utility: create media element (img or video)
-    function createMediaElement(src){
-      const isVideo = typeof src === 'string' && (src.match(/\.(mp4|webm|ogg)(\?.*)?$/i) || src.includes('video') || src.includes('mp4'));
-      const wrapper = document.createElement('div');
-      wrapper.className = 'media-item';
-      if(isVideo){
-        const v = document.createElement('video');
-        v.src = src;
-        v.controls = true;
-        v.playsInline = true;
-        v.preload = 'metadata';
-        v.style.maxHeight = '100%';
-        v.style.maxWidth = '100%';
-        wrapper.appendChild(v);
+      // ---------- Lazy-load CSS background images ----------
+      const lazyBackgrounds = [].slice.call(document.querySelectorAll('.media[data-bg]'));
+      if('IntersectionObserver' in window && lazyBackgrounds.length){
+        const bgObserver = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if(entry.isIntersecting){
+              const el = entry.target;
+              const url = el.getAttribute('data-bg');
+              if(url){
+                el.style.backgroundImage = `url('${url}')`;
+                el.removeAttribute('data-bg');
+              }
+              obs.unobserve(el);
+            }
+          });
+        }, {rootMargin: '300px 0px'});
+        lazyBackgrounds.forEach(el => bgObserver.observe(el));
       } else {
-        const img = document.createElement('img');
-        img.src = src || '';
-        img.alt = modalTitle.textContent || '';
-        wrapper.appendChild(img);
+        lazyBackgrounds.forEach(el => {
+          const url = el.getAttribute('data-bg');
+          if(url) el.style.backgroundImage = `url('${url}')`;
+          el.removeAttribute('data-bg');
+        });
       }
-      return wrapper;
-    }
 
-    // Render thumbnails
-    function renderThumbs(){
-      thumbs.innerHTML = '';
-      currentImages.forEach((src, i) => {
-        const div = document.createElement('div');
-        div.className = 'thumb' + (i === currentIndex ? ' active' : '');
-        div.style.backgroundImage = `url('${src}')`;
-        div.setAttribute('role','button');
-        div.setAttribute('aria-label','Thumbnail ' + (i+1));
-        div.addEventListener('click', () => {
-          if(i === currentIndex || isAnimating) return;
-          animateToIndex(i, i > currentIndex ? 1 : -1);
+      // ---------- Lazy-load <img> elements with srcset and LQIP ----------
+      const lazyImgs = [].slice.call(document.querySelectorAll('img.lazy-img'));
+      function loadImage(img){
+        if(!img) return;
+        // set srcset/sizes from data attributes
+        const src = img.getAttribute('data-src');
+        const srcset = img.getAttribute('data-srcset');
+        const sizes = img.getAttribute('data-sizes');
+        if(srcset) img.srcset = srcset;
+        if(sizes) img.sizes = sizes;
+        if(src) img.src = src;
+        // remove data attributes to avoid reprocessing
+        img.removeAttribute('data-src');
+        img.removeAttribute('data-srcset');
+        img.removeAttribute('data-sizes');
+        img.classList.remove('lazy-img');
+      }
+
+      if('IntersectionObserver' in window && lazyImgs.length){
+        const imgObserver = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if(entry.isIntersecting){
+              const img = entry.target;
+              loadImage(img);
+              obs.unobserve(img);
+            }
+          });
+        }, {rootMargin: '300px 0px', threshold: 0.01});
+        lazyImgs.forEach(img => imgObserver.observe(img));
+      } else {
+        // fallback: load all images after a short idle time
+        if('requestIdleCallback' in window){
+          requestIdleCallback(() => lazyImgs.forEach(loadImage), {timeout:2000});
+        } else {
+          setTimeout(() => lazyImgs.forEach(loadImage), 1000);
+        }
+      }
+
+      // ---------- Gallery: create media elements lazily and prefetch neighbors ----------
+      function createMediaElement(src){
+        const isVideo = typeof src === 'string' && (src.match(/\.(mp4|webm|ogg)(\?.*)?$/i) || src.includes('video') || src.includes('mp4'));
+        const wrapper = document.createElement('div');
+        wrapper.className = 'media-item';
+        if(isVideo){
+          const v = document.createElement('video');
+          v.src = src;
+          v.controls = true;
+          v.playsInline = true;
+          v.preload = 'metadata';
+          v.style.maxHeight = '100%';
+          v.style.maxWidth = '100%';
+          wrapper.appendChild(v);
+        } else {
+          const img = document.createElement('img');
+          // do not set src immediately to avoid mass decoding
+          img.alt = modalTitle.textContent || '';
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          img.style.maxWidth = '100%';
+          img.style.maxHeight = '100%';
+          // set a tiny placeholder to reserve layout (keeps aspect ratio)
+          img.src = 'data:image/svg+xml;charset=utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9"%3E%3Crect width="16" height="9" fill="%23f3f4f6"/%3E%3C/svg%3E';
+          // store the real src on dataset for controlled loading
+          img.dataset.realSrc = src || '';
+          wrapper.appendChild(img);
+        }
+        return wrapper;
+      }
+
+      // Render thumbnails
+      function renderThumbs(){
+        thumbs.innerHTML = '';
+        currentImages.forEach((src, i) => {
+          const div = document.createElement('div');
+          div.className = 'thumb' + (i === currentIndex ? ' active' : '');
+          div.style.backgroundImage = `url('${src}')`;
+          div.setAttribute('role','button');
+          div.setAttribute('aria-label','Thumbnail ' + (i+1));
+          div.addEventListener('click', () => {
+            if(i === currentIndex || isAnimating) return;
+            animateToIndex(i, i > currentIndex ? 1 : -1);
+          });
+          thumbs.appendChild(div);
         });
-        thumbs.appendChild(div);
-      });
-    }
+      }
 
-    // Show initial media immediately (no animation)
-    function showIndexImmediate(index){
-      galleryStage.innerHTML = '';
-      const el = createMediaElement(currentImages[index] || '');
-      el.classList.add('media-item','current');
-      el.style.transform = 'translateX(0%)';
-      galleryStage.appendChild(el);
-      currentIndex = index;
-      renderThumbs();
-      pauseAllExcept(el);
-    }
-
-    // Pause videos except the provided wrapper element
-    function pauseAllExcept(keepEl){
-      const videos = galleryStage.querySelectorAll('video');
-      videos.forEach(v => {
-        if(!keepEl || !keepEl.contains(v)) {
-          try { v.pause(); v.currentTime = 0; } catch(e){}
+      // Show initial media immediately (no animation) but load image only when appended
+      function showIndexImmediate(index){
+        galleryStage.innerHTML = '';
+        const el = createMediaElement(currentImages[index] || '');
+        el.classList.add('media-item','current');
+        el.style.transform = 'translateX(0%)';
+        galleryStage.appendChild(el);
+        // load the image now (if image)
+        const img = el.querySelector('img[data-real-src]');
+        if(img && img.dataset.realSrc){
+          img.src = img.dataset.realSrc;
+          delete img.dataset.realSrc;
         }
-      });
-    }
-
-    // Animate to new index with direction: dir = 1 (next, slide left), -1 (prev, slide right)
-    function animateToIndex(newIndex, dir){
-      if(isAnimating) return;
-      if(newIndex === currentIndex) return;
-      if(!currentImages.length) return;
-      isAnimating = true;
-
-      const oldEl = galleryStage.querySelector('.media-item.current') || galleryStage.firstElementChild;
-      const newEl = createMediaElement(currentImages[newIndex] || '');
-      newEl.classList.add('media-item');
-      newEl.style.transform = `translateX(${dir > 0 ? 100 : -100}%)`;
-      galleryStage.appendChild(newEl);
-
-      requestAnimationFrame(() => {
-        if(oldEl){
-          oldEl.style.transition = 'transform 320ms cubic-bezier(.2,.9,.2,1)';
-          oldEl.style.transform = `translateX(${dir > 0 ? -100 : 100}%)`;
-        }
-        newEl.style.transition = 'transform 320ms cubic-bezier(.2,.9,.2,1)';
-        newEl.style.transform = 'translateX(0%)';
-      });
-
-      const onEnd = () => {
-        if(oldEl && oldEl.parentElement === galleryStage) {
-          const v = oldEl.querySelector('video');
-          if(v){ try { v.pause(); v.currentTime = 0; } catch(e){} }
-          oldEl.remove();
-        }
-        newEl.classList.add('current');
-        Array.from(galleryStage.querySelectorAll('.media-item')).forEach((el) => {
-          if(el !== newEl) el.classList.remove('current');
-        });
-        currentIndex = newIndex;
+        currentIndex = index;
         renderThumbs();
-        pauseAllExcept(newEl);
-        isAnimating = false;
-      };
+        pauseAllExcept(el);
+        // prefetch neighbors
+        prefetchNeighbors(index);
+      }
 
-      let finished = false;
-      newEl.addEventListener('transitionend', function te(){
-        if(finished) return;
-        finished = true;
-        newEl.removeEventListener('transitionend', te);
-        onEnd();
-      });
-      setTimeout(() => {
-        if(!finished) {
+      function pauseAllExcept(keepEl){
+        const videos = galleryStage.querySelectorAll('video');
+        videos.forEach(v => {
+          if(!keepEl || !keepEl.contains(v)) {
+            try { v.pause(); v.currentTime = 0; } catch(e){}
+          }
+        });
+      }
+
+      function animateToIndex(newIndex, dir){
+        if(isAnimating) return;
+        if(newIndex === currentIndex) return;
+        if(!currentImages.length) return;
+        isAnimating = true;
+
+        const oldEl = galleryStage.querySelector('.media-item.current') || galleryStage.firstElementChild;
+        const newEl = createMediaElement(currentImages[newIndex] || '');
+        newEl.classList.add('media-item');
+        newEl.style.transform = `translateX(${dir > 0 ? 100 : -100}%)`;
+        galleryStage.appendChild(newEl);
+
+        // load the new image only when appended
+        const img = newEl.querySelector('img[data-real-src]');
+        if(img && img.dataset.realSrc){
+          // small delay to allow browser to schedule decode after layout
+          requestAnimationFrame(() => {
+            img.src = img.dataset.realSrc;
+            delete img.dataset.realSrc;
+          });
+        }
+
+        requestAnimationFrame(() => {
+          if(oldEl){
+            oldEl.style.transition = 'transform 320ms cubic-bezier(.2,.9,.2,1)';
+            oldEl.style.transform = `translateX(${dir > 0 ? -100 : 100}%)`;
+          }
+          newEl.style.transition = 'transform 320ms cubic-bezier(.2,.9,.2,1)';
+          newEl.style.transform = 'translateX(0%)';
+        });
+
+        const onEnd = () => {
+          if(oldEl && oldEl.parentElement === galleryStage) {
+            const v = oldEl.querySelector('video');
+            if(v){ try { v.pause(); v.currentTime = 0; } catch(e){} }
+            oldEl.remove();
+          }
+          newEl.classList.add('current');
+          Array.from(galleryStage.querySelectorAll('.media-item')).forEach((el) => {
+            if(el !== newEl) el.classList.remove('current');
+          });
+          currentIndex = newIndex;
+          renderThumbs();
+          pauseAllExcept(newEl);
+          isAnimating = false;
+          // prefetch neighbors after animation completes
+          prefetchNeighbors(currentIndex);
+        };
+
+        let finished = false;
+        newEl.addEventListener('transitionend', function te(){
+          if(finished) return;
           finished = true;
+          newEl.removeEventListener('transitionend', te);
           onEnd();
-        }
-      }, 420);
-    }
-
-    // Open modal
-    function openModal(data){
-      lastFocused = document.activeElement;
-      modalTitle.textContent = data.title || '';
-      modalDesc.textContent = data.desc || '';
-      currentImages = Array.isArray(data.images) ? data.images.slice() : [];
-      currentIndex = 0;
-      galleryStage.innerHTML = '';
-      if(currentImages.length){
-        showIndexImmediate(0);
-      } else {
-        const placeholder = document.createElement('div');
-        placeholder.className = 'media-item current';
-        placeholder.style.display = 'flex';
-        placeholder.style.alignItems = 'center';
-        placeholder.style.justifyContent = 'center';
-        placeholder.style.color = '#fff';
-        placeholder.textContent = 'No media';
-        galleryStage.appendChild(placeholder);
+        });
+        setTimeout(() => {
+          if(!finished) {
+            finished = true;
+            onEnd();
+          }
+        }, 500);
       }
-      renderThumbs();
-      overlay.classList.add('open');
-      overlay.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-      closeBtn.focus();
-    }
 
-    function closeModal(){
-      overlay.classList.remove('open');
-      overlay.setAttribute('aria-hidden','true');
-      document.body.style.overflow = '';
-      const videos = galleryStage.querySelectorAll('video');
-      videos.forEach(v => { try { v.pause(); v.currentTime = 0; } catch(e){} });
-      galleryStage.innerHTML = '';
-      currentImages = [];
-      currentIndex = 0;
-      if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
-    }
+      // Prefetch adjacent images (previous and next) using requestIdleCallback
+      function prefetchNeighbors(index){
+        if(!currentImages || !currentImages.length) return;
+        const prev = (index - 1 + currentImages.length) % currentImages.length;
+        const next = (index + 1) % currentImages.length;
+        const toPrefetch = [prev, next].filter((i, pos, arr) => arr.indexOf(i) === pos);
+        const doPrefetch = () => {
+          toPrefetch.forEach(i => {
+            const url = currentImages[i];
+            if(!url) return;
+            const img = new Image();
+            img.src = url;
+            img.decoding = 'async';
+          });
+        };
+        if('requestIdleCallback' in window){
+          requestIdleCallback(doPrefetch, {timeout:2000});
+        } else {
+          setTimeout(doPrefetch, 1000);
+        }
+      }
 
-    // Prev/Next handlers use animateToIndex
-    prevBtn.addEventListener('click', () => {
-      if(isAnimating) return;
-      if(currentImages.length === 0) return;
-      const newIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-      animateToIndex(newIndex, -1);
-    });
-    nextBtn.addEventListener('click', () => {
-      if(isAnimating) return;
-      if(currentImages.length === 0) return;
-      const newIndex = (currentIndex + 1) % currentImages.length;
-      animateToIndex(newIndex, 1);
-    });
-
-    // Open modal when clicking a project/program card
-    document.querySelectorAll('.project').forEach(el => {
-      el.addEventListener('click', () => {
-        const title = el.dataset.title || (el.querySelector('.title') && el.querySelector('.title').textContent) || '';
-        const desc = el.dataset.desc || (el.querySelector('.desc') && el.querySelector('.desc').textContent) || '';
-        let images = [];
+      // Open modal
+      function openModal(data){
+        lastFocused = document.activeElement;
+        modalTitle.textContent = data.title || '';
+        modalDesc.textContent = data.desc || '';
         try {
-          images = JSON.parse(el.dataset.images || '[]');
-        } catch(e) {
-          images = [];
+          currentImages = Array.isArray(data.images) ? data.images.slice() : [];
+        } catch(e){
+          currentImages = [];
         }
-        openModal({ title, desc, images });
-      });
-    });
-
-    // Close handlers
-    closeBtn.addEventListener('click', closeModal);
-    modalClose2.addEventListener('click', closeModal);
-
-    // Close when clicking overlay background
-    overlay.addEventListener('click', (e) => {
-      if(e.target === overlay) closeModal();
-    });
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if(!overlay.classList.contains('open')) return;
-      if(e.key === 'Escape') {
-        e.preventDefault();
-        closeModal();
-      } else if(e.key === 'ArrowLeft') {
-        e.preventDefault();
-        prevBtn.click();
-      } else if(e.key === 'ArrowRight') {
-        e.preventDefault();
-        nextBtn.click();
+        currentIndex = 0;
+        galleryStage.innerHTML = '';
+        if(currentImages.length){
+          showIndexImmediate(0);
+        } else {
+          const placeholder = document.createElement('div');
+          placeholder.className = 'media-item current';
+          placeholder.style.display = 'flex';
+          placeholder.style.alignItems = 'center';
+          placeholder.style.justifyContent = 'center';
+          placeholder.style.color = '#fff';
+          placeholder.textContent = 'No media';
+          galleryStage.appendChild(placeholder);
+        }
+        renderThumbs();
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
       }
-    });
+
+      function closeModal(){
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+        const videos = galleryStage.querySelectorAll('video');
+        videos.forEach(v => { try { v.pause(); v.currentTime = 0; } catch(e){} });
+        galleryStage.innerHTML = '';
+        currentImages = [];
+        currentIndex = 0;
+        if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+      }
+
+      // Attach click handlers to project cards to open modal
+      document.querySelectorAll('.project').forEach(card => {
+        card.addEventListener('click', () => {
+          const title = card.getAttribute('data-title') || '';
+          const desc = card.getAttribute('data-desc') || '';
+          let images = [];
+          try {
+            images = JSON.parse(card.getAttribute('data-images') || '[]');
+          } catch(e){
+            images = [];
+          }
+          openModal({title, desc, images});
+        });
+      });
+
+      // Modal controls
+      closeBtn.addEventListener('click', closeModal);
+      modalClose2.addEventListener('click', closeModal);
+      overlay.addEventListener('click', (e) => { if(e.target === overlay) closeModal(); });
+      prevBtn.addEventListener('click', () => { if(isAnimating || !currentImages.length) return; const next = (currentIndex - 1 + currentImages.length) % currentImages.length; animateToIndex(next, -1); });
+      nextBtn.addEventListener('click', () => { if(isAnimating || !currentImages.length) return; const next = (currentIndex + 1) % currentImages.length; animateToIndex(next, 1); });
+
+      // Keyboard navigation for modal
+      document.addEventListener('keydown', (e) => {
+        if(overlay.classList.contains('open')){
+          if(e.key === 'Escape') closeModal();
+          if(e.key === 'ArrowLeft') prevBtn.click();
+          if(e.key === 'ArrowRight') nextBtn.click();
+        }
+      });
+
+      // Pause videos when tab/window hidden
+      document.addEventListener('visibilitychange', () => {
+        if(document.hidden){
+          const vids = document.querySelectorAll('video');
+          vids.forEach(v => { try { v.pause(); } catch(e){} });
+        }
+      });
+
+      // Warm-up: prefetch first project's first image during idle time
+      if('requestIdleCallback' in window){
+        requestIdleCallback(() => {
+          const firstProject = document.querySelector('.project[data-images]');
+          if(firstProject){
+            try {
+              const imgs = JSON.parse(firstProject.getAttribute('data-images') || '[]');
+              if(imgs && imgs[0]){
+                const i = new Image();
+                i.src = imgs[0];
+                i.decoding = 'async';
+              }
+            } catch(e){}
+          }
+        }, {timeout:2000});
+      }
+
+    })();
   </script>
 </body>
 </html>
