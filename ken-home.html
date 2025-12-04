@@ -222,40 +222,53 @@
       @media (max-width:720px){ .hero{ grid-template-columns: 1fr; } .modal{ grid-template-columns: 1fr; max-width:720px; } .media-row{ grid-template-columns: 1fr; } .media-large{ height:325px; } .project.large .media{ height:220px; } .modal .gallery .main-wrap{ height:40vh; max-height:40vh; } }
       @media (max-width:560px){ .profile{ padding:14px; } .avatar{ width:120px; height:120px; } .intro h1{ font-size:22px; } .modal .gallery button.arrow{ width:48px; height:48px; padding:12px; } }
 
-      /* --- Updated styles for longer scrollable highlights --- */
-      .modal .details{
-        padding:18px;
-        overflow: auto;
-        background:#fff;
-        -webkit-overflow-scrolling: touch;
+      /* -------------------------
+         Highlights: responsive behavior
+         - Stationary (natural flow) on wide screens
+         - Scrollable with capped height on small screens (phones/tablets)
+         - Applies to #default-highlights and any element with .highlights class
+         ------------------------- */
+
+      /* Default: desktop / wide screens — let highlights expand naturally */
+      #default-highlights,
+      .highlights {
+        overflow: visible;
+        max-height: none;
       }
 
-      /* Larger, scrollable highlights container to accommodate longer lists */
-      .modal .details .highlights-list{
-        margin-top:12px;
-        color:var(--muted);
-        max-height:320px; /* increased to allow more content before scrolling */
-        overflow-y:auto;
-        padding-right:8px;
-        border-top:1px solid rgba(0,0,0,0.04);
-        padding-top:12px;
+      /* Small screens: cap height and enable vertical scrolling inside highlights */
+      @media (max-width: 720px) {
+        /* Let the details panel size naturally; highlights will scroll internally */
+        .modal .details {
+          overflow: visible;
+        }
+
+        #default-highlights,
+        .highlights {
+          max-height: 40vh;                 /* adjust between 30vh–50vh as needed */
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch; /* smooth native scrolling on iOS/Android */
+          padding-right: 6px;               /* prevent content from touching scrollbar */
+        }
+
+        /* If the modal itself becomes taller than viewport, allow it to scroll */
+        .overlay.open .modal {
+          max-height: 100vh;
+        }
       }
 
-      /* Tighter limits on small screens */
-      @media (max-width:720px){
-        .modal{ max-width:720px; }
-        .modal .details{ max-height: calc(90vh - 120px); }
-        .modal .details .highlights-list{ max-height:220px; }
-      }
+      /* Ensure desktop keeps highlights stationary even if modal content overflows */
+      @media (min-width: 721px) {
+        .modal .details {
+          overflow: auto; /* allow the whole details panel to scroll if needed */
+        }
 
-      @media (max-width:420px){
-        .modal .details{ max-height: calc(85vh - 100px); }
-        .modal .details .highlights-list{ max-height:160px; }
+        #default-highlights,
+        .highlights {
+          max-height: none;
+          overflow: visible;
+        }
       }
-
-      /* Optional: nicer thin scrollbar for WebKit */
-      .modal .details .highlights-list::-webkit-scrollbar{ width:8px; }
-      .modal .details .highlights-list::-webkit-scrollbar-thumb{ background:rgba(0,0,0,0.08); border-radius:6px; }
     </style>
   </head>
 
@@ -305,57 +318,51 @@
       <section aria-label="Projects">
         <h2 style="margin:0 0 12px 0; font-size:18px; font-weight:800">Selected Projects</h2>
         <div class="projects" id="projects">
-          <!-- Project 1: Achievements (updated with longer highlights) -->
+          <!-- Project 1: Achievements (already had highlights) -->
           <article class="project large"
                    data-title="Achievements"
                    data-desc="Academic work is a human act of curiosity and courage; it asks us to listen, question, and grow. True scholarship honors mistakes as much as discoveries, because both teach us how to be more human."
                    data-images='["https://dl.dropboxusercontent.com/scl/fi/zp4tggj6vllhmew1txvpy/IMG_20250204_220354.webp?rlkey=gpgtnxl0gskr2byutd4x67nha&st=fixyz0df&dl=0"]'
-                   data-highlights='[
-                     "Received a Diploma for completing the requirements of Senior High School, Grade 12 (2024-2025)",
-                     "Received the Certificate of Academic Excellence Award and graduated with Honors, Grade 12 (2024-2025)",
-                     "Earned a Work Immersion Certificate from DICT C.A.R, Grade 12 (2024-2025)",
-                     "Academic Awardee From Grade 7 until Grade 10",
-                     "Graduate of PCNHS",
-                     "Academic Achiever in Grade 12",
-                     "Graduate from the University of the Cordilleras in 2024"
-                   ]'>
-            <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/g8pe6eadqolzh4eyfwfo3/Screenshot-2025-12-04-000350.webp?rlkey=8poutolxmxh55mskqm4clxbhj&st=qqmbnt8d&dl=0" role="img" aria-label="Achievements image"></div>
+                   data-highlights='["Academic Awardee From Grade 7 until Grade 10","Graduate of PCNHS","Academic Achiever in Grade 12","Graduate from the University of the Cordilleras in 2024"]'>
+            <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/g8pe6eadqolzh4eyfwfo3/Screenshot-2025-12-04-000350.webp?rlkey=8poutolxmxh55mskqm4clxbhj&st=qqmbnt8d&dl=0" role="img" aria-label="Project Aurora image"></div>
             <div class="meta">
               <h3 class="title">Achievements</h3>
-              <p class="desc">Here you'll find the achievements I've acquired.</p>
+              <p class="desc">Here you'll find the achievements i've acquired</p>
             </div>
           </article>
 
-          <!-- Project 2 -->
+          <!-- Project 2: Projects -->
           <article class="project large"
                    data-title="Projects"
                    data-desc="Artistic and Inspiring Works — This page showcases my projects from junior and senior high school through to the present, highlighting creative growth, key achievements, and the ideas that shaped my journey."
-                   data-images='["https://dl.dropboxusercontent.com/scl/fi/5gpq1ocmeb1zabsiigu1z/Screenshot-2025-12-03-233450.webp?rlkey=v5riw1ehsouhigcm5q8yb7v53&st=0p5vtfq4&dl=0","https://dl.dropboxusercontent.com/scl/fi/yzng9ahaffc4u86azj78q/abstract-art-no.2-varation-final-done.webp?rlkey=mnny0uyvyp3y2v058cp8pm23u&st=5ddfqr19&dl=0","https://dl.dropboxusercontent.com/scl/fi/i382gqw2nzmft8kvusew7/abstarct-background-ps-export-final.webp?rlkey=toxf95xvccptcr9lcf5lyalon&st=ath0li21&dl=0","https://dl.dropboxusercontent.com/scl/fi/w4gqj47m5xtb62v7tfg2l/Screenshot-2024-11-28-170142.webp?rlkey=0g9vcba82jvr17vej1h7pxupd&st=vsa9tkke&dl=0","https://dl.dropboxusercontent.com/scl/fi/uko3rpfi0svp9h8f0fdn2/Screenshot-2025-12-03-235753.webp?rlkey=t41x5hwkqbqtgwakgwfekahun&st=p96f4i5u&dl=0"]'>
-            <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/5gpq1ocmeb1zabsiigu1z/Screenshot-2025-12-03-233450.webp?rlkey=v5riw1ehsouhigcm5q8yb7v53&st=0p5vtfq4&dl=0" role="img" aria-label="Projects image"></div>
+                   data-images='["https://dl.dropboxusercontent.com/scl/fi/5gpq1ocmeb1zabsiigu1z/Screenshot-2025-12-03-233450.webp?rlkey=v5riw1ehsouhigcm5q8yb7v53&st=0p5vtfq4&dl=0","https://dl.dropboxusercontent.com/scl/fi/yzng9ahaffc4u86azj78q/abstract-art-no.2-varation-final-done.webp?rlkey=mnny0uyvyp3y2v058cp8pm23u&st=5ddfqr19&dl=0","https://dl.dropboxusercontent.com/scl/fi/i382gqw2nzmft8kvusew7/abstarct-background-ps-export-final.webp?rlkey=toxf95xvccptcr9lcf5lyalon&st=ath0li21&dl=0","https://dl.dropboxusercontent.com/scl/fi/w4gqj47m5xtb62v7tfg2l/Screenshot-2024-11-28-170142.webp?rlkey=0g9vcba82jvr17vej1h7pxupd&st=vsa9tkke&dl=0","https://dl.dropboxusercontent.com/scl/fi/uko3rpfi0svp9h8f0fdn2/Screenshot-2025-12-03-235753.webp?rlkey=t41x5hwkqbqtgwakgwfekahun&st=p96f4i5u&dl=0"]'
+              data-highlights='["A single red rose unfurls like a quiet promise against a soft, sunlit blur.","Dew-kissed petals catch the first light, brightening the day with effortless grace.","A tumble of pink blossoms spills over the branch, joyful and unapologetically bold.","Clusters of magenta reach toward the blue, a lively conversation between flower and sky.","Delicate blooms gather in a gentle chorus, inviting a slow, lingering breath."]'>
+                   <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/5gpq1ocmeb1zabsiigu1z/Screenshot-2025-12-03-233450.webp?rlkey=v5riw1ehsouhigcm5q8yb7v53&st=0p5vtfq4&dl=0" role="img" aria-label="Projects image"></div>
             <div class="meta">
               <h3 class="title">Projects</h3>
               <p class="desc">Here you’ll find a selection of my work. Explore my projects to learn more about what I do.</p>
             </div>
           </article>
 
-          <!-- Project 3 -->
+          <!-- Project 3: Hobbies -->
           <article class="project large"
-                   data-title="My Hobbies"
-                   data-desc="I chase light and quiet moments, turning ordinary scenes into lingering visual stories. That quote depicts my art itself"
-                   data-images='["https://dl.dropboxusercontent.com/scl/fi/lyn3uxx4nw5i6et93y8np/329499139_1622334898278996_4171053628367841960_n.webp?rlkey=d2f8eltuqii1n5hq6f867s566&st=djofau4i&dl=0","https://dl.dropboxusercontent.com/scl/fi/2lstn5budn0q2t5sfj7z5/329785655_964051695037498_1346925642961946229_n.webp?rlkey=8zcpcskvlum2v7a39npipkj6h&st=986r19ha&dl=0","https://dl.dropboxusercontent.com/scl/fi/d51shgcl2zoesva5c8avx/340641356_738845294571244_1138016351730339913_n.webp?rlkey=aez1ducpsddy0hgz3b9uqayfd&st=rjz6uz5l&dl=0","https://dl.dropboxusercontent.com/scl/fi/z77p7amj2wwknsivnizvh/341933494_962319381792372_3535160102446161496_n.webp?rlkey=54hnyq19aq8un7uq2r4e4hbus&st=bd31u6m4&dl=0","https://dl.dropboxusercontent.com/scl/fi/iizjhqsxsunss09x1rj8r/342335417_743817660624178_944112588714985992_n.webp?rlkey=dm4px8e0gcu3d19i89s70euw7&st=jkzohd2c&dl=0"]'>
-            <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/lyn3uxx4nw5i6et93y8np/329499139_1622334898278996_4171053628367841960_n.webp?rlkey=d2f8eltuqii1n5hq6f867s566&st=djofau4i&dl=0" role="img" aria-label="Hobbies image"></div>
-            <div class="meta">
-              <h3 class="title">Hobbies</h3>
-              <p class="desc">Marketing site rebuild with performance and accessibility improvements.</p>
-            </div>
-          </article>
+         data-title="My Hobbies"
+         data-desc="I chase light and quiet moments, turning ordinary scenes into lingering visual stories. That quote depicts my art itself"
+          data-images='["https://dl.dropboxusercontent.com/scl/fi/lyn3uxx4nw5i6et93y8np/329499139_1622334898278996_4171053628367841960_n.webp?rlkey=d2f8eltuqii1n5hq6f867s566&st=djofau4i&dl=0","https://dl.dropboxusercontent.com/scl/fi/2lstn5budn0q2t5sfj7z5/329785655_964051695037498_1346925642961946229_n.webp?rlkey=8zcpcskvlum2v7a39npipkj6h&st=986r19ha&dl=0","https://dl.dropboxusercontent.com/scl/fi/d51shgcl2zoesva5c8avx/340641356_738845294571244_1138016351730339913_n.webp?rlkey=aez1ducpsddy0hgz3b9uqayfd&st=rjz6uz5l&dl=0","https://dl.dropboxusercontent.com/scl/fi/z77p7amj2wwknsivnizvh/341933494_962319381792372_3535160102446161496_n.webp?rlkey=54hnyq19aq8un7uq2r4e4hbus&st=bd31u6m4&dl=0","https://dl.dropboxusercontent.com/scl/fi/iizjhqsxsunss09x1rj8r/342335417_743817660624178_944112588714985992_n.webp?rlkey=dm4px8e0gcu3d19i89s70euw7&st=jkzohd2c&dl=0"]'
+         data-highlights='["A single red rose unfurls like a quiet promise against a soft, sunlit blur.","Dew-kissed petals catch the first light, brightening the day with effortless grace.","A tumble of pink blossoms spills over the branch, joyful and unapologetically bold.","Clusters of magenta reach toward the blue, a lively conversation between flower and sky.","Delicate blooms gather in a gentle chorus, inviting a slow, lingering breath."]'>
+  <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/lyn3uxx4nw5i6et93y8np/329499139_1622334898278996_4171053628367841960_n.webp?rlkey=d2f8eltuqii1n5hq6f867s566&st=djofau4i&dl=0" role="img" aria-label="Atlas Site image"></div>
+  <div class="meta">
+    <h3 class="title">Hobbies</h3>
+    <p class="desc">Marketing site rebuild with performance and accessibility improvements.</p>
+  </div>
+</article>
         </div>
       </section>
 
       <section aria-label="Programs">
         <h2 style="margin:18px 0 12px 0; font-size:18px; font-weight:800">Selected Programs</h2>
         <div class="programs" id="programs">
-          <article class="project program" data-title="Program One" data-desc="A compact program focused on onboarding flows." data-images='["https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60"]'>
+          <article class="project program" data-title="Program One" data-desc="A compact program focused on onboarding flows." data-images='["https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60"]' data-highlights='["Onboarding flow: user research","Prototype: clickable Figma build","Metrics: reduced drop-off by X%"]'>
             <div class="media" data-bg="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60" role="img" aria-label="Program One image"></div>
             <div class="meta">
               <h3 class="title">Program One</h3>
@@ -363,7 +370,7 @@
             </div>
           </article>
 
-          <article class="project program" data-title="Program Two" data-desc="A toolkit for data visualization and reporting." data-images='["https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60"]'>
+          <article class="project program" data-title="Program Two" data-desc="A toolkit for data visualization and reporting." data-images='["https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60"]' data-highlights='["Visualization templates: bar, line, map","Export: CSV and PDF support","Accessibility: colorblind-friendly palettes"]'>
             <div class="media" data-bg="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60" role="img" aria-label="Program Two image"></div>
             <div class="meta">
               <h3 class="title">Program Two</h3>
@@ -371,7 +378,7 @@
             </div>
           </article>
 
-          <article class="project program" data-title="Program Three" data-desc="Accessibility-first UI components and patterns." data-images='["https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60"]'>
+          <article class="project program" data-title="Program Three" data-desc="Accessibility-first UI components and patterns." data-images='["https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60"]' data-highlights='["Accessible components: buttons, forms, nav","Documentation: usage and examples","Testing: keyboard and screen reader checks"]'>
             <div class="media" data-bg="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60" role="img" aria-label="Program Three image"></div>
             <div class="meta">
               <h3 class="title">Program Three</h3>
@@ -533,7 +540,7 @@
           }, {rootMargin: '200px 0px'});
           lazyBackgrounds.forEach(el => bgObserver.observe(el));
         } else {
-          // fallback: load all immediately
+          // Fallback: load all backgrounds immediately
           lazyBackgrounds.forEach(el => {
             const url = el.getAttribute('data-bg');
             if(url) el.style.backgroundImage = `url('${url}')`;
@@ -541,17 +548,272 @@
           });
         }
 
-        // ---------- Lazy-load <img> sources for picture elements ----------
+        // ---------- Helper: create media element (image or video) ----------
+        function createMediaElement(src) {
+          const lower = src.toLowerCase();
+          if(lower.endsWith('.mp4') || lower.endsWith('.webm') || lower.includes('video')) {
+            const video = document.createElement('video');
+            video.src = src;
+            video.controls = true;
+            video.preload = 'metadata';
+            video.style.width = '100%';
+            video.style.height = '100%';
+            video.setAttribute('aria-hidden', 'false');
+            return video;
+          } else {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = '';
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'cover';
+            return img;
+          }
+        }
+
+        // ---------- Build gallery stage and thumbs ----------
+        function buildGallery(images) {
+          galleryStage.innerHTML = '';
+          thumbs.innerHTML = '';
+          currentImages = images.slice();
+          currentIndex = 0;
+
+          images.forEach((src, i) => {
+            const item = document.createElement('div');
+            item.className = 'media-item';
+            item.style.transform = `translateX(${i === 0 ? 0 : 100}%)`;
+            item.setAttribute('data-index', i);
+            const media = createMediaElement(src);
+            item.appendChild(media);
+            galleryStage.appendChild(item);
+
+            const t = document.createElement('button');
+            t.className = 'thumb';
+            t.type = 'button';
+            t.setAttribute('aria-label', `Thumbnail ${i+1}`);
+            t.style.backgroundImage = `url('${src}')`;
+            t.addEventListener('click', () => showIndex(i));
+            thumbs.appendChild(t);
+          });
+
+          updateThumbs();
+        }
+
+        // ---------- Show a specific index ----------
+        function showIndex(index) {
+          if(!currentImages.length) return;
+          index = (index + currentImages.length) % currentImages.length;
+          const items = galleryStage.querySelectorAll('.media-item');
+          items.forEach((el) => {
+            const i = Number(el.getAttribute('data-index'));
+            if(i < index) el.style.transform = 'translateX(-100%)';
+            else if(i === index) el.style.transform = 'translateX(0%)';
+            else el.style.transform = 'translateX(100%)';
+          });
+          currentIndex = index;
+          updateThumbs();
+        }
+
+        function updateThumbs() {
+          const tButtons = thumbs.querySelectorAll('.thumb');
+          tButtons.forEach((btn, i) => {
+            btn.classList.toggle('active', i === currentIndex);
+            btn.setAttribute('aria-pressed', i === currentIndex ? 'true' : 'false');
+          });
+        }
+
+        // ---------- Navigation ----------
+        function next() { showIndex(currentIndex + 1); }
+        function prev() { showIndex(currentIndex - 1); }
+
+        // ---------- Open / Close modal ----------
+        function openModal() {
+          lastFocused = document.activeElement;
+          overlay.classList.add('open');
+          overlay.setAttribute('aria-hidden', 'false');
+          closeBtn.focus();
+          document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+          overlay.classList.remove('open');
+          overlay.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+          if(!defaultHighlights.parentElement) {
+            const details = document.querySelector('.modal .details');
+            if(details && !details.querySelector('#default-highlights')) {
+              details.insertBefore(defaultHighlights, details.querySelector('div[style*="margin-top:14px;"]') || null);
+            }
+          }
+          if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+        }
+
+        // ---------- Replace highlights with per-project list ----------
+        function setHighlights(highlightsArray) {
+          const existing = document.getElementById('default-highlights');
+          if(existing) existing.remove();
+
+          const container = document.createElement('div');
+          container.id = 'default-highlights';
+          container.style.marginTop = '12px';
+          container.className = 'highlights';
+
+          const strong = document.createElement('strong');
+          strong.style.display = 'block';
+          strong.style.marginBottom = '8px';
+          strong.textContent = 'Highlights';
+          container.appendChild(strong);
+
+          const ul = document.createElement('ul');
+          ul.style.color = 'var(--muted)';
+          ul.style.marginTop = '0';
+
+          highlightsArray.forEach(h => {
+            const li = document.createElement('li');
+            li.textContent = h;
+            ul.appendChild(li);
+          });
+
+          container.appendChild(ul);
+
+          const details = document.querySelector('.modal .details');
+          const closeArea = details.querySelector('div[style*="margin-top:14px;"]');
+          details.insertBefore(container, closeArea);
+        }
+
+        // ---------- Attach project click handlers ----------
+        const projectEls = [].slice.call(document.querySelectorAll('.project'));
+        projectEls.forEach(el => {
+          el.addEventListener('click', () => {
+            const title = el.getAttribute('data-title') || el.querySelector('.title')?.textContent || 'Project';
+            const desc = el.getAttribute('data-desc') || el.querySelector('.desc')?.textContent || '';
+            let images = [];
+            try {
+              const raw = el.getAttribute('data-images');
+              if(raw) images = JSON.parse(raw);
+            } catch(e) { images = []; }
+
+            if(!images.length) {
+              const media = el.querySelector('.media');
+              if(media) {
+                const bg = media.getAttribute('data-bg') || (media.style.backgroundImage || '').replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '');
+                if(bg) images.push(bg);
+              }
+            }
+
+            modalTitle.textContent = title;
+            modalDesc.textContent = desc;
+
+            const rawHighlights = el.getAttribute('data-highlights');
+            if(rawHighlights) {
+              try {
+                const arr = JSON.parse(rawHighlights);
+                if(Array.isArray(arr) && arr.length) {
+                  const existing = document.getElementById('default-highlights');
+                  if(existing) existing.remove();
+                  setHighlights(arr);
+                }
+              } catch(e) {
+                // ignore parse errors and keep default highlights
+              }
+            } else {
+              const details = document.querySelector('.modal .details');
+              if(!details.querySelector('#default-highlights')) {
+                details.insertBefore(defaultHighlights, details.querySelector('div[style*="margin-top:14px;"]') || null);
+              }
+            }
+
+            if(images.length) buildGallery(images);
+            else buildGallery(['https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1600&q=60']);
+
+            openModal();
+          });
+
+          el.addEventListener('keydown', (ev) => {
+            if(ev.key === 'Enter' || ev.key === ' ') {
+              ev.preventDefault();
+              el.click();
+            }
+          });
+        });
+
+        // ---------- Controls ----------
+        nextBtn.addEventListener('click', next);
+        prevBtn.addEventListener('click', prev);
+        closeBtn.addEventListener('click', closeModal);
+        modalClose2.addEventListener('click', closeModal);
+
+        overlay.addEventListener('click', (e) => {
+          if(e.target === overlay) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if(overlay.classList.contains('open')) {
+            if(e.key === 'ArrowRight') { e.preventDefault(); next(); }
+            else if(e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+            else if(e.key === 'Escape') { e.preventDefault(); closeModal(); }
+            else if(e.key === 'Tab') {
+              const focusable = overlay.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+              if(focusable.length) {
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+                if(e.shiftKey && document.activeElement === first) {
+                  e.preventDefault();
+                  last.focus();
+                } else if(!e.shiftKey && document.activeElement === last) {
+                  e.preventDefault();
+                  first.focus();
+                }
+              }
+            }
+          }
+        });
+
+        // touch swipe support for gallery (basic)
+        (function addSwipe() {
+          let startX = 0;
+          let startY = 0;
+          let isMoving = false;
+          const threshold = 30;
+
+          galleryStage.addEventListener('touchstart', (e) => {
+            if(e.touches.length === 1) {
+              startX = e.touches[0].clientX;
+              startY = e.touches[0].clientY;
+              isMoving = true;
+            }
+          }, {passive: true});
+
+          galleryStage.addEventListener('touchmove', (e) => {
+            if(!isMoving) return;
+            const dx = e.touches[0].clientX - startX;
+            const dy = e.touches[0].clientY - startY;
+            if(Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > threshold) {
+              if(dx < 0) next();
+              else prev();
+              isMoving = false;
+            }
+          }, {passive: true});
+
+          galleryStage.addEventListener('touchend', () => { isMoving = false; });
+        })();
+
+        window.addEventListener('resize', () => updateThumbs());
+
         const lazyImgs = [].slice.call(document.querySelectorAll('img.lazy-img'));
-        if('IntersectionObserver' in window && lazyImgs.length){
+        if('IntersectionObserver' in window && lazyImgs.length) {
           const imgObserver = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
-              if(entry.isIntersecting){
+              if(entry.isIntersecting) {
                 const img = entry.target;
                 const src = img.getAttribute('data-src');
                 const srcset = img.getAttribute('data-srcset');
-                if(srcset) img.setAttribute('srcset', srcset);
-                if(src) img.setAttribute('src', src);
+                const sizes = img.getAttribute('data-sizes');
+                if(srcset) img.srcset = srcset;
+                if(sizes) img.sizes = sizes;
+                if(src) img.src = src;
                 img.classList.remove('lazy-img');
                 obs.unobserve(img);
               }
@@ -562,223 +824,13 @@
           lazyImgs.forEach(img => {
             const src = img.getAttribute('data-src');
             const srcset = img.getAttribute('data-srcset');
-            if(srcset) img.setAttribute('srcset', srcset);
-            if(src) img.setAttribute('src', src);
+            const sizes = img.getAttribute('data-sizes');
+            if(srcset) img.srcset = srcset;
+            if(sizes) img.sizes = sizes;
+            if(src) img.src = src;
             img.classList.remove('lazy-img');
           });
         }
-
-        // ---------- Gallery rendering helpers ----------
-        function clearGallery(){
-          galleryStage.innerHTML = '';
-          thumbs.innerHTML = '';
-          currentImages = [];
-          currentIndex = 0;
-        }
-
-        function buildGallery(images){
-          clearGallery();
-          images.forEach((src, i) => {
-            // main stage item
-            const item = document.createElement('div');
-            item.className = 'media-item';
-            item.style.transform = `translateX(${i * 100}%)`;
-            const img = document.createElement('img');
-            img.src = src;
-            img.alt = `Image ${i+1}`;
-            item.appendChild(img);
-            galleryStage.appendChild(item);
-
-            // thumb
-            const t = document.createElement('div');
-            t.className = 'thumb';
-            t.style.backgroundImage = `url('${src}')`;
-            t.dataset.index = i;
-            t.addEventListener('click', () => {
-              goToIndex(i);
-            });
-            thumbs.appendChild(t);
-            currentImages.push(src);
-          });
-          updateThumbs();
-        }
-
-        function updateThumbs(){
-          const nodes = thumbs.querySelectorAll('.thumb');
-          nodes.forEach(n => n.classList.remove('active'));
-          const active = thumbs.querySelector(`.thumb[data-index="${currentIndex}"]`);
-          if(active) active.classList.add('active');
-        }
-
-        function goToIndex(idx){
-          const items = galleryStage.querySelectorAll('.media-item');
-          items.forEach((it, i) => {
-            it.style.transform = `translateX(${(i - idx) * 100}%)`;
-          });
-          currentIndex = idx;
-          updateThumbs();
-        }
-
-        prevBtn.addEventListener('click', () => {
-          if(currentImages.length === 0) return;
-          const next = (currentIndex - 1 + currentImages.length) % currentImages.length;
-          goToIndex(next);
-        });
-        nextBtn.addEventListener('click', () => {
-          if(currentImages.length === 0) return;
-          const next = (currentIndex + 1) % currentImages.length;
-          goToIndex(next);
-        });
-
-        // ---------- Highlights rendering and modal open/close ----------
-        function renderHighlights(highlightsArray){
-          // Hide default highlights
-          const defaultBlock = document.getElementById('default-highlights');
-          if(defaultBlock) defaultBlock.style.display = 'none';
-
-          // Remove any previous custom highlights container
-          const prev = document.querySelector('.modal .details .highlights-list');
-          if(prev) prev.remove();
-
-          // Create container
-          const listWrap = document.createElement('div');
-          listWrap.className = 'highlights-list';
-          const title = document.createElement('strong');
-          title.textContent = 'Highlights';
-          title.style.display = 'block';
-          title.style.marginBottom = '8px';
-          listWrap.appendChild(title);
-
-          const ul = document.createElement('ul');
-          ul.style.marginTop = '0';
-          ul.style.paddingLeft = '18px';
-          ul.style.color = 'var(--muted)';
-
-          highlightsArray.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = item;
-            ul.appendChild(li);
-          });
-
-          listWrap.appendChild(ul);
-          // Append to details panel
-          const details = document.querySelector('.modal .details');
-          details.appendChild(listWrap);
-        }
-
-        function openProjectModal(projectEl){
-          // store last focused element for accessibility
-          lastFocused = document.activeElement;
-
-          // title & desc
-          const title = projectEl.getAttribute('data-title') || 'Project';
-          const desc = projectEl.getAttribute('data-desc') || '';
-          modalTitle.textContent = title;
-          modalDesc.textContent = desc;
-
-          // parse images and build gallery
-          const rawImages = projectEl.getAttribute('data-images');
-          if(rawImages){
-            try{
-              const imgs = JSON.parse(rawImages);
-              if(Array.isArray(imgs) && imgs.length){
-                buildGallery(imgs);
-                goToIndex(0);
-              } else {
-                clearGallery();
-              }
-            } catch(e){
-              clearGallery();
-            }
-          } else {
-            clearGallery();
-          }
-
-          // parse highlights if present
-          const rawHighlights = projectEl.getAttribute('data-highlights');
-          if(rawHighlights){
-            try{
-              const highlights = JSON.parse(rawHighlights);
-              if(Array.isArray(highlights) && highlights.length){
-                renderHighlights(highlights);
-              } else {
-                const defaultBlock = document.getElementById('default-highlights');
-                if(defaultBlock) defaultBlock.style.display = 'block';
-              }
-            } catch(e){
-              const defaultBlock = document.getElementById('default-highlights');
-              if(defaultBlock) defaultBlock.style.display = 'block';
-            }
-          } else {
-            const defaultBlock = document.getElementById('default-highlights');
-            if(defaultBlock) defaultBlock.style.display = 'block';
-          }
-
-          // open overlay
-          overlay.classList.add('open');
-          overlay.setAttribute('aria-hidden', 'false');
-
-          // focus management
-          const close = document.getElementById('closeBtn');
-          if(close) close.focus();
-        }
-
-        // Wire up click handlers for project items
-        document.querySelectorAll('.project').forEach(p => {
-          p.addEventListener('click', () => openProjectModal(p));
-          // also allow keyboard activation
-          p.setAttribute('tabindex', '0');
-          p.addEventListener('keydown', (e) => {
-            if(e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              openProjectModal(p);
-            }
-          });
-        });
-
-        // Close handlers
-        function closeModal(){
-          overlay.classList.remove('open');
-          overlay.setAttribute('aria-hidden', 'true');
-          // restore default highlights visibility
-          const defaultBlock = document.getElementById('default-highlights');
-          if(defaultBlock) defaultBlock.style.display = 'block';
-          // remove custom highlights if any
-          const prev = document.querySelector('.modal .details .highlights-list');
-          if(prev) prev.remove();
-          // clear gallery
-          clearGallery();
-          // restore focus
-          if(lastFocused) lastFocused.focus();
-        }
-
-        closeBtn.addEventListener('click', closeModal);
-        modalClose2.addEventListener('click', closeModal);
-
-        // close when clicking outside modal content
-        overlay.addEventListener('click', (e) => {
-          if(e.target === overlay) closeModal();
-        });
-
-        // keyboard navigation
-        document.addEventListener('keydown', (e) => {
-          if(overlay.classList.contains('open')){
-            if(e.key === 'Escape') closeModal();
-            if(e.key === 'ArrowLeft') prevBtn.click();
-            if(e.key === 'ArrowRight') nextBtn.click();
-          }
-        });
-
-        // Prevent focus from escaping modal (basic trap)
-        document.addEventListener('focus', function(event){
-          if(overlay.classList.contains('open')){
-            const modal = document.querySelector('.modal');
-            if(modal && !modal.contains(event.target)){
-              event.stopPropagation();
-              modal.querySelector('button, [tabindex]')?.focus();
-            }
-          }
-        }, true);
 
       })();
     </script>
