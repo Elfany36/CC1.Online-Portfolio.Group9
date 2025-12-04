@@ -221,6 +221,41 @@
       @media (max-width:1100px){ .media-row{ grid-template-columns: repeat(2, 1fr); } .programs{ grid-template-columns: repeat(2, 1fr); } }
       @media (max-width:720px){ .hero{ grid-template-columns: 1fr; } .modal{ grid-template-columns: 1fr; max-width:720px; } .media-row{ grid-template-columns: 1fr; } .media-large{ height:325px; } .project.large .media{ height:220px; } .modal .gallery .main-wrap{ height:40vh; max-height:40vh; } }
       @media (max-width:560px){ .profile{ padding:14px; } .avatar{ width:120px; height:120px; } .intro h1{ font-size:22px; } .modal .gallery button.arrow{ width:48px; height:48px; padding:12px; } }
+
+      /* --- Updated styles for longer scrollable highlights --- */
+      .modal .details{
+        padding:18px;
+        overflow: auto;
+        background:#fff;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* Larger, scrollable highlights container to accommodate longer lists */
+      .modal .details .highlights-list{
+        margin-top:12px;
+        color:var(--muted);
+        max-height:320px; /* increased to allow more content before scrolling */
+        overflow-y:auto;
+        padding-right:8px;
+        border-top:1px solid rgba(0,0,0,0.04);
+        padding-top:12px;
+      }
+
+      /* Tighter limits on small screens */
+      @media (max-width:720px){
+        .modal{ max-width:720px; }
+        .modal .details{ max-height: calc(90vh - 120px); }
+        .modal .details .highlights-list{ max-height:220px; }
+      }
+
+      @media (max-width:420px){
+        .modal .details{ max-height: calc(85vh - 100px); }
+        .modal .details .highlights-list{ max-height:160px; }
+      }
+
+      /* Optional: nicer thin scrollbar for WebKit */
+      .modal .details .highlights-list::-webkit-scrollbar{ width:8px; }
+      .modal .details .highlights-list::-webkit-scrollbar-thumb{ background:rgba(0,0,0,0.08); border-radius:6px; }
     </style>
   </head>
 
@@ -270,17 +305,24 @@
       <section aria-label="Projects">
         <h2 style="margin:0 0 12px 0; font-size:18px; font-weight:800">Selected Projects</h2>
         <div class="projects" id="projects">
-          <!-- Project 1: background lazy via data-bg -->
+          <!-- Project 1: Achievements (updated with longer highlights) -->
           <article class="project large"
                    data-title="Achievements"
                    data-desc="Academic work is a human act of curiosity and courage; it asks us to listen, question, and grow. True scholarship honors mistakes as much as discoveries, because both teach us how to be more human."
                    data-images='["https://dl.dropboxusercontent.com/scl/fi/zp4tggj6vllhmew1txvpy/IMG_20250204_220354.webp?rlkey=gpgtnxl0gskr2byutd4x67nha&st=fixyz0df&dl=0"]'
-                   data-highlights='["Academic Awardee From Grade 7 until Grade 10", "Graduate of PCNHS", "Academic Achiever in Grade 12", "Graduate of the University of the Cordilleras - SHS (2025)"]'>
-            <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/g8pe6eadqolzh4eyfwfo3/Screenshot-2025-12-04-000350.webp?rlkey=8poutolxmxh55mskqm4clxbhj&st=qqmbnt8d&dl=0" role="img" aria-label="Project Aurora image"></div>
+                   data-highlights='[
+                     "Received a Diploma for completing the requirements of Senior High School, Grade 12 (2024-2025)",
+                     "Received the Certificate of Academic Excellence Award and graduated with Honors, Grade 12 (2024-2025)",
+                     "Earned a Work Immersion Certificate from DICT C.A.R, Grade 12 (2024-2025)",
+                     "Academic Awardee From Grade 7 until Grade 10",
+                     "Graduate of PCNHS",
+                     "Academic Achiever in Grade 12",
+                     "Graduate from the University of the Cordilleras in 2024"
+                   ]'>
+            <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/g8pe6eadqolzh4eyfwfo3/Screenshot-2025-12-04-000350.webp?rlkey=8poutolxmxh55mskqm4clxbhj&st=qqmbnt8d&dl=0" role="img" aria-label="Achievements image"></div>
             <div class="meta">
               <h3 class="title">Achievements</h3>
-              <p class="desc">Here you'll find the achievements i've acquired</p>
-              
+              <p class="desc">Here you'll find the achievements I've acquired.</p>
             </div>
           </article>
 
@@ -301,7 +343,7 @@
                    data-title="My Hobbies"
                    data-desc="I chase light and quiet moments, turning ordinary scenes into lingering visual stories. That quote depicts my art itself"
                    data-images='["https://dl.dropboxusercontent.com/scl/fi/lyn3uxx4nw5i6et93y8np/329499139_1622334898278996_4171053628367841960_n.webp?rlkey=d2f8eltuqii1n5hq6f867s566&st=djofau4i&dl=0","https://dl.dropboxusercontent.com/scl/fi/2lstn5budn0q2t5sfj7z5/329785655_964051695037498_1346925642961946229_n.webp?rlkey=8zcpcskvlum2v7a39npipkj6h&st=986r19ha&dl=0","https://dl.dropboxusercontent.com/scl/fi/d51shgcl2zoesva5c8avx/340641356_738845294571244_1138016351730339913_n.webp?rlkey=aez1ducpsddy0hgz3b9uqayfd&st=rjz6uz5l&dl=0","https://dl.dropboxusercontent.com/scl/fi/z77p7amj2wwknsivnizvh/341933494_962319381792372_3535160102446161496_n.webp?rlkey=54hnyq19aq8un7uq2r4e4hbus&st=bd31u6m4&dl=0","https://dl.dropboxusercontent.com/scl/fi/iizjhqsxsunss09x1rj8r/342335417_743817660624178_944112588714985992_n.webp?rlkey=dm4px8e0gcu3d19i89s70euw7&st=jkzohd2c&dl=0"]'>
-            <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/lyn3uxx4nw5i6et93y8np/329499139_1622334898278996_4171053628367841960_n.webp?rlkey=d2f8eltuqii1n5hq6f867s566&st=djofau4i&dl=0" role="img" aria-label="Atlas Site image"></div>
+            <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/lyn3uxx4nw5i6et93y8np/329499139_1622334898278996_4171053628367841960_n.webp?rlkey=d2f8eltuqii1n5hq6f867s566&st=djofau4i&dl=0" role="img" aria-label="Hobbies image"></div>
             <div class="meta">
               <h3 class="title">Hobbies</h3>
               <p class="desc">Marketing site rebuild with performance and accessibility improvements.</p>
@@ -488,9 +530,10 @@
                 obs.unobserve(el);
               }
             });
-          }, {rootMargin: '300px 0px'});
+          }, {rootMargin: '200px 0px'});
           lazyBackgrounds.forEach(el => bgObserver.observe(el));
         } else {
+          // fallback: load all immediately
           lazyBackgrounds.forEach(el => {
             const url = el.getAttribute('data-bg');
             if(url) el.style.backgroundImage = `url('${url}')`;
@@ -498,274 +541,245 @@
           });
         }
 
-        // ---------- Lazy-load <img> elements with srcset and LQIP ----------
+        // ---------- Lazy-load <img> sources for picture elements ----------
         const lazyImgs = [].slice.call(document.querySelectorAll('img.lazy-img'));
-        function loadImage(img){
-          if(!img) return;
-          const picture = img.closest('picture');
-          if(picture){
-            const sources = [].slice.call(picture.querySelectorAll('source'));
-            sources.forEach(s => {
-              const ds = s.getAttribute('data-srcset');
-              if(ds) s.srcset = ds;
-              s.removeAttribute('data-srcset');
-            });
-          }
-          const src = img.getAttribute('data-src');
-          const srcset = img.getAttribute('data-srcset');
-          const sizes = img.getAttribute('data-sizes');
-          if(srcset) img.srcset = srcset;
-          if(sizes) img.sizes = sizes;
-          if(src) img.src = src;
-          img.removeAttribute('data-src');
-          img.removeAttribute('data-srcset');
-          img.removeAttribute('data-sizes');
-        }
-
         if('IntersectionObserver' in window && lazyImgs.length){
           const imgObserver = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
               if(entry.isIntersecting){
-                loadImage(entry.target);
-                obs.unobserve(entry.target);
+                const img = entry.target;
+                const src = img.getAttribute('data-src');
+                const srcset = img.getAttribute('data-srcset');
+                if(srcset) img.setAttribute('srcset', srcset);
+                if(src) img.setAttribute('src', src);
+                img.classList.remove('lazy-img');
+                obs.unobserve(img);
               }
             });
           }, {rootMargin: '200px 0px'});
-          lazyImgs.forEach(img => imgObserver.observe(img));
+          lazyImgs.forEach(i => imgObserver.observe(i));
         } else {
-          lazyImgs.forEach(img => loadImage(img));
+          lazyImgs.forEach(img => {
+            const src = img.getAttribute('data-src');
+            const srcset = img.getAttribute('data-srcset');
+            if(srcset) img.setAttribute('srcset', srcset);
+            if(src) img.setAttribute('src', src);
+            img.classList.remove('lazy-img');
+          });
         }
 
-        // ---------- Gallery logic (per-project) ----------
-        // Utility to parse JSON attribute safely
-        function parseJsonAttr(el, name) {
-          const raw = el.getAttribute(name);
-          if (!raw) return null;
-          try { return JSON.parse(raw); } catch (e) { return null; }
-        }
-
-        // Build stage item (image)
-        function createStageItem(src, index) {
-          const wrap = document.createElement('div');
-          wrap.className = 'media-item';
-          wrap.dataset.index = index;
-          wrap.style.transform = 'translateX(100%)';
-          wrap.setAttribute('aria-hidden', 'true');
-
-          const img = document.createElement('img');
-          img.src = src;
-          img.alt = `Image ${index + 1}`;
-          img.loading = 'lazy';
-          img.decoding = 'async';
-          img.style.width = '100%';
-          img.style.height = '100%';
-          img.style.objectFit = 'cover';
-
-          wrap.appendChild(img);
-          return wrap;
-        }
-
-        // Build thumbnail element
-        function createThumb(src, index) {
-          const t = document.createElement('button');
-          t.className = 'thumb';
-          t.type = 'button';
-          t.style.backgroundImage = `url('${src}')`;
-          t.dataset.index = index;
-          t.setAttribute('aria-label', `Thumbnail ${index + 1}`);
-          return t;
-        }
-
-        // Render gallery for currentImages
-        function renderGallery() {
+        // ---------- Gallery rendering helpers ----------
+        function clearGallery(){
           galleryStage.innerHTML = '';
           thumbs.innerHTML = '';
-
-          currentImages.forEach((src, i) => {
-            const item = createStageItem(src, i);
-            if (i === currentIndex) {
-              item.style.transform = 'translateX(0%)';
-              item.setAttribute('aria-hidden', 'false');
-            }
-            galleryStage.appendChild(item);
-
-            const thumb = createThumb(src, i);
-            if (i === currentIndex) thumb.classList.add('active');
-            thumb.addEventListener('click', () => goToIndex(i));
-            thumbs.appendChild(thumb);
-          });
-
-          // hide nav if single image
-          if(currentImages.length <= 1){
-            prevBtn.style.visibility = 'hidden';
-            nextBtn.style.visibility = 'hidden';
-          } else {
-            prevBtn.style.visibility = '';
-            nextBtn.style.visibility = '';
-          }
-        }
-
-        // Animate slide to index
-        function goToIndex(target) {
-          if (target === currentIndex) return;
-          const items = Array.from(galleryStage.children);
-          const from = currentIndex;
-          const to = target;
-          const dir = to > from ? -1 : 1; // -1 means next (left), 1 means prev (right)
-
-          const fromEl = items[from];
-          const toEl = items[to];
-
-          if (!fromEl || !toEl) return;
-
-          // prepare toEl offscreen
-          toEl.style.transform = `translateX(${dir * 100}%)`;
-          toEl.setAttribute('aria-hidden', 'false');
-
-          // force reflow then animate
-          requestAnimationFrame(() => {
-            fromEl.style.transform = `translateX(${dir * -100}%)`;
-            toEl.style.transform = 'translateX(0%)';
-          });
-
-          // update thumbnails
-          const thumbButtons = Array.from(thumbs.children);
-          thumbButtons.forEach(tb => tb.classList.remove('active'));
-          if (thumbButtons[to]) thumbButtons[to].classList.add('active');
-
-          currentIndex = to;
-        }
-
-        function showModal() {
-          lastFocused = document.activeElement;
-          overlay.classList.add('open');
-          overlay.setAttribute('aria-hidden', 'false');
-          // focus close button for keyboard users
-          closeBtn.focus();
-          document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-          overlay.classList.remove('open');
-          overlay.setAttribute('aria-hidden', 'true');
-          galleryStage.innerHTML = '';
-          thumbs.innerHTML = '';
-          modalTitle.textContent = 'Project Title';
-          modalDesc.textContent = '';
-          // remove any injected project-highlights block
-          const details = document.querySelector('.modal .details');
-          const existing = details.querySelector('.project-highlights');
-          if (existing) existing.remove();
-          // restore default highlights visibility
-          if (defaultHighlights) defaultHighlights.style.display = '';
           currentImages = [];
           currentIndex = 0;
-          document.body.style.overflow = '';
-          if (lastFocused && lastFocused.focus) lastFocused.focus();
         }
 
-        // Keyboard handling
-        function onKey(e) {
-          if (overlay.classList.contains('open')) {
-            if (e.key === 'Escape') closeModal();
-            if (e.key === 'ArrowLeft') goToIndex(Math.max(0, currentIndex - 1));
-            if (e.key === 'ArrowRight') goToIndex(Math.min(currentImages.length - 1, currentIndex + 1));
-          }
+        function buildGallery(images){
+          clearGallery();
+          images.forEach((src, i) => {
+            // main stage item
+            const item = document.createElement('div');
+            item.className = 'media-item';
+            item.style.transform = `translateX(${i * 100}%)`;
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `Image ${i+1}`;
+            item.appendChild(img);
+            galleryStage.appendChild(item);
+
+            // thumb
+            const t = document.createElement('div');
+            t.className = 'thumb';
+            t.style.backgroundImage = `url('${src}')`;
+            t.dataset.index = i;
+            t.addEventListener('click', () => {
+              goToIndex(i);
+            });
+            thumbs.appendChild(t);
+            currentImages.push(src);
+          });
+          updateThumbs();
         }
 
-        // Attach click handlers to project items
-        const projects = Array.from(document.querySelectorAll('.project'));
-        projects.forEach(proj => {
-          // make keyboard accessible
-          if(!proj.hasAttribute('tabindex')) proj.setAttribute('tabindex','0');
-          proj.addEventListener('click', () => {
-            // read attributes
-            const title = proj.getAttribute('data-title') || proj.querySelector('.title')?.textContent || 'Project';
-            const desc = proj.getAttribute('data-desc') || proj.querySelector('.desc')?.textContent || '';
-            const images = parseJsonAttr(proj, 'data-images') || [];
-            const highlights = parseJsonAttr(proj, 'data-highlights') || null;
+        function updateThumbs(){
+          const nodes = thumbs.querySelectorAll('.thumb');
+          nodes.forEach(n => n.classList.remove('active'));
+          const active = thumbs.querySelector(`.thumb[data-index="${currentIndex}"]`);
+          if(active) active.classList.add('active');
+        }
 
-            // populate modal text
-            modalTitle.textContent = title;
-            modalDesc.textContent = desc;
+        function goToIndex(idx){
+          const items = galleryStage.querySelectorAll('.media-item');
+          items.forEach((it, i) => {
+            it.style.transform = `translateX(${(i - idx) * 100}%)`;
+          });
+          currentIndex = idx;
+          updateThumbs();
+        }
 
-            // remove existing custom highlights block if any
-            const details = document.querySelector('.modal .details');
-            const existing = details.querySelector('.project-highlights');
-            if (existing) existing.remove();
+        prevBtn.addEventListener('click', () => {
+          if(currentImages.length === 0) return;
+          const next = (currentIndex - 1 + currentImages.length) % currentImages.length;
+          goToIndex(next);
+        });
+        nextBtn.addEventListener('click', () => {
+          if(currentImages.length === 0) return;
+          const next = (currentIndex + 1) % currentImages.length;
+          goToIndex(next);
+        });
 
-            if (highlights && Array.isArray(highlights)) {
-              if (defaultHighlights) defaultHighlights.style.display = 'none';
+        // ---------- Highlights rendering and modal open/close ----------
+        function renderHighlights(highlightsArray){
+          // Hide default highlights
+          const defaultBlock = document.getElementById('default-highlights');
+          if(defaultBlock) defaultBlock.style.display = 'none';
 
-              const wrap = document.createElement('div');
-              wrap.className = 'project-highlights';
-              wrap.style.marginTop = '12px';
+          // Remove any previous custom highlights container
+          const prev = document.querySelector('.modal .details .highlights-list');
+          if(prev) prev.remove();
 
-              const strong = document.createElement('strong');
-              strong.textContent = 'Highlights';
-              strong.style.display = 'block';
-              strong.style.marginBottom = '8px';
-              wrap.appendChild(strong);
+          // Create container
+          const listWrap = document.createElement('div');
+          listWrap.className = 'highlights-list';
+          const title = document.createElement('strong');
+          title.textContent = 'Highlights';
+          title.style.display = 'block';
+          title.style.marginBottom = '8px';
+          listWrap.appendChild(title);
 
-              const ul = document.createElement('ul');
-              ul.style.color = 'var(--muted)';
-              ul.style.marginTop = '0';
-              highlights.forEach(h => {
-                const li = document.createElement('li');
-                li.textContent = h;
-                ul.appendChild(li);
-              });
-              wrap.appendChild(ul);
-              details.insertBefore(wrap, details.querySelector('#modal-close-2').parentElement);
-            } else {
-              if (defaultHighlights) defaultHighlights.style.display = '';
-            }
+          const ul = document.createElement('ul');
+          ul.style.marginTop = '0';
+          ul.style.paddingLeft = '18px';
+          ul.style.color = 'var(--muted)';
 
-            // images fallback: if none, try to use media background or placeholder
-            if (!images.length) {
-              const bgEl = proj.querySelector('.media');
-              const bg = bgEl && bgEl.style.backgroundImage ? bgEl.style.backgroundImage.replace(/^url\(["']?/, '').replace(/["']?\)$/, '') : null;
-              if (bg) currentImages = [bg];
-              else currentImages = [];
-            } else {
-              currentImages = images.slice();
-            }
-
-            currentIndex = 0;
-            renderGallery();
-            showModal();
+          highlightsArray.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            ul.appendChild(li);
           });
 
-          proj.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
+          listWrap.appendChild(ul);
+          // Append to details panel
+          const details = document.querySelector('.modal .details');
+          details.appendChild(listWrap);
+        }
+
+        function openProjectModal(projectEl){
+          // store last focused element for accessibility
+          lastFocused = document.activeElement;
+
+          // title & desc
+          const title = projectEl.getAttribute('data-title') || 'Project';
+          const desc = projectEl.getAttribute('data-desc') || '';
+          modalTitle.textContent = title;
+          modalDesc.textContent = desc;
+
+          // parse images and build gallery
+          const rawImages = projectEl.getAttribute('data-images');
+          if(rawImages){
+            try{
+              const imgs = JSON.parse(rawImages);
+              if(Array.isArray(imgs) && imgs.length){
+                buildGallery(imgs);
+                goToIndex(0);
+              } else {
+                clearGallery();
+              }
+            } catch(e){
+              clearGallery();
+            }
+          } else {
+            clearGallery();
+          }
+
+          // parse highlights if present
+          const rawHighlights = projectEl.getAttribute('data-highlights');
+          if(rawHighlights){
+            try{
+              const highlights = JSON.parse(rawHighlights);
+              if(Array.isArray(highlights) && highlights.length){
+                renderHighlights(highlights);
+              } else {
+                const defaultBlock = document.getElementById('default-highlights');
+                if(defaultBlock) defaultBlock.style.display = 'block';
+              }
+            } catch(e){
+              const defaultBlock = document.getElementById('default-highlights');
+              if(defaultBlock) defaultBlock.style.display = 'block';
+            }
+          } else {
+            const defaultBlock = document.getElementById('default-highlights');
+            if(defaultBlock) defaultBlock.style.display = 'block';
+          }
+
+          // open overlay
+          overlay.classList.add('open');
+          overlay.setAttribute('aria-hidden', 'false');
+
+          // focus management
+          const close = document.getElementById('closeBtn');
+          if(close) close.focus();
+        }
+
+        // Wire up click handlers for project items
+        document.querySelectorAll('.project').forEach(p => {
+          p.addEventListener('click', () => openProjectModal(p));
+          // also allow keyboard activation
+          p.setAttribute('tabindex', '0');
+          p.addEventListener('keydown', (e) => {
+            if(e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
-              proj.click();
+              openProjectModal(p);
             }
           });
         });
-
-        // Navigation buttons
-        prevBtn.addEventListener('click', () => goToIndex(Math.max(0, currentIndex - 1)));
-        nextBtn.addEventListener('click', () => goToIndex(Math.min(currentImages.length - 1, currentIndex + 1)));
 
         // Close handlers
+        function closeModal(){
+          overlay.classList.remove('open');
+          overlay.setAttribute('aria-hidden', 'true');
+          // restore default highlights visibility
+          const defaultBlock = document.getElementById('default-highlights');
+          if(defaultBlock) defaultBlock.style.display = 'block';
+          // remove custom highlights if any
+          const prev = document.querySelector('.modal .details .highlights-list');
+          if(prev) prev.remove();
+          // clear gallery
+          clearGallery();
+          // restore focus
+          if(lastFocused) lastFocused.focus();
+        }
+
         closeBtn.addEventListener('click', closeModal);
         modalClose2.addEventListener('click', closeModal);
+
+        // close when clicking outside modal content
         overlay.addEventListener('click', (e) => {
-          if (e.target === overlay) closeModal();
+          if(e.target === overlay) closeModal();
         });
 
-        // Keyboard
-        document.addEventListener('keydown', onKey);
+        // keyboard navigation
+        document.addEventListener('keydown', (e) => {
+          if(overlay.classList.contains('open')){
+            if(e.key === 'Escape') closeModal();
+            if(e.key === 'ArrowLeft') prevBtn.click();
+            if(e.key === 'ArrowRight') nextBtn.click();
+          }
+        });
 
-        // Prevent focus from escaping modal while open (simple trap)
-        document.addEventListener('focus', function (e) {
-          if (!overlay.classList.contains('open')) return;
-          if (!overlay.contains(e.target)) {
-            e.stopPropagation();
-            closeBtn.focus();
+        // Prevent focus from escaping modal (basic trap)
+        document.addEventListener('focus', function(event){
+          if(overlay.classList.contains('open')){
+            const modal = document.querySelector('.modal');
+            if(modal && !modal.contains(event.target)){
+              event.stopPropagation();
+              modal.querySelector('button, [tabindex]')?.focus();
+            }
           }
         }, true);
+
       })();
     </script>
   </body>
