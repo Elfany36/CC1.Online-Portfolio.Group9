@@ -148,7 +148,7 @@
         box-shadow:0 10px 30px rgba(0,0,0,0.06);
         display:flex;
         flex-direction:column;
-        min-height:220px;
+        min-height:250px;
         cursor:pointer;
         content-visibility: auto;
         contain-intrinsic-size: 240px;
@@ -167,7 +167,7 @@
       .project .desc{ color:var(--muted); font-size:13px; margin:0; flex:1; }
 
       /* Programs */
-      .programs{ margin-top:8px; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:18px; }
+      .programs{ margin-top:8px; display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:18px; }
 
       /* Media-only grid */
       .media-showcase{ margin-top:28px; display:grid; gap:18px; }
@@ -196,6 +196,44 @@
         display:block;
         background: transparent;
         border-radius: 0;
+      }
+      /* Equalize card heights without removing or changing any existing markup */
+      .projects,
+      .programs {
+        align-items: stretch;
+      }
+
+      /* Ensure each card fills its grid cell and keeps original flex behavior */
+      .project,
+      .project.program {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      /* Make the media area a fixed visual band so all cards line up */
+      .project .media {
+        flex: 0 0 320px;
+        height: 320px;
+        min-height: 320px;
+        background-size: cover;
+        background-position: center;
+      }
+
+      /* Let the meta area remain flexible and scroll naturally if content grows */
+      .project .meta {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Responsive: reduce media height on small screens to preserve layout */
+      @media (max-width: 720px) {
+        .project .media {
+          flex: 0 0 220px;
+          height: 220px;
+          min-height: 220px;
+        }
       }
 
       /* Modal and gallery styles */
@@ -267,6 +305,7 @@
         .highlights {
           max-height: none;
           overflow: visible;
+          
         }
       }
     </style>
@@ -362,15 +401,15 @@
       <section aria-label="Programs">
         <h2 style="margin:18px 0 12px 0; font-size:18px; font-weight:800">Selected Programs</h2>
         <div class="programs" id="programs">
-          <article class="project program" data-title="Program One" data-desc="A compact program focused on onboarding flows." data-images='["https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60"]' data-highlights='["Call Of Duty", "Clash of Clans"," Manor Lords", "Cities Skyline 1-2"," And a variety of Simulation and City Building Games"]'>
-            <div class="media" data-bg="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60" role="img" aria-label="Program One image"></div>
+          <article class="project program" data-title="Program One" data-desc="A compact program focused on onboarding flows." data-images= '["https://dl.dropboxusercontent.com/scl/fi/0csjfnx594vk33r74tvk5/Call-of-duty-mobile.webp?rlkey=youw43j17fvvblriyx1oxohnc&st=f0cvk1qt&dl=0","https://dl.dropboxusercontent.com/scl/fi/h7ehfnd3j86loh6f8s5bq/Clash-of-Clans-Check-more-at.webp?rlkey=5wipd1l4w0rg1q8emha2qw7pv&st=aerbdmeq&dl=0","https://dl.dropboxusercontent.com/scl/fi/wwyblf31gmi2joq9ynt9i/Manor-Lords-alcan-a-o-primeiro-lugar-nas-listas-de-desejos-na-Steam-ultrapassando-Hades-2-e-Silk___.webp?rlkey=uv05kg1t3037unw9u48expg36&st=5z6489ix&dl=0","https://dl.dropboxusercontent.com/scl/fi/hykiaxd274rmcnyjahqe0/Cities_-Skylines-_-Deku-Deals-1.webp?rlkey=p5sa4a42741xnfwyo8utps5jh&st=gfd2tto5&dl=0","https://dl.dropboxusercontent.com/scl/fi/5j6uyuylpchhy4t4ddcgi/steamunderground_-net.webp?rlkey=nvs18tnorg0nn3w2akrbi2w07&st=1t9z7ule&dl=0","https://dl.dropboxusercontent.com/scl/fi/nd3644omco9uqac3vax9z/mincraft.webp?rlkey=f0zi0kzfljqvwvnwc9w1omk25&st=kwfqzurm&dl=0"]' data-highlights='["Visualization templates: bar, line, map","Export: CSV and PDF support","Accessibility: colorblind-friendly palettes"]' data-highlights='["Call Of Duty", "Clash of Clans"," Manor Lords", "Cities Skyline 1-2","Minecraft"," And a variety of Simulation and City Building Games"]'>
+            <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/97so3tsqo5013jahuwkpl/download-21.webp?rlkey=qjrjy2ysjyfqd90e5vf4tsmk9&st=pp9yz1wg&dl=0"></div>
             <div class="meta">
               <h3 class="title">Games</h3>
               <p class="desc">Compact program focused on onboarding flows and micro-interactions.</p>
             </div>
           </article>
 
-          <article class="project program" data-title="Program Two" data-desc="A toolkit for data visualization and reporting." data-images='["https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60"]' data-highlights='["Visualization templates: bar, line, map","Export: CSV and PDF support","Accessibility: colorblind-friendly palettes"]'>
+          <article class="project program" data-title="Program Two" data-desc="A toolkit for data visualization and reporting." data-images='["https://www.dropbox.com/scl/fi/0csjfnx594vk33r74tvk5/Call-of-duty-mobile.webp?rlkey=youw43j17fvvblriyx1oxohnc&st=f0cvk1qt&dl=0","https://www.dropbox.com/scl/fi/h7ehfnd3j86loh6f8s5bq/Clash-of-Clans-Check-more-at.webp?rlkey=5wipd1l4w0rg1q8emha2qw7pv&st=aerbdmeq&dl=0","https://www.dropbox.com/scl/fi/wwyblf31gmi2joq9ynt9i/Manor-Lords-alcan-a-o-primeiro-lugar-nas-listas-de-desejos-na-Steam-ultrapassando-Hades-2-e-Silk___.webp?rlkey=uv05kg1t3037unw9u48expg36&st=5z6489ix&dl=0","https://www.dropbox.com/scl/fi/hykiaxd274rmcnyjahqe0/Cities_-Skylines-_-Deku-Deals-1.webp?rlkey=p5sa4a42741xnfwyo8utps5jh&st=gfd2tto5&dl=0","https://www.dropbox.com/scl/fi/5j6uyuylpchhy4t4ddcgi/steamunderground_-net.webp?rlkey=nvs18tnorg0nn3w2akrbi2w07&st=1t9z7ule&dl=0","https://www.dropbox.com/scl/fi/nd3644omco9uqac3vax9z/mincraft.webp?rlkey=f0zi0kzfljqvwvnwc9w1omk25&st=kwfqzurm&dl=0"]' data-highlights='["Visualization templates: bar, line, map","Export: CSV and PDF support","Accessibility: colorblind-friendly palettes"]'>
             <div class="media" data-bg="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60" role="img" aria-label="Program Two image"></div>
             <div class="meta">
               <h3 class="title">Favorites</h3>
@@ -836,4 +875,5 @@
     </script>
   </body>
 </html>
+
 
