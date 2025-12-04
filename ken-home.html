@@ -245,6 +245,32 @@
       .modal .gallery .stage{ position:relative; width:100%; height:100%; overflow:hidden; z-index:1; }
       .modal .gallery .media-item{ position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; transform: translateX(0%); transition: transform 320ms cubic-bezier(.2,.9,.2,1); will-change: transform, opacity; background:#111; z-index:2; }
       .modal .gallery .media-item img, .modal .gallery .media-item video{ width:100%; height:100%; object-fit:cover; display:block; }
+
+      /* NEW: ensure gallery media shows full image (no cropping) while preserving layout.
+         This override uses max-width/max-height and object-fit: contain so images/videos
+         are fully visible inside the gallery window without being cut. The !important flags
+         ensure these rules take precedence over inline styles applied by JS. */
+      .modal .gallery .media-item img,
+      .modal .gallery .media-item video {
+        width: auto !important;
+        height: auto !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        object-fit: contain !important;
+        display: block;
+      }
+
+      /* Also ensure the large media showcase uses contain so full image is visible */
+      .media-large img,
+      .media-large video {
+        width: auto !important;
+        height: auto !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        object-fit: contain !important;
+        display: block;
+      }
+
       .modal .gallery .nav{ position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); display: flex; justify-content: space-between; padding: 0 12px; pointer-events: none; z-index: 70; }
       .modal .gallery button.arrow{ pointer-events: auto; background: rgba(255,255,255,0.95); border: none; padding: 10px 12px; border-radius: 10px; cursor: pointer; font-weight: 800; color: #111; box-shadow: 0 6px 18px rgba(0,0,0,0.12); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; user-select: none; }
       .modal .gallery .thumbs{ width:100%; display:flex; gap:8px; padding:12px; overflow:auto; background:rgba(0,0,0,0.05); box-sizing:border-box; }
@@ -873,7 +899,54 @@
 
       })();
     </script>
+
+    <!-- Additional small script to ensure any dynamically created media inside the gallery
+         respects the "contain" behavior even if inline styles are present. This does not
+         remove or replace existing code; it only applies safe post-creation adjustments. -->
+    <script>
+      (function(){
+        // Observe additions to the gallery stage and adjust media sizing to ensure full image is visible.
+        const stage = document.getElementById('galleryStage');
+        if(!stage || !window.MutationObserver) return;
+
+        const applyContainStyles = (node) => {
+          if(!node) return;
+          const imgs = node.querySelectorAll && node.querySelectorAll('img, video');
+          if(imgs && imgs.length){
+            imgs.forEach(media => {
+              // Use CSS properties that ensure the media is fully visible inside its container.
+              media.style.width = 'auto';
+              media.style.height = 'auto';
+              media.style.maxWidth = '100%';
+              media.style.maxHeight = '100%';
+              media.style.objectFit = 'contain';
+              // ensure block-level rendering for centering
+              media.style.display = 'block';
+            });
+          }
+        };
+
+        const mo = new MutationObserver((mutations) => {
+          mutations.forEach(m => {
+            m.addedNodes.forEach(n => {
+              if(n.nodeType === 1) {
+                // If a media-item was added, apply styles immediately
+                if(n.classList && n.classList.contains('media-item')) {
+                  applyContainStyles(n);
+                } else {
+                  // also handle nested additions
+                  applyContainStyles(n);
+                }
+              }
+            });
+          });
+        });
+
+        mo.observe(stage, { childList: true, subtree: true });
+
+        // Also apply to any existing items (in case gallery was built before observer attached)
+        document.querySelectorAll('.media-item').forEach(item => applyContainStyles(item));
+      })();
+    </script>
   </body>
 </html>
-
-
