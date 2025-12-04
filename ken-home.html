@@ -1,718 +1,772 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Portfolio — Ken</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Portfolio — Ken</title>
 
-  <!-- Preconnect and preload -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1600&q=60">
+    <!-- Preconnect and preload -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet" />
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1600&q=60" />
 
-  <style>
-    :root{
-      --bg-light: #ffffff;
-      --bg-blue: #0504A4;
-      --accent-1: #5b8cff;
-      --accent-2: #2b5fe0;
-      --text: #0b0b0b;
-      --muted: #6b7280;
-      --card-bg: #ffffff;
-      --max-width: 1100px;
-      --nav-start: #4b63ff;
-      --nav-mid:  #2439d1;
-      --nav-end:  #0504A4;
-      --nav-accent-shadow: rgba(5,4,164,0.28);
-      --nav-inactive-bg: rgba(255,255,255,0.06);
-      --nav-inactive-color: var(--muted);
-      --nav-text-active: #ffffff;
-      --nav-focus: rgba(5,4,164,0.18);
-    }
+    <style>
+      :root{
+        --bg-light: #ffffff;
+        --bg-blue: #0504A4;
+        --accent-1: #5b8cff;
+        --accent-2: #2b5fe0;
+        --text: #0b0b0b;
+        --muted: #6b7280;
+        --card-bg: #ffffff;
+        --max-width: 1100px;
+        --nav-start: #4b63ff;
+        --nav-mid:  #2439d1;
+        --nav-end:  #0504A4;
+        --nav-accent-shadow: rgba(5,4,164,0.28);
+        --nav-inactive-bg: rgba(255,255,255,0.06);
+        --nav-inactive-color: var(--muted);
+        --nav-text-active: #ffffff;
+        --nav-focus: rgba(5,4,164,0.18);
+      }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    html { scroll-behavior: smooth; }
-    body{
-      margin:0;
-      font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-      color:var(--text);
-      background: none;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      display:flex;
-      justify-content:center;
-      padding:32px 16px;
-      position:relative;
-      background-color:var(--bg-light);
-    }
+      *{box-sizing:border-box}
+      html,body{height:100%}
+      html { scroll-behavior: smooth; }
+      body{
+        margin:0;
+        font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+        color:var(--text);
+        background: none;
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale;
+        display:flex;
+        justify-content:center;
+        padding:32px 16px;
+        position:relative;
+        background-color:var(--bg-light);
+      }
 
-    /* fixed background layer that never scrolls (left white → right deep blue) */
-    body::before{
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background: linear-gradient(135deg, var(--bg-light) 50%, var(--bg-blue) 50%);
-      background-size: cover;
-      background-repeat: no-repeat;
-      pointer-events: none;
-    }
+      /* fixed background layer that never scrolls (left white → right deep blue) */
+      body::before{
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background: linear-gradient(135deg, var(--bg-light) 50%, var(--bg-blue) 50%);
+        background-size: cover;
+        background-repeat: no-repeat;
+        pointer-events: none;
+      }
 
-    .container{
-      width:100%;
-      max-width:var(--max-width);
-      background:transparent;
-    }
+      .container{
+        width:100%;
+        max-width:var(--max-width);
+        background:transparent;
+      }
 
-    header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom:18px;
-    }
-    .brand{ display:flex; align-items:center; gap:12px; }
-    .brand-name{ font-weight:800; font-size:18px; color:var(--muted); }
+      header{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:16px;
+        margin-bottom:18px;
+      }
+      .brand{ display:flex; align-items:center; gap:12px; }
+      .brand-name{ font-weight:800; font-size:18px; color:var(--muted); }
 
-    header nav{ display:flex; gap:10px; align-items:center; }
+      header nav{ display:flex; gap:10px; align-items:center; }
 
-    .nav-btn{
-      position:relative;
-      display:inline-block;
-      padding:9px 16px;
-      border-radius:999px;
-      text-decoration:none;
-      color:var(--nav-inactive-color);
-      background:var(--nav-inactive-bg);
-      font-weight:700;
-      letter-spacing:0.2px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-      transition: transform .14s ease, box-shadow .14s ease, background .18s ease, color .14s ease;
-      -webkit-tap-highlight-color: transparent;
-      overflow:hidden;
-    }
-    .nav-btn:hover{ transform: translateY(-3px); box-shadow: 0 14px 36px rgba(0,0,0,0.12); }
-    .nav-btn:focus{ outline: 3px solid var(--nav-focus); outline-offset:4px; border-radius:999px; }
+      .nav-btn{
+        position:relative;
+        display:inline-block;
+        padding:9px 16px;
+        border-radius:999px;
+        text-decoration:none;
+        color:var(--nav-inactive-color);
+        background:var(--nav-inactive-bg);
+        font-weight:700;
+        letter-spacing:0.2px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        transition: transform .14s ease, box-shadow .14s ease, background .18s ease, color .14s ease;
+        -webkit-tap-highlight-color: transparent;
+        overflow:hidden;
+      }
+      .nav-btn:hover{ transform: translateY(-3px); box-shadow: 0 14px 36px rgba(0,0,0,0.12); }
+      .nav-btn:focus{ outline: 3px solid var(--nav-focus); outline-offset:4px; border-radius:999px; }
 
-    .nav-btn.active,
-    .nav-btn[aria-current="page"]{
-      background: linear-gradient(180deg, var(--nav-start) 0%, var(--nav-mid) 48%, var(--nav-end) 100%);
-      color: var(--nav-text-active);
-      box-shadow: 0 18px 48px var(--nav-accent-shadow);
-      transform: translateY(-2px);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
+      .nav-btn.active,
+      .nav-btn[aria-current="page"]{
+        background: linear-gradient(180deg, var(--nav-start) 0%, var(--nav-mid) 48%, var(--nav-end) 100%);
+        color: var(--nav-text-active);
+        box-shadow: 0 18px 48px var(--nav-accent-shadow);
+        transform: translateY(-2px);
+        border: 1px solid rgba(255,255,255,0.06);
+      }
 
-    @media (max-width:600px){
-      header nav{ flex-direction:column; gap:8px; }
-      .nav-btn{ width:220px; text-align:center; }
-    }
+      @media (max-width:600px){
+        header nav{ flex-direction:column; gap:8px; }
+        .nav-btn{ width:220px; text-align:center; }
+      }
 
-    /* Hero */
-    .hero{ display:grid; grid-template-columns: 220px 1fr; gap:20px; align-items:center; margin-bottom:28px; }
-    .profile{ background:var(--card-bg); padding:18px; border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,0.06); display:flex; flex-direction:column; align-items:center; text-align:center; }
-    .avatar{
-      width:140px;
-      height:140px;
-      border-radius:50%;
-      overflow:hidden;
-      margin-bottom:12px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
-    }
-    .avatar img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      border-radius:50%;
-    }
-    .name{ font-size:20px; font-weight:800; margin:6px 0; }
-    .role{ color:var(--muted); font-weight:700; font-size:13px; margin-bottom:8px; }
-    .socials{ display:flex; gap:8px; margin-top:8px; }
+      /* Hero */
+      .hero{ display:grid; grid-template-columns: 220px 1fr; gap:20px; align-items:center; margin-bottom:28px; }
+      .profile{ background:var(--card-bg); padding:18px; border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,0.06); display:flex; flex-direction:column; align-items:center; text-align:center; }
+      .avatar{
+        width:140px;
+        height:140px;
+        border-radius:50%;
+        overflow:hidden;
+        margin-bottom:12px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
+      }
+      .avatar img{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        display:block;
+        border-radius:50%;
+      }
+      .name{ font-size:20px; font-weight:800; margin:6px 0; }
+      .role{ color:var(--muted); font-weight:700; font-size:13px; margin-bottom:8px; }
+      .socials{ display:flex; gap:8px; margin-top:8px; }
 
-    .intro{ background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.98)); padding:20px; border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,0.04); }
-    .intro h1{ margin:0 0 8px 0; font-size:28px; }
-    .intro p{ margin:0; color:var(--muted); line-height:1.5; }
+      .intro{ background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.98)); padding:20px; border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,0.04); }
+      .intro h1{ margin:0 0 8px 0; font-size:28px; }
+      .intro p{ margin:0; color:var(--muted); line-height:1.5; }
 
-    /* Projects */
-    .projects{ margin-top:8px; display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:18px; }
-    .project{
-      background:var(--card-bg);
-      border-radius:12px;
-      overflow:hidden;
-      box-shadow:0 10px 30px rgba(0,0,0,0.06);
-      display:flex;
-      flex-direction:column;
-      min-height:220px;
-      cursor:pointer;
-      content-visibility: auto;
-      contain-intrinsic-size: 240px;
-    }
-    .project .media{
-      height:140px;
-      background-size:cover;
-      background-position:center;
-      background-repeat:no-repeat;
-      background-color:#f3f4f6;
-      /* keep aspect ratio to avoid CLS when using background images */
-      aspect-ratio: 16 / 9;
-    }
-    .project.large .media{ height:320px; aspect-ratio: 16 / 9; }
-    .project .meta{ padding:12px 14px; display:flex; flex-direction:column; gap:8px; flex:1; }
-    .project .title{ font-weight:800; font-size:16px; margin:0; }
-    .project .desc{ color:var(--muted); font-size:13px; margin:0; flex:1; }
+      /* Projects */
+      .projects{ margin-top:8px; display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:18px; }
+      .project{
+        background:var(--card-bg);
+        border-radius:12px;
+        overflow:hidden;
+        box-shadow:0 10px 30px rgba(0,0,0,0.06);
+        display:flex;
+        flex-direction:column;
+        min-height:220px;
+        cursor:pointer;
+        content-visibility: auto;
+        contain-intrinsic-size: 240px;
+      }
+      .project .media{
+        height:140px;
+        background-size:cover;
+        background-position:center;
+        background-repeat:no-repeat;
+        background-color:#f3f4f6;
+        aspect-ratio: 16 / 9;
+      }
+      .project.large .media{ height:320px; aspect-ratio: 16 / 9; }
+      .project .meta{ padding:12px 14px; display:flex; flex-direction:column; gap:8px; flex:1; }
+      .project .title{ font-weight:800; font-size:16px; margin:0; }
+      .project .desc{ color:var(--muted); font-size:13px; margin:0; flex:1; }
 
-    /* Programs */
-    .programs{ margin-top:8px; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:18px; }
+      /* Programs */
+      .programs{ margin-top:8px; display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:18px; }
 
-    /* Media-only grid */
-    .media-showcase{ margin-top:28px; display:grid; gap:18px; }
-    .media-row{ display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; align-items:start; }
-    .media-card{ background:var(--card-bg); border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.06); height:225px; display:flex; align-items:center; justify-content:center; content-visibility: auto; contain-intrinsic-size: 225px; }
-    .media-card img, .media-card video{ width:100%; height:100%; object-fit:cover; display:block; }
+      /* Media-only grid */
+      .media-showcase{ margin-top:28px; display:grid; gap:18px; }
+      .media-row{ display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; align-items:start; }
+      .media-card{ background:var(--card-bg); border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.06); height:225px; display:flex; align-items:center; justify-content:center; content-visibility: auto; contain-intrinsic-size: 225px; }
+      .media-card img, .media-card video{ width:100%; height:100%; object-fit:cover; display:block; }
 
-    /* Updated .media-large to remove white card background */
-    .media-large{
-      background: transparent;
-      border-radius: 0;
-      overflow: visible;
-      box-shadow: none;
-      height:525px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      content-visibility: auto;
-      contain-intrinsic-size: 525px;
-    }
-    .media-large img,
-    .media-large video{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      background: transparent;
-      border-radius: 0;
-    }
+      /* Updated .media-large to remove white card background */
+      .media-large{
+        background: transparent;
+        border-radius: 0;
+        overflow: visible;
+        box-shadow: none;
+        height:525px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        content-visibility: auto;
+        contain-intrinsic-size: 525px;
+      }
+      .media-large img,
+      .media-large video{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        display:block;
+        background: transparent;
+        border-radius: 0;
+      }
 
-    /* Modal and gallery styles */
-    .overlay{ position:fixed; inset:0; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; z-index:60; padding:20px; }
-    .overlay.open{ display:flex; }
-    .modal{ width:100%; max-width:1000px; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,0.3); display:grid; grid-template-columns: 1fr 360px; gap:0; max-height:90vh; }
-    .modal .gallery{ background:#000; min-height:320px; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; color:#fff; }
-    .modal .gallery .main-wrap{ width:100%; height:60vh; max-height:60vh; display:flex; align-items:center; justify-content:center; position:relative; background:#111; overflow:hidden; }
-    .modal .gallery .stage{ position:relative; width:100%; height:100%; overflow:hidden; z-index:1; }
-    .modal .gallery .media-item{ position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; transform: translateX(0%); transition: transform 320ms cubic-bezier(.2,.9,.2,1); will-change: transform, opacity; background:#111; z-index:2; }
-    .modal .gallery .media-item img, .modal .gallery .media-item video{ width:100%; height:100%; object-fit:cover; display:block; }
-    .modal .gallery .nav{ position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); display: flex; justify-content: space-between; padding: 0 12px; pointer-events: auto; z-index: 70; }
-    .modal .gallery button.arrow{ pointer-events: auto; background: rgba(255,255,255,0.95); border: none; padding: 10px 12px; border-radius: 10px; cursor: pointer; font-weight: 800; color: #111; box-shadow: 0 6px 18px rgba(0,0,0,0.12); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; user-select: none; }
-    .modal .gallery .thumbs{ width:100%; display:flex; gap:8px; padding:12px; overflow:auto; background:rgba(0,0,0,0.05); box-sizing:border-box; }
-    .modal .gallery .thumb{ width:92px; height:64px; background-size:cover; background-position:center; border-radius:6px; cursor:pointer; opacity:0.6; border:2px solid transparent; flex:0 0 auto; }
-    .modal .gallery .thumb.active{ opacity:1; border-color:rgba(255,255,255,0.9); }
-    .modal .details{ padding:18px; overflow:auto; background:#fff; }
-    .modal .details h3{ margin:0 0 8px 0; }
-    .modal .close{ position:absolute; right:12px; top:12px; background:rgba(255,255,255,0.9); border:none; padding:8px; border-radius:8px; cursor:pointer; font-weight:700; }
+      /* Modal and gallery styles */
+      .overlay{ position:fixed; inset:0; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; z-index:60; padding:20px; }
+      .overlay.open{ display:flex; }
+      .modal{ width:100%; max-width:1000px; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,0.3); display:grid; grid-template-columns: 1fr 360px; gap:0; max-height:90vh; }
+      .modal .gallery{ background:#000; min-height:320px; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; color:#fff; }
+      .modal .gallery .main-wrap{ width:100%; height:60vh; max-height:60vh; display:flex; align-items:center; justify-content:center; position:relative; background:#111; overflow:hidden; }
+      .modal .gallery .stage{ position:relative; width:100%; height:100%; overflow:hidden; z-index:1; }
+      .modal .gallery .media-item{ position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; transform: translateX(0%); transition: transform 320ms cubic-bezier(.2,.9,.2,1); will-change: transform, opacity; background:#111; z-index:2; }
+      .modal .gallery .media-item img, .modal .gallery .media-item video{ width:100%; height:100%; object-fit:cover; display:block; }
+      .modal .gallery .nav{ position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); display: flex; justify-content: space-between; padding: 0 12px; pointer-events: none; z-index: 70; }
+      .modal .gallery button.arrow{ pointer-events: auto; background: rgba(255,255,255,0.95); border: none; padding: 10px 12px; border-radius: 10px; cursor: pointer; font-weight: 800; color: #111; box-shadow: 0 6px 18px rgba(0,0,0,0.12); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; user-select: none; }
+      .modal .gallery .thumbs{ width:100%; display:flex; gap:8px; padding:12px; overflow:auto; background:rgba(0,0,0,0.05); box-sizing:border-box; }
+      .modal .gallery .thumb{ width:92px; height:64px; background-size:cover; background-position:center; border-radius:6px; cursor:pointer; opacity:0.6; border:2px solid transparent; flex:0 0 auto; }
+      .modal .gallery .thumb.active{ opacity:1; border-color:rgba(255,255,255,0.9); }
+      .modal .details{ padding:18px; overflow:auto; background:#fff; }
+      .modal .details h3{ margin:0 0 8px 0; }
+      .modal .close{ position:absolute; right:12px; top:12px; background:rgba(255,255,255,0.9); border:none; padding:8px; border-radius:8px; cursor:pointer; font-weight:700; }
 
-    footer{ margin-top:28px; color:var(--muted); font-size:13px; text-align:center; }
+      footer{ margin-top:28px; color:var(--muted); font-size:13px; text-align:center; }
 
-    @media (max-width:1100px){ .media-row{ grid-template-columns: repeat(2, 1fr); } .programs{ grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width:720px){ .hero{ grid-template-columns: 1fr; } .modal{ grid-template-columns: 1fr; max-width:720px; } .media-row{ grid-template-columns: 1fr; } .media-large{ height:325px; } .project.large .media{ height:220px; } .modal .gallery .main-wrap{ height:40vh; max-height:40vh; } }
-    @media (max-width:560px){ .profile{ padding:14px; } .avatar{ width:120px; height:120px; } .intro h1{ font-size:22px; } .modal .gallery button.arrow{ width:48px; height:48px; padding:12px; } }
-  </style>
-</head>
-<body>
+      @media (max-width:1100px){ .media-row{ grid-template-columns: repeat(2, 1fr); } .programs{ grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width:720px){ .hero{ grid-template-columns: 1fr; } .modal{ grid-template-columns: 1fr; max-width:720px; } .media-row{ grid-template-columns: 1fr; } .media-large{ height:325px; } .project.large .media{ height:220px; } .modal .gallery .main-wrap{ height:40vh; max-height:40vh; } }
+      @media (max-width:560px){ .profile{ padding:14px; } .avatar{ width:120px; height:120px; } .intro h1{ font-size:22px; } .modal .gallery button.arrow{ width:48px; height:48px; padding:12px; } }
+    </style>
+  </head>
 
-  <div class="container" role="main" id="home">
-    <header>
-      <div class="brand" aria-hidden="false"></div>
+  <body>
+    <div class="container" role="main" id="home">
+      <header>
+        <div class="brand" aria-hidden="false"></div>
 
-      <nav aria-label="Main">
-        <a href="index.html" class="nav-btn">Home</a>
-        <a href="project-home.html" class="nav-btn active" aria-current="page">Projects</a>
-        <a href="#about" class="nav-btn">About Me</a>
-      </nav>
-    </header>
+        <nav aria-label="Main">
+          <a href="index.html" class="nav-btn">Home</a>
+          <a href="project-home.html" class="nav-btn active" aria-current="page">Projects</a>
+          <a href="#about" class="nav-btn">About Me</a>
+        </nav>
+      </header>
 
-    <section class="hero" aria-label="Profile">
-      <aside class="profile" aria-label="Profile card">
-        <!-- Updated avatar: replace src with your actual image URL -->
-        <div class="avatar" role="img" aria-label="Profile photo">
-          <img
-            src="https://dl.dropboxusercontent.com/scl/fi/pilhzirwy9849gzrrhods/resume-pic_enhanced.webp?rlkey=qyoym6db4egf2t7x7s6lkpgaw&st=exxl1wl5&dl=0"
-            alt="Ken Delos Santos Fabros profile photo"
-            width="140"
-            height="140"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-
-        <div class="name">Ken Delos Santos Fabros</div>
-        <div class="role"></div>
-        <div class="socials" aria-hidden="false">
-          <a href="#" aria-label="Instagram" title="Instagram" style="text-decoration:none; color:var(--muted)">Instagram</a>
-          <a href="#" aria-label="Twitter" title="LinkedIn" style="text-decoration:none; color:var(--muted)"></a>
-          <a href="#" aria-label="GitHub" title="GitHub" style="text-decoration:none; color:var(--muted)">GitHub</a>
-        </div>
-      </aside>
-
-      <div class="intro" aria-label="Introduction" id="about">
-        <h1>About Me</h1>
-        <p>Hi, I am <strong>Ken Delos Santos Fabros</strong>. A CITCS Student from the University of the Cordilleras. I'm passionate about sharing my journey and work. This is a space where I express my creativity and showcase my accomplishments. Feel free to explore and get to know me better.</p>
-        <p style="margin-top:12px">My philosophy "Quote":</p>
-        <p>In the cosmic ballet of existence, we find ourselves continuously seeking meaning, purpose, and connection. Our philosophy of harmonious existence is grounded in the principle that every individual, no matter their background, beliefs, or circumstances, contributes uniquely to the grand tapestry of life.</p>
-      </div>
-    </section>
-
-    <section aria-label="Projects">
-      <h2 style="margin:0 0 12px 0; font-size:18px; font-weight:800">Selected Projects</h2>
-      <div class="projects" id="projects">
-        <!-- Project 1: background lazy via data-bg -->
-        <article class="project large" data-title="Project Aurora" data-desc="Onboarding and retention redesign for a mobile app. Research driven and pixel perfect UI." data-images='["https://dl.dropboxusercontent.com/scl/fi/zp4tggj6vllhmew1txvpy/IMG_20250204_220354.webp?rlkey=gpgtnxl0gskr2byutd4x67nha&st=fixyz0df&dl=0"]'>
-          <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/g8pe6eadqolzh4eyfwfo3/Screenshot-2025-12-04-000350.webp?rlkey=8poutolxmxh55mskqm4clxbhj&st=qqmbnt8d&dl=0" role="img" aria-label="Project Aurora image"></div>
-          <div class="meta">
-            <h3 class="title">Achievements</h3>
-            <p class="desc">Here you'll find the achievements i've acquired</p>
-          </div>
-        </article>
-
-        <!-- Project 2 -->
-        <article class="project large" data-title="Projects" data-desc="Artistic and Inspiring Works — This page showcases my projects from junior and senior high school through to the present, highlighting creative growth, key achievements, and the ideas that shaped my journey." data-images='["https://dl.dropboxusercontent.com/scl/fi/5gpq1ocmeb1zabsiigu1z/Screenshot-2025-12-03-233450.webp?rlkey=v5riw1ehsouhigcm5q8yb7v53&st=0p5vtfq4&dl=0","https://dl.dropboxusercontent.com/scl/fi/yzng9ahaffc4u86azj78q/abstract-art-no.2-varation-final-done.webp?rlkey=mnny0uyvyp3y2v058cp8pm23u&st=5ddfqr19&dl=0","https://dl.dropboxusercontent.com/scl/fi/i382gqw2nzmft8kvusew7/abstarct-background-ps-export-final.webp?rlkey=toxf95xvccptcr9lcf5lyalon&st=ath0li21&dl=0","https://dl.dropboxusercontent.com/scl/fi/w4gqj47m5xtb62v7tfg2l/Screenshot-2024-11-28-170142.webp?rlkey=0g9vcba82jvr17vej1h7pxupd&st=vsa9tkke&dl=0","https://dl.dropboxusercontent.com/scl/fi/uko3rpfi0svp9h8f0fdn2/Screenshot-2025-12-03-235753.webp?rlkey=t41x5hwkqbqtgwakgwfekahun&st=p96f4i5u&dl=0"]'>
-          <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/5gpq1ocmeb1zabsiigu1z/Screenshot-2025-12-03-233450.webp?rlkey=v5riw1ehsouhigcm5q8yb7v53&st=0p5vtfq4&dl=0" role="img" aria-label="Projects image"></div>
-          <div class="meta">
-            <h3 class="title">Projects</h3>
-            <p class="desc">Here you’ll find a selection of my work. Explore my projects to learn more about what I do.</p>
-          </div>
-        </article>
-
-        <!-- Project 3 -->
-        <article class="project large" data-title="My Hobbies" data-desc="I chase light and quiet moments, turning ordinary scenes into lingering visual stories. That quote depicts my art itself" data-images='["https://dl.dropboxusercontent.com/scl/fi/lyn3uxx4nw5i6et93y8np/329499139_1622334898278996_4171053628367841960_n.webp?rlkey=d2f8eltuqii1n5hq6f867s566&st=djofau4i&dl=0","https://dl.dropboxusercontent.com/scl/fi/2lstn5budn0q2t5sfj7z5/329785655_964051695037498_1346925642961946229_n.webp?rlkey=8zcpcskvlum2v7a39npipkj6h&st=986r19ha&dl=0","https://dl.dropboxusercontent.com/scl/fi/d51shgcl2zoesva5c8avx/340641356_738845294571244_1138016351730339913_n.webp?rlkey=aez1ducpsddy0hgz3b9uqayfd&st=rjz6uz5l&dl=0","https://dl.dropboxusercontent.com/scl/fi/z77p7amj2wwknsivnizvh/341933494_962319381792372_3535160102446161496_n.webp?rlkey=54hnyq19aq8un7uq2r4e4hbus&st=bd31u6m4&dl=0","https://dl.dropboxusercontent.com/scl/fi/iizjhqsxsunss09x1rj8r/342335417_743817660624178_944112588714985992_n.webp?rlkey=dm4px8e0gcu3d19i89s70euw7&st=jkzohd2c&dl=0"]'>
-          <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/lyn3uxx4nw5i6et93y8np/329499139_1622334898278996_4171053628367841960_n.webp?rlkey=d2f8eltuqii1n5hq6f867s566&st=djofau4i&dl=0" role="img" aria-label="Atlas Site image"></div>
-          <div class="meta">
-            <h3 class="title">Hobbies</h3>
-            <p class="desc">Marketing site rebuild with performance and accessibility improvements.</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section aria-label="Programs">
-      <h2 style="margin:18px 0 12px 0; font-size:18px; font-weight:800">Selected Programs</h2>
-      <div class="programs" id="programs">
-        <article class="project program" data-title="Program One" data-desc="A compact program focused on onboarding flows." data-images='["https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60"]'>
-          <div class="media" data-bg="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60" role="img" aria-label="Program One image"></div>
-          <div class="meta">
-            <h3 class="title">Program One</h3>
-            <p class="desc">Compact program focused on onboarding flows and micro-interactions.</p>
-          </div>
-        </article>
-
-        <article class="project program" data-title="Program Two" data-desc="A toolkit for data visualization and reporting." data-images='["https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60"]'>
-          <div class="media" data-bg="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60" role="img" aria-label="Program Two image"></div>
-          <div class="meta">
-            <h3 class="title">Program Two</h3>
-            <p class="desc">Toolkit for building clear, performant data visualizations and reports.</p>
-          </div>
-        </article>
-
-        <article class="project program" data-title="Program Three" data-desc="Accessibility-first UI components and patterns." data-images='["https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60"]'>
-          <div class="media" data-bg="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60" role="img" aria-label="Program Three image"></div>
-          <div class="meta">
-            <h3 class="title">Program Three</h3>
-            <p class="desc">A set of accessibility-first UI components and interaction patterns.</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="media-showcase" aria-label="Media showcase">
-      <h2 style="margin:0 0 12px 0; font-size:18px; font-weight:800">Media Showcase</h2>
-
-      <div class="media-row" aria-hidden="false">
-        <div class="media-card" aria-label="Media card 1">
-          <!-- Responsive image with LQIP placeholder and explicit dimensions -->
-          <picture>
-            <source type="image/avif" data-srcset="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=400&q=60&fm=avif 400w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=800&q=60&fm=avif 800w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=1200&q=60&fm=avif 1200w" />
-            <source type="image/webp" data-srcset="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=400&q=60&fm=webp 400w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=800&q=60&fm=webp 800w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=1200&q=60&fm=webp 1200w" />
+      <section class="hero" aria-label="Profile">
+        <aside class="profile" aria-label="Profile card">
+          <!-- Updated avatar: replace src with your actual image URL -->
+          <div class="avatar" role="img" aria-label="Profile photo">
             <img
-              class="lazy-img"
-              data-src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=800&q=60"
-              data-srcset="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=400&q=60 400w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=800&q=60 800w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=1200&q=60 1200w"
-              data-sizes="(max-width:720px) 100vw, 33vw"
-              width="800" height="450"
-              alt="Media 1"
+              src="https://dl.dropboxusercontent.com/scl/fi/pilhzirwy9849gzrrhods/resume-pic_enhanced.webp?rlkey=qyoym6db4egf2t7x7s6lkpgaw&st=exxl1wl5&dl=0"
+              alt="Ken Delos Santos Fabros profile photo"
+              width="140"
+              height="140"
               loading="lazy"
               decoding="async"
-              style="max-width:100%;height:auto;display:block;background:#f3f4f6;"
+            />
+          </div>
+
+          <div class="name">Ken Delos Santos Fabros</div>
+          <div class="role"></div>
+          <div class="socials" aria-hidden="false">
+            <a href="#" aria-label="Instagram" title="Instagram" style="text-decoration:none; color:var(--muted)">Instagram</a>
+            <a href="#" aria-label="Twitter" title="LinkedIn" style="text-decoration:none; color:var(--muted)"></a>
+            <a href="#" aria-label="GitHub" title="GitHub" style="text-decoration:none; color:var(--muted)">GitHub</a>
+          </div>
+        </aside>
+
+        <div class="intro" aria-label="Introduction" id="about">
+          <h1>About Me</h1>
+          <p>Hi, I am <strong>Ken Delos Santos Fabros</strong>. A CITCS Student from the University of the Cordilleras. I'm passionate about sharing my journey and work. This is a space where I express my creativity and showcase my accomplishments. Feel free to explore and get to know me better.</p>
+          <p style="margin-top:12px">My philosophy "Quote":</p>
+          <p>In the cosmic ballet of existence, we find ourselves continuously seeking meaning, purpose, and connection. Our philosophy of harmonious existence is grounded in the principle that every individual, no matter their background, beliefs, or circumstances, contributes uniquely to the grand tapestry of life.</p>
+        </div>
+      </section>
+
+      <section aria-label="Projects">
+        <h2 style="margin:0 0 12px 0; font-size:18px; font-weight:800">Selected Projects</h2>
+        <div class="projects" id="projects">
+          <!-- Project 1: background lazy via data-bg -->
+          <article class="project large"
+                   data-title="Achievements"
+                   data-desc="Academic work is a human act of curiosity and courage; it asks us to listen, question, and grow. True scholarship honors mistakes as much as discoveries, because both teach us how to be more human."
+                   data-images='["https://dl.dropboxusercontent.com/scl/fi/zp4tggj6vllhmew1txvpy/IMG_20250204_220354.webp?rlkey=gpgtnxl0gskr2byutd4x67nha&st=fixyz0df&dl=0"]'
+                   data-highlights='["Academic Awardee From Grade 7 until Grade 10", "Graduate of PCNHS", "Academic Achiever in Grade 12", "Graduate of the University of the Cordilleras - SHS (2025)"]'>
+            <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/g8pe6eadqolzh4eyfwfo3/Screenshot-2025-12-04-000350.webp?rlkey=8poutolxmxh55mskqm4clxbhj&st=qqmbnt8d&dl=0" role="img" aria-label="Project Aurora image"></div>
+            <div class="meta">
+              <h3 class="title">Achievements</h3>
+              <p class="desc">Here you'll find the achievements i've acquired</p>
+              
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project large"
+                   data-title="Projects"
+                   data-desc="Artistic and Inspiring Works — This page showcases my projects from junior and senior high school through to the present, highlighting creative growth, key achievements, and the ideas that shaped my journey."
+                   data-images='["https://dl.dropboxusercontent.com/scl/fi/5gpq1ocmeb1zabsiigu1z/Screenshot-2025-12-03-233450.webp?rlkey=v5riw1ehsouhigcm5q8yb7v53&st=0p5vtfq4&dl=0","https://dl.dropboxusercontent.com/scl/fi/yzng9ahaffc4u86azj78q/abstract-art-no.2-varation-final-done.webp?rlkey=mnny0uyvyp3y2v058cp8pm23u&st=5ddfqr19&dl=0","https://dl.dropboxusercontent.com/scl/fi/i382gqw2nzmft8kvusew7/abstarct-background-ps-export-final.webp?rlkey=toxf95xvccptcr9lcf5lyalon&st=ath0li21&dl=0","https://dl.dropboxusercontent.com/scl/fi/w4gqj47m5xtb62v7tfg2l/Screenshot-2024-11-28-170142.webp?rlkey=0g9vcba82jvr17vej1h7pxupd&st=vsa9tkke&dl=0","https://dl.dropboxusercontent.com/scl/fi/uko3rpfi0svp9h8f0fdn2/Screenshot-2025-12-03-235753.webp?rlkey=t41x5hwkqbqtgwakgwfekahun&st=p96f4i5u&dl=0"]'>
+            <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/5gpq1ocmeb1zabsiigu1z/Screenshot-2025-12-03-233450.webp?rlkey=v5riw1ehsouhigcm5q8yb7v53&st=0p5vtfq4&dl=0" role="img" aria-label="Projects image"></div>
+            <div class="meta">
+              <h3 class="title">Projects</h3>
+              <p class="desc">Here you’ll find a selection of my work. Explore my projects to learn more about what I do.</p>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project large"
+                   data-title="My Hobbies"
+                   data-desc="I chase light and quiet moments, turning ordinary scenes into lingering visual stories. That quote depicts my art itself"
+                   data-images='["https://dl.dropboxusercontent.com/scl/fi/lyn3uxx4nw5i6et93y8np/329499139_1622334898278996_4171053628367841960_n.webp?rlkey=d2f8eltuqii1n5hq6f867s566&st=djofau4i&dl=0","https://dl.dropboxusercontent.com/scl/fi/2lstn5budn0q2t5sfj7z5/329785655_964051695037498_1346925642961946229_n.webp?rlkey=8zcpcskvlum2v7a39npipkj6h&st=986r19ha&dl=0","https://dl.dropboxusercontent.com/scl/fi/d51shgcl2zoesva5c8avx/340641356_738845294571244_1138016351730339913_n.webp?rlkey=aez1ducpsddy0hgz3b9uqayfd&st=rjz6uz5l&dl=0","https://dl.dropboxusercontent.com/scl/fi/z77p7amj2wwknsivnizvh/341933494_962319381792372_3535160102446161496_n.webp?rlkey=54hnyq19aq8un7uq2r4e4hbus&st=bd31u6m4&dl=0","https://dl.dropboxusercontent.com/scl/fi/iizjhqsxsunss09x1rj8r/342335417_743817660624178_944112588714985992_n.webp?rlkey=dm4px8e0gcu3d19i89s70euw7&st=jkzohd2c&dl=0"]'>
+            <div class="media" data-bg="https://dl.dropboxusercontent.com/scl/fi/lyn3uxx4nw5i6et93y8np/329499139_1622334898278996_4171053628367841960_n.webp?rlkey=d2f8eltuqii1n5hq6f867s566&st=djofau4i&dl=0" role="img" aria-label="Atlas Site image"></div>
+            <div class="meta">
+              <h3 class="title">Hobbies</h3>
+              <p class="desc">Marketing site rebuild with performance and accessibility improvements.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section aria-label="Programs">
+        <h2 style="margin:18px 0 12px 0; font-size:18px; font-weight:800">Selected Programs</h2>
+        <div class="programs" id="programs">
+          <article class="project program" data-title="Program One" data-desc="A compact program focused on onboarding flows." data-images='["https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60"]'>
+            <div class="media" data-bg="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60" role="img" aria-label="Program One image"></div>
+            <div class="meta">
+              <h3 class="title">Program One</h3>
+              <p class="desc">Compact program focused on onboarding flows and micro-interactions.</p>
+            </div>
+          </article>
+
+          <article class="project program" data-title="Program Two" data-desc="A toolkit for data visualization and reporting." data-images='["https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60"]'>
+            <div class="media" data-bg="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60" role="img" aria-label="Program Two image"></div>
+            <div class="meta">
+              <h3 class="title">Program Two</h3>
+              <p class="desc">Toolkit for building clear, performant data visualizations and reports.</p>
+            </div>
+          </article>
+
+          <article class="project program" data-title="Program Three" data-desc="Accessibility-first UI components and patterns." data-images='["https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60"]'>
+            <div class="media" data-bg="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60" role="img" aria-label="Program Three image"></div>
+            <div class="meta">
+              <h3 class="title">Program Three</h3>
+              <p class="desc">A set of accessibility-first UI components and interaction patterns.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="media-showcase" aria-label="Media showcase">
+        <h2 style="margin:0 0 12px 0; font-size:18px; font-weight:800">Media Showcase</h2>
+
+        <div class="media-row" aria-hidden="false">
+          <div class="media-card" aria-label="Media card 1">
+            <picture>
+              <source type="image/avif" data-srcset="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=400&q=60&fm=avif 400w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=800&q=60&fm=avif 800w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=1200&q=60&fm=avif 1200w" />
+              <source type="image/webp" data-srcset="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=400&q=60&fm=webp 400w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=800&q=60&fm=webp 800w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=1200&q=60&fm=webp 1200w" />
+              <img
+                class="lazy-img"
+                data-src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=800&q=60"
+                data-srcset="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=400&q=60 400w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=800&q=60 800w, https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=1200&q=60 1200w"
+                data-sizes="(max-width:720px) 100vw, 33vw"
+                width="800" height="450"
+                alt="Media 1"
+                loading="lazy"
+                decoding="async"
+                style="max-width:100%;height:auto;display:block;background:#f3f4f6;"
+                src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23f3f4f6'/%3E%3C/svg%3E">
+            </picture>
+          </div>
+
+          <div class="media-card" aria-label="Media card 2">
+            <picture>
+              <source type="image/avif" data-srcset="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=60&fm=avif 400w, https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=60&fm=avif 800w" />
+              <source type="image/webp" data-srcset="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=60&fm=webp 400w, https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=60&fm=webp 800w" />
+              <img
+                class="lazy-img"
+                data-src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=60"
+                data-srcset="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=60 400w, https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=60 800w"
+                data-sizes="(max-width:720px) 100vw, 33vw"
+                width="800" height="450"
+                alt="Media 2"
+                loading="lazy"
+                decoding="async"
+                style="max-width:100%;height:auto;display:block;background:#f3f4f6;"
+                src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23f3f4f6'/%3E%3C/svg%3E">
+            </picture>
+          </div>
+
+          <div class="media-card" aria-label="Media card 3">
+            <video controls poster="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60" preload="none" style="width:100%;height:100%;object-fit:cover;">
+              <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+
+        <div class="media-large" aria-label="Large media display">
+          <picture>
+            <source type="image/avif" data-srcset="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=800&q=60&fm=avif 800w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60&fm=avif 1200w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1600&q=60&fm=avif 1600w" />
+            <source type="image/webp" data-srcset="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=800&q=60&fm=webp 800w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60&fm=webp 1200w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1600&q=60&fm=webp 1600w" />
+            <img
+              class="lazy-img"
+              data-src="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1600&q=60"
+              data-srcset="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=800&q=60 800w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60 1200w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1600&q=60 1600w"
+              data-sizes="(max-width:720px) 100vw, 1000px"
+              width="1600" height="900"
+              alt="Large media"
+              loading="lazy"
+              decoding="async"
+              style="max-width:100%;height:auto;display:block;background:transparent;"
               src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23f3f4f6'/%3E%3C/svg%3E">
           </picture>
         </div>
+      </section>
 
-        <div class="media-card" aria-label="Media card 2">
-          <picture>
-            <source type="image/avif" data-srcset="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=60&fm=avif 400w, https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=60&fm=avif 800w" />
-            <source type="image/webp" data-srcset="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=60&fm=webp 400w, https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=60&fm=webp 800w" />
-            <img
-              class="lazy-img"
-              data-src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=60"
-              data-srcset="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=60 400w, https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=60 800w"
-              data-sizes="(max-width:720px) 100vw, 33vw"
-              width="800" height="450"
-              alt="Media 2"
-              loading="lazy"
-              decoding="async"
-              style="max-width:100%;height:auto;display:block;background:#f3f4f6;"
-              src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23f3f4f6'/%3E%3C/svg%3E">
-          </picture>
-        </div>
+      <!-- Modal for project details and image gallery -->
+      <div class="overlay" id="overlay" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+          <div class="gallery" id="gallery">
+            <div class="main-wrap" id="mainWrap">
+              <button class="close" id="closeBtn" aria-label="Close">Close</button>
 
-        <div class="media-card" aria-label="Media card 3">
-          <video controls poster="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60" preload="none" style="width:100%;height:100%;object-fit:cover;">
-            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
+              <div class="nav" aria-hidden="false">
+                <button class="arrow" id="prevBtn" aria-label="Previous">‹</button>
+                <button class="arrow" id="nextBtn" aria-label="Next">›</button>
+              </div>
 
-      <div class="media-large" aria-label="Large media display">
-        <picture>
-          <source type="image/avif" data-srcset="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=800&q=60&fm=avif 800w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60&fm=avif 1200w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1600&q=60&fm=avif 1600w" />
-          <source type="image/webp" data-srcset="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=800&q=60&fm=webp 800w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60&fm=webp 1200w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1600&q=60&fm=webp 1600w" />
-          <img
-            class="lazy-img"
-            data-src="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1600&q=60"
-            data-srcset="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=800&q=60 800w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1200&q=60 1200w, https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1600&q=60 1600w"
-            data-sizes="(max-width:720px) 100vw, 1000px"
-            width="1600" height="900"
-            alt="Large media"
-            loading="lazy"
-            decoding="async"
-            style="max-width:100%;height:auto;display:block;background:transparent;"
-            src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23f3f4f6'/%3E%3C/svg%3E">
-        </picture>
-      </div>
-    </section>
-
-    <!-- Modal for project details and image gallery -->
-    <div class="overlay" id="overlay" aria-hidden="true">
-      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <div class="gallery" id="gallery">
-          <div class="main-wrap" id="mainWrap">
-            <button class="close" id="closeBtn" aria-label="Close">Close</button>
-
-            <div class="nav" aria-hidden="false">
-              <button class="arrow" id="prevBtn" aria-label="Previous">‹</button>
-              <button class="arrow" id="nextBtn" aria-label="Next">›</button>
+              <!-- Stage: sliding media items are appended here -->
+              <div id="galleryStage" class="stage" aria-live="polite"></div>
             </div>
 
-            <!-- Stage: sliding media items are appended here -->
-            <div id="galleryStage" class="stage" aria-live="polite"></div>
+            <div class="thumbs" id="thumbs" aria-hidden="false"></div>
           </div>
 
-          <div class="thumbs" id="thumbs" aria-hidden="false"></div>
-        </div>
+          <div class="details">
+            <h3 id="modal-title">Project Title</h3>
+            <p id="modal-desc" style="color:var(--muted)"></p>
 
-        <div class="details">
-          <h3 id="modal-title">Project Title</h3>
-          <p id="modal-desc" style="color:var(--muted)"></p>
-          <div style="margin-top:12px;">
-            <strong style="display:block; margin-bottom:8px">Highlights</strong>
-            <ul style="color:var(--muted); margin-top:0">
-              <li>Research and user interviews</li>
-              <li>Interactive prototypes</li>
-              <li>Final UI and handoff</li>
-            </ul>
-          </div>
-          <div style="margin-top:14px;">
-            <button id="modal-close-2" style="margin-left:8px; padding:8px 12px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); background:#fff; cursor:pointer;">Close</button>
+            <!-- Default highlights block (will be replaced by per-project highlights if provided) -->
+            <div id="default-highlights" style="margin-top:12px;">
+              <strong style="display:block; margin-bottom:8px">Highlights</strong>
+              <ul style="color:var(--muted); margin-top:0">
+                <li>Research and user interviews</li>
+                <li>Interactive prototypes</li>
+                <li>Final UI and handoff</li>
+              </ul>
+            </div>
+
+            <div style="margin-top:14px;">
+              <button id="modal-close-2" style="margin-left:8px; padding:8px 12px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); background:#fff; cursor:pointer;">Close</button>
+            </div>
           </div>
         </div>
       </div>
+
+      <footer>
+        © <span id="year"></span> Your Name. All rights reserved.
+      </footer>
     </div>
 
-    <footer>
-      © <span id="year"></span> Your Name. All rights reserved.
-    </footer>
-  </div>
+    <script>
+      (function(){
+        // Populate year
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-  <script>
-    (function(){
-      // Populate year
-      document.getElementById('year').textContent = new Date().getFullYear();
+        // Elements for modal/gallery and controls
+        const overlay = document.getElementById('overlay');
+        const galleryStage = document.getElementById('galleryStage');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const closeBtn = document.getElementById('closeBtn');
+        const modalClose2 = document.getElementById('modal-close-2');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const thumbs = document.getElementById('thumbs');
+        const detailsPanel = document.querySelector('.modal .details');
+        const defaultHighlights = document.getElementById('default-highlights');
 
-      // Elements for modal/gallery
-      const overlay = document.getElementById('overlay');
-      const galleryStage = document.getElementById('galleryStage');
-      const modalTitle = document.getElementById('modal-title');
-      const modalDesc = document.getElementById('modal-desc');
-      const closeBtn = document.getElementById('closeBtn');
-      const modalClose2 = document.getElementById('modal-close-2');
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
-      const thumbs = document.getElementById('thumbs');
+        let currentImages = [];
+        let currentIndex = 0;
+        let lastFocused = null;
 
-      let currentImages = [];
-      let currentIndex = 0;
-      let isAnimating = false;
-      let lastFocused = null;
-
-      // ---------- Lazy-load CSS background images ----------
-      const lazyBackgrounds = [].slice.call(document.querySelectorAll('.media[data-bg]'));
-      if('IntersectionObserver' in window && lazyBackgrounds.length){
-        const bgObserver = new IntersectionObserver((entries, obs) => {
-          entries.forEach(entry => {
-            if(entry.isIntersecting){
-              const el = entry.target;
-              const url = el.getAttribute('data-bg');
-              if(url){
-                el.style.backgroundImage = `url('${url}')`;
-                el.removeAttribute('data-bg');
+        // ---------- Lazy-load CSS background images ----------
+        const lazyBackgrounds = [].slice.call(document.querySelectorAll('.media[data-bg]'));
+        if('IntersectionObserver' in window && lazyBackgrounds.length){
+          const bgObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+              if(entry.isIntersecting){
+                const el = entry.target;
+                const url = el.getAttribute('data-bg');
+                if(url){
+                  el.style.backgroundImage = `url('${url}')`;
+                  el.removeAttribute('data-bg');
+                }
+                obs.unobserve(el);
               }
-              obs.unobserve(el);
-            }
-          });
-        }, {rootMargin: '300px 0px'});
-        lazyBackgrounds.forEach(el => bgObserver.observe(el));
-      } else {
-        lazyBackgrounds.forEach(el => {
-          const url = el.getAttribute('data-bg');
-          if(url) el.style.backgroundImage = `url('${url}')`;
-          el.removeAttribute('data-bg');
-        });
-      }
-
-      // ---------- Lazy-load <img> elements with srcset and LQIP ----------
-      const lazyImgs = [].slice.call(document.querySelectorAll('img.lazy-img'));
-      function loadImage(img){
-        if(!img) return;
-        // if inside a <picture>, set source srcsets first
-        const picture = img.closest('picture');
-        if(picture){
-          const sources = [].slice.call(picture.querySelectorAll('source'));
-          sources.forEach(s => {
-            const ds = s.getAttribute('data-srcset');
-            if(ds) s.srcset = ds;
-            s.removeAttribute('data-srcset');
+            });
+          }, {rootMargin: '300px 0px'});
+          lazyBackgrounds.forEach(el => bgObserver.observe(el));
+        } else {
+          lazyBackgrounds.forEach(el => {
+            const url = el.getAttribute('data-bg');
+            if(url) el.style.backgroundImage = `url('${url}')`;
+            el.removeAttribute('data-bg');
           });
         }
-        // set srcset/sizes from data attributes
-        const src = img.getAttribute('data-src');
-        const srcset = img.getAttribute('data-srcset');
-        const sizes = img.getAttribute('data-sizes');
-        if(srcset) img.srcset = srcset;
-        if(sizes) img.sizes = sizes;
-        if(src) img.src = src;
-        // remove data attributes to avoid reprocessing
-        img.removeAttribute('data-src');
-        img.removeAttribute('data-srcset');
-        img.removeAttribute('data-sizes');
-        img.classList.remove('lazy-img');
-      }
 
-      if('IntersectionObserver' in window && lazyImgs.length){
-        const imgObserver = new IntersectionObserver((entries, obs) => {
-          entries.forEach(entry => {
-            if(entry.isIntersecting){
-              const img = entry.target;
-              loadImage(img);
-              obs.unobserve(img);
-            }
-          });
-        }, {rootMargin: '300px 0px'});
-        lazyImgs.forEach(img => imgObserver.observe(img));
-      } else {
-        lazyImgs.forEach(img => loadImage(img));
-      }
-
-      // ---------- Gallery modal logic ----------
-      const projectEls = [].slice.call(document.querySelectorAll('.project'));
-      function openGallery(images, title, desc, startIndex = 0){
-        if(!images || !images.length) return;
-        currentImages = images.slice();
-        currentIndex = Math.max(0, Math.min(startIndex, currentImages.length - 1));
-        modalTitle.textContent = title || '';
-        modalDesc.textContent = desc || '';
-        buildGallery();
-        overlay.classList.add('open');
-        overlay.setAttribute('aria-hidden', 'false');
-        lastFocused = document.activeElement;
-        // focus close button for accessibility
-        closeBtn.focus();
-        updateStage();
-      }
-
-      function closeGallery(){
-        overlay.classList.remove('open');
-        overlay.setAttribute('aria-hidden', 'true');
-        // cleanup
-        galleryStage.innerHTML = '';
-        thumbs.innerHTML = '';
-        currentImages = [];
-        currentIndex = 0;
-        if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
-      }
-
-      function buildGallery(){
-        galleryStage.innerHTML = '';
-        thumbs.innerHTML = '';
-        currentImages.forEach((src, i) => {
-          // create media item
-          const item = document.createElement('div');
-          item.className = 'media-item';
-          item.style.transform = `translateX(${(i - currentIndex) * 100}%)`;
-          item.setAttribute('data-index', i);
-
-          // determine if video or image (basic check)
-          const isVideo = /\.(mp4|webm|ogg)(\?|$)/i.test(src);
-          if(isVideo){
-            const video = document.createElement('video');
-            video.controls = true;
-            video.preload = 'metadata';
-            video.style.width = '100%';
-            video.style.height = '100%';
-            video.style.objectFit = 'cover';
-            const source = document.createElement('source');
-            source.src = src;
-            source.type = 'video/mp4';
-            video.appendChild(source);
-            item.appendChild(video);
-          } else {
-            // use picture wrapper for responsiveness if desired
-            const img = document.createElement('img');
-            img.alt = `Gallery image ${i + 1}`;
-            img.setAttribute('data-src', src);
-            img.style.width = '100%';
-            img.style.height = '100%';
-            img.style.objectFit = 'cover';
-            img.loading = 'lazy';
-            img.decoding = 'async';
-            item.appendChild(img);
-            // load immediately for visible items
-            // we'll call loadImage on all images after appending
+        // ---------- Lazy-load <img> elements with srcset and LQIP ----------
+        const lazyImgs = [].slice.call(document.querySelectorAll('img.lazy-img'));
+        function loadImage(img){
+          if(!img) return;
+          const picture = img.closest('picture');
+          if(picture){
+            const sources = [].slice.call(picture.querySelectorAll('source'));
+            sources.forEach(s => {
+              const ds = s.getAttribute('data-srcset');
+              if(ds) s.srcset = ds;
+              s.removeAttribute('data-srcset');
+            });
           }
+          const src = img.getAttribute('data-src');
+          const srcset = img.getAttribute('data-srcset');
+          const sizes = img.getAttribute('data-sizes');
+          if(srcset) img.srcset = srcset;
+          if(sizes) img.sizes = sizes;
+          if(src) img.src = src;
+          img.removeAttribute('data-src');
+          img.removeAttribute('data-srcset');
+          img.removeAttribute('data-sizes');
+        }
 
-          galleryStage.appendChild(item);
+        if('IntersectionObserver' in window && lazyImgs.length){
+          const imgObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+              if(entry.isIntersecting){
+                loadImage(entry.target);
+                obs.unobserve(entry.target);
+              }
+            });
+          }, {rootMargin: '200px 0px'});
+          lazyImgs.forEach(img => imgObserver.observe(img));
+        } else {
+          lazyImgs.forEach(img => loadImage(img));
+        }
 
-          // create thumb
+        // ---------- Gallery logic (per-project) ----------
+        // Utility to parse JSON attribute safely
+        function parseJsonAttr(el, name) {
+          const raw = el.getAttribute(name);
+          if (!raw) return null;
+          try { return JSON.parse(raw); } catch (e) { return null; }
+        }
+
+        // Build stage item (image)
+        function createStageItem(src, index) {
+          const wrap = document.createElement('div');
+          wrap.className = 'media-item';
+          wrap.dataset.index = index;
+          wrap.style.transform = 'translateX(100%)';
+          wrap.setAttribute('aria-hidden', 'true');
+
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = `Image ${index + 1}`;
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          img.style.width = '100%';
+          img.style.height = '100%';
+          img.style.objectFit = 'cover';
+
+          wrap.appendChild(img);
+          return wrap;
+        }
+
+        // Build thumbnail element
+        function createThumb(src, index) {
           const t = document.createElement('button');
           t.className = 'thumb';
           t.type = 'button';
-          t.setAttribute('data-index', i);
           t.style.backgroundImage = `url('${src}')`;
-          t.addEventListener('click', () => {
-            if(currentIndex === i) return;
-            goToIndex(i);
+          t.dataset.index = index;
+          t.setAttribute('aria-label', `Thumbnail ${index + 1}`);
+          return t;
+        }
+
+        // Render gallery for currentImages
+        function renderGallery() {
+          galleryStage.innerHTML = '';
+          thumbs.innerHTML = '';
+
+          currentImages.forEach((src, i) => {
+            const item = createStageItem(src, i);
+            if (i === currentIndex) {
+              item.style.transform = 'translateX(0%)';
+              item.setAttribute('aria-hidden', 'false');
+            }
+            galleryStage.appendChild(item);
+
+            const thumb = createThumb(src, i);
+            if (i === currentIndex) thumb.classList.add('active');
+            thumb.addEventListener('click', () => goToIndex(i));
+            thumbs.appendChild(thumb);
           });
-          thumbs.appendChild(t);
-        });
 
-        // lazy-load images inside gallery
-        const galleryImgs = [].slice.call(galleryStage.querySelectorAll('img'));
-        galleryImgs.forEach(img => {
-          // set src immediately so gallery shows images
-          const ds = img.getAttribute('data-src');
-          if(ds) {
-            img.src = ds;
-            img.removeAttribute('data-src');
+          // hide nav if single image
+          if(currentImages.length <= 1){
+            prevBtn.style.visibility = 'hidden';
+            nextBtn.style.visibility = 'hidden';
+          } else {
+            prevBtn.style.visibility = '';
+            nextBtn.style.visibility = '';
           }
-        });
-      }
-
-      function updateStage(){
-        const items = [].slice.call(galleryStage.querySelectorAll('.media-item'));
-        items.forEach((el, i) => {
-          const offset = (i - currentIndex) * 100;
-          el.style.transform = `translateX(${offset}%)`;
-          el.style.opacity = (i === currentIndex) ? '1' : '0.6';
-          el.style.zIndex = (i === currentIndex) ? '3' : '2';
-        });
-
-        const thumbEls = [].slice.call(thumbs.querySelectorAll('.thumb'));
-        thumbEls.forEach((t, i) => {
-          if(i === currentIndex) t.classList.add('active'); else t.classList.remove('active');
-        });
-
-        // ensure active thumb is visible
-        const activeThumb = thumbs.querySelector('.thumb.active');
-        if(activeThumb) activeThumb.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
-      }
-
-      function goToIndex(idx){
-        if(isAnimating) return;
-        if(idx < 0) idx = currentImages.length - 1;
-        if(idx >= currentImages.length) idx = 0;
-        currentIndex = idx;
-        updateStage();
-      }
-
-      prevBtn.addEventListener('click', () => {
-        goToIndex(currentIndex - 1);
-      });
-      nextBtn.addEventListener('click', () => {
-        goToIndex(currentIndex + 1);
-      });
-
-      closeBtn.addEventListener('click', closeGallery);
-      modalClose2.addEventListener('click', closeGallery);
-
-      // close when clicking outside modal content
-      overlay.addEventListener('click', (e) => {
-        if(e.target === overlay) closeGallery();
-      });
-
-      // keyboard navigation
-      document.addEventListener('keydown', (e) => {
-        if(overlay.classList.contains('open')){
-          if(e.key === 'ArrowLeft') { e.preventDefault(); goToIndex(currentIndex - 1); }
-          if(e.key === 'ArrowRight') { e.preventDefault(); goToIndex(currentIndex + 1); }
-          if(e.key === 'Escape') { e.preventDefault(); closeGallery(); }
         }
-      });
 
-      // open gallery when clicking a project
-      projectEls.forEach(p => {
-        p.addEventListener('click', () => {
-          const raw = p.getAttribute('data-images') || '[]';
-          let imgs = [];
-          try { imgs = JSON.parse(raw); } catch (err) { imgs = []; }
-          const title = p.getAttribute('data-title') || '';
-          const desc = p.getAttribute('data-desc') || '';
-          openGallery(imgs, title, desc, 0);
-        });
+        // Animate slide to index
+        function goToIndex(target) {
+          if (target === currentIndex) return;
+          const items = Array.from(galleryStage.children);
+          const from = currentIndex;
+          const to = target;
+          const dir = to > from ? -1 : 1; // -1 means next (left), 1 means prev (right)
 
-        // make keyboard accessible
-        p.setAttribute('tabindex', '0');
-        p.addEventListener('keydown', (e) => {
-          if(e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            p.click();
-          }
-        });
-      });
+          const fromEl = items[from];
+          const toEl = items[to];
 
-      // ensure any remaining lazy images (outside IntersectionObserver) are loaded on DOMContentLoaded
-      window.addEventListener('load', () => {
-        const remaining = [].slice.call(document.querySelectorAll('img.lazy-img'));
-        remaining.forEach(img => loadImage(img));
-      });
+          if (!fromEl || !toEl) return;
 
-      // small accessibility improvement: trap focus inside modal while open (basic)
-      document.addEventListener('focus', (e) => {
-        if(!overlay.classList.contains('open')) return;
-        const modal = overlay.querySelector('.modal');
-        if(!modal) return;
-        if(!modal.contains(e.target)){
-          // move focus back to close button
-          e.stopPropagation();
+          // prepare toEl offscreen
+          toEl.style.transform = `translateX(${dir * 100}%)`;
+          toEl.setAttribute('aria-hidden', 'false');
+
+          // force reflow then animate
+          requestAnimationFrame(() => {
+            fromEl.style.transform = `translateX(${dir * -100}%)`;
+            toEl.style.transform = 'translateX(0%)';
+          });
+
+          // update thumbnails
+          const thumbButtons = Array.from(thumbs.children);
+          thumbButtons.forEach(tb => tb.classList.remove('active'));
+          if (thumbButtons[to]) thumbButtons[to].classList.add('active');
+
+          currentIndex = to;
+        }
+
+        function showModal() {
+          lastFocused = document.activeElement;
+          overlay.classList.add('open');
+          overlay.setAttribute('aria-hidden', 'false');
+          // focus close button for keyboard users
           closeBtn.focus();
+          document.body.style.overflow = 'hidden';
         }
-      }, true);
 
-    })();
-  </script>
-</body>
+        function closeModal() {
+          overlay.classList.remove('open');
+          overlay.setAttribute('aria-hidden', 'true');
+          galleryStage.innerHTML = '';
+          thumbs.innerHTML = '';
+          modalTitle.textContent = 'Project Title';
+          modalDesc.textContent = '';
+          // remove any injected project-highlights block
+          const details = document.querySelector('.modal .details');
+          const existing = details.querySelector('.project-highlights');
+          if (existing) existing.remove();
+          // restore default highlights visibility
+          if (defaultHighlights) defaultHighlights.style.display = '';
+          currentImages = [];
+          currentIndex = 0;
+          document.body.style.overflow = '';
+          if (lastFocused && lastFocused.focus) lastFocused.focus();
+        }
+
+        // Keyboard handling
+        function onKey(e) {
+          if (overlay.classList.contains('open')) {
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'ArrowLeft') goToIndex(Math.max(0, currentIndex - 1));
+            if (e.key === 'ArrowRight') goToIndex(Math.min(currentImages.length - 1, currentIndex + 1));
+          }
+        }
+
+        // Attach click handlers to project items
+        const projects = Array.from(document.querySelectorAll('.project'));
+        projects.forEach(proj => {
+          // make keyboard accessible
+          if(!proj.hasAttribute('tabindex')) proj.setAttribute('tabindex','0');
+          proj.addEventListener('click', () => {
+            // read attributes
+            const title = proj.getAttribute('data-title') || proj.querySelector('.title')?.textContent || 'Project';
+            const desc = proj.getAttribute('data-desc') || proj.querySelector('.desc')?.textContent || '';
+            const images = parseJsonAttr(proj, 'data-images') || [];
+            const highlights = parseJsonAttr(proj, 'data-highlights') || null;
+
+            // populate modal text
+            modalTitle.textContent = title;
+            modalDesc.textContent = desc;
+
+            // remove existing custom highlights block if any
+            const details = document.querySelector('.modal .details');
+            const existing = details.querySelector('.project-highlights');
+            if (existing) existing.remove();
+
+            if (highlights && Array.isArray(highlights)) {
+              if (defaultHighlights) defaultHighlights.style.display = 'none';
+
+              const wrap = document.createElement('div');
+              wrap.className = 'project-highlights';
+              wrap.style.marginTop = '12px';
+
+              const strong = document.createElement('strong');
+              strong.textContent = 'Highlights';
+              strong.style.display = 'block';
+              strong.style.marginBottom = '8px';
+              wrap.appendChild(strong);
+
+              const ul = document.createElement('ul');
+              ul.style.color = 'var(--muted)';
+              ul.style.marginTop = '0';
+              highlights.forEach(h => {
+                const li = document.createElement('li');
+                li.textContent = h;
+                ul.appendChild(li);
+              });
+              wrap.appendChild(ul);
+              details.insertBefore(wrap, details.querySelector('#modal-close-2').parentElement);
+            } else {
+              if (defaultHighlights) defaultHighlights.style.display = '';
+            }
+
+            // images fallback: if none, try to use media background or placeholder
+            if (!images.length) {
+              const bgEl = proj.querySelector('.media');
+              const bg = bgEl && bgEl.style.backgroundImage ? bgEl.style.backgroundImage.replace(/^url\(["']?/, '').replace(/["']?\)$/, '') : null;
+              if (bg) currentImages = [bg];
+              else currentImages = [];
+            } else {
+              currentImages = images.slice();
+            }
+
+            currentIndex = 0;
+            renderGallery();
+            showModal();
+          });
+
+          proj.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              proj.click();
+            }
+          });
+        });
+
+        // Navigation buttons
+        prevBtn.addEventListener('click', () => goToIndex(Math.max(0, currentIndex - 1)));
+        nextBtn.addEventListener('click', () => goToIndex(Math.min(currentImages.length - 1, currentIndex + 1)));
+
+        // Close handlers
+        closeBtn.addEventListener('click', closeModal);
+        modalClose2.addEventListener('click', closeModal);
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) closeModal();
+        });
+
+        // Keyboard
+        document.addEventListener('keydown', onKey);
+
+        // Prevent focus from escaping modal while open (simple trap)
+        document.addEventListener('focus', function (e) {
+          if (!overlay.classList.contains('open')) return;
+          if (!overlay.contains(e.target)) {
+            e.stopPropagation();
+            closeBtn.focus();
+          }
+        }, true);
+      })();
+    </script>
+  </body>
 </html>
